@@ -45,7 +45,7 @@ if (process.env.APP_TYPE === 'site') {
     },
   ]);
 }
-
+console.log(process.env.NODE_ENV);
 export default {
   // add for transfer to umi
   plugins,
