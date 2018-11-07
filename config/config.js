@@ -72,6 +72,12 @@ export default {
   //     pathRewrite: { '^/server': '' },
   //   },
   // },
+  proxy: {
+    '/api': {
+      target: 'http://192.168.1.160:8135/',
+      changeOrigin: true,
+    },
+  },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
     javascriptEnabled: true,
