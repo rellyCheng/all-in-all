@@ -256,6 +256,20 @@ export default [
         ],
       },
       {
+        name: 'systemManage',
+        icon: 'setting',
+        path: '/systemManage',
+        routes: [
+          // exception
+          {
+            path: '/systemManage/permission',
+            name: 'permission',
+            component: './SystemManage/Permission',
+          },
+         
+        ],
+      },
+      {
         component: '404',
       },
     ],

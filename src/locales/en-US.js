@@ -104,6 +104,8 @@ export default {
   'menu.account.settings': 'Account Settings',
   'menu.account.trigger': 'Trigger Error',
   'menu.account.logout': 'Logout',
+  'menu.systemManage': 'System Manage',
+  'menu.systemManage.permission': 'Permission Manage',
   'app.login.message-invalid-credentials': 'Invalid username or password（admin/ant.design）',
   'app.login.message-invalid-verification-code': 'Invalid verification code',
   'app.login.tab-login-credentials': 'Credentials',
