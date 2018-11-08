@@ -4,6 +4,7 @@ import { fakeAccountLogin, getFakeCaptcha } from '@/services/api';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
+import token from '@/utils/token';
 
 export default {
   namespace: 'login',
@@ -20,7 +21,9 @@ export default {
         payload: response,
       });
       // Login successfully
-      if (response.status === 'ok') {
+      if (response.state === 'OK') {
+        console.log(response)
+        token.save(response.data.token);
         reloadAuthorized();
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
@@ -46,6 +49,8 @@ export default {
     },
 
     *logout(_, { put }) {
+      // remove token in sessionStorage
+      token.remove();
       yield put({
         type: 'changeLoginStatus',
         payload: {
@@ -67,7 +72,7 @@ export default {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      setAuthority(payload.currentAuthority);
+      setAuthority(payload.data.currentAuthority);
       return {
         ...state,
         status: payload.status,

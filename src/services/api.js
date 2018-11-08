@@ -105,9 +105,9 @@ export async function updateFakeList(params) {
 
 export async function fakeAccountLogin(params) {
   let formData = new FormData();
-  formData.append('userName', params.userName);
+  formData.append('username', params.userName);
   formData.append('password', params.password);
-  return request('/api/index/login/account', {
+  return request('/api/index/doLogin', {
     method: 'POST',
     body: formData,
   });

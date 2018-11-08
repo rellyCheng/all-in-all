@@ -3,6 +3,7 @@ import { notification } from 'antd';
 import router from 'umi/router';
 import hash from 'hash.js';
 import { isAntdPro } from './utils';
+import token from './token';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -36,6 +37,11 @@ const checkStatus = response => {
   error.response = response;
   throw error;
 };
+
+function buildAuthorization  ()  {
+  const tokenVal = token.get();
+  return (token !== '') ? `Bearer ${tokenVal}` : '';
+}
 
 const cachedSave = (response, hashcode) => {
   /**
@@ -93,6 +99,7 @@ export default function request(url, option) {
         'Content-Type': 'application/json; charset=utf-8',
         ...newOptions.headers,
       };
+      newOptions.headers.Authorization = buildAuthorization(); // 增加的代码
       newOptions.body = JSON.stringify(newOptions.body);
     } else {
       // newOptions.body is FormData
@@ -100,6 +107,7 @@ export default function request(url, option) {
         Accept: 'application/json',
         ...newOptions.headers,
       };
+      newOptions.headers.Authorization = buildAuthorization(); // 增加的代码
     }
   }
 
