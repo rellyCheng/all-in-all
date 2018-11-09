@@ -8,6 +8,7 @@ import GlobalHeader from '@/components/GlobalHeader';
 import TopNavHeader from '@/components/TopNavHeader';
 import styles from './Header.less';
 import Authorized from '@/utils/Authorized';
+import token from '@/utils/token';
 
 const { Header } = Layout;
 
@@ -24,7 +25,6 @@ class HeaderView extends PureComponent {
     }
     return null;
   }
-
   componentDidMount() {
     document.addEventListener('scroll', this.handScroll, { passive: true });
   }

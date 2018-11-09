@@ -17,7 +17,7 @@ import Footer from './Footer';
 import Header from './Header';
 import Context from './MenuContext';
 import Exception403 from '../pages/Exception/403';
-
+import token from '@/utils/token';
 const { Content } = Layout;
 
 // Conversion router to menu.
@@ -93,6 +93,15 @@ class BasicLayout extends React.PureComponent {
     isMobile: false,
     menuData: this.getMenuData(),
   };
+
+  componentWillMount(){
+    const tokenVal = token.get();
+    if(tokenVal==null){
+      window.location.href=("/user/login");
+      message.info("小伙子请出示令牌!");
+      return null;
+    }
+  }
 
   componentDidMount() {
     const { dispatch } = this.props;
