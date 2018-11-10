@@ -105,11 +105,16 @@ export async function updateFakeList(params) {
 
 export async function fakeAccountLogin(params) {
   let formData = new FormData();
-  formData.append('username', params.userName);
+  formData.append('userName', params.userName);
   formData.append('password', params.password);
-  return request('/api/index/doLogin', {
+  return request('/api/login/accountLogin', {
     method: 'POST',
     body: formData,
+  });
+}
+export async function fakeLogout() {
+  return request('/api/logout', {
+    method: 'POST',
   });
 }
 
@@ -131,9 +136,8 @@ export async function queryPermissionList(params) {
   let formData = new FormData();
   formData.append('pageCurrent', params.pageCurrent);
   formData.append('pageSize', params.pageSize);
-  return request(`/permission/get/permissionList`,{
+  return request(`/permission/get/permissionList`, {
     method: 'POST',
     body: formData,
   });
 }
-

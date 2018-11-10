@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { stringify } from 'qs';
-import { fakeAccountLogin, getFakeCaptcha } from '@/services/api';
+import { fakeAccountLogin, getFakeCaptcha, fakeLogout } from '@/services/api';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
@@ -22,7 +22,6 @@ export default {
       });
       // Login successfully
       if (response.state === 'OK') {
-        console.log(response)
         token.save(response.data.token);
         reloadAuthorized();
         const urlParams = new URL(window.location.href);
@@ -48,15 +47,13 @@ export default {
       yield call(getFakeCaptcha, payload);
     },
 
-    *logout(_, { put }) {
+    *logout(_, { call, put }) {
       // remove token in sessionStorage
       token.remove();
+      const response = yield call(fakeLogout);
       yield put({
         type: 'changeLoginStatus',
-        payload: {
-          status: false,
-          currentAuthority: 'guest',
-        },
+        payload: response,
       });
       reloadAuthorized();
       yield put(
