@@ -104,6 +104,7 @@ export default {
   'menu.account.logout': '退出登录',
   'menu.systemManage': '系统管理',
   'menu.systemManage.permission': '权限管理',
+  'menu.systemManage.user': '用户管理',
   'app.login.message-invalid-credentials': '账户或密码错误（admin/ant.design）',
   'app.login.message-invalid-verification-code': '验证码错误',
   'app.login.tab-login-credentials': '账户密码登录',

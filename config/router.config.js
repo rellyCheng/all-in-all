@@ -260,13 +260,18 @@ export default [
         icon: 'setting',
         path: '/systemManage',
         routes: [
-          // exception
+          // permission
           {
             path: '/systemManage/permission',
             name: 'permission',
             component: './SystemManage/Permission',
           },
-         
+          // user
+          {
+            path: '/systemManage/user',
+            name: 'user',
+            component: './SystemManage/User',
+          },
         ],
       },
       {

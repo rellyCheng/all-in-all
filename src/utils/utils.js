@@ -182,3 +182,18 @@ export function formatWan(val) {
 export function isAntdPro() {
   return window.location.hostname === 'preview.pro.ant.design';
 }
+
+export function pagination(data,callback){
+  return {
+      onChange:(current)=>{
+          callback(current)
+      },
+      current:data.data.pageCurrent,
+      pageSize:data.data.pageSize,
+      total: data.data.rowCount,
+      showTotal:()=>{
+          return `共${data.data.rowCount}条`
+      },
+      showQuickJumper:true
+  }
+}

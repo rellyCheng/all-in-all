@@ -132,11 +132,22 @@ export async function queryNotices() {
 export async function getFakeCaptcha(mobile) {
   return request(`/api/captcha?mobile=${mobile}`);
 }
+
 export async function queryPermissionList(params) {
   let formData = new FormData();
   formData.append('pageCurrent', params.pageCurrent);
   formData.append('pageSize', params.pageSize);
   return request(`/permission/get/permissionList`, {
+    method: 'POST',
+    body: formData,
+  });
+}
+
+export async function queryUserList(params) {
+  let formData = new FormData();
+  formData.append('pageCurrent', params.pageCurrent);
+  formData.append('pageSize', params.pageSize);
+  return request(`/api/user/getUserList`, {
     method: 'POST',
     body: formData,
   });

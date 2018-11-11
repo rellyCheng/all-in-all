@@ -73,6 +73,7 @@ export default {
   'menu.account.logout': 'Sair',
   'menu.systemManage': 'Sistema Gestão',
   'menu.systemManage.permission': 'Permissões Gestão',
+  'menu.systemManage.permission': 'Usuário Gestão',
   'app.login.message-invalid-credentials': 'Nome de usuário ou senha inválidosd（admin/ant.design）',
   'app.login.message-invalid-verification-code': 'Código de verificação inválido',
   'app.login.tab-login-credentials': 'Credenciais',
