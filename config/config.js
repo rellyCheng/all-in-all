@@ -119,5 +119,6 @@ export default {
     basePath: '/',
   },
 
+  hash:true,
   chainWebpack: webpackPlugin,
 };
