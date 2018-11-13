@@ -4,7 +4,8 @@ export default {
   namespace: 'permission',
 
   state: {
-    permissionList:[]
+    permissionList:[],
+    parentPermissionList:[]
   },
 
   effects: {
@@ -12,6 +13,14 @@ export default {
       const response = yield call(queryPermissionList,payload);
       yield put({
         type: 'show',
+        payload: response.data,
+      });
+    },
+    *getParentPermissionList({ payload }, { call, put }) {
+      const response = yield call(getParentPermissionList,payload);
+      console.log(response)
+      yield put({
+        type: 'parent',
         payload: response.data,
       });
     },
@@ -24,6 +33,11 @@ export default {
         ...state,
         ...payload,
         permissionList:payload.pageData
+      };
+    },
+    parent(state, { payload }) {
+      return {
+       parentPermissionList:payload
       };
     },
   },

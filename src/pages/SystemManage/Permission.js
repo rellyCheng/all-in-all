@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Card, Badge, Table, Divider } from 'antd';
+import { Card, Badge, Table, Divider, Button, Modal  } from 'antd';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import AddPermissionForm from '@/pages/SystemManage/AddPermissionForm'
 @connect(({ permission, loading }) => ({
   permission,
   loading: loading.effects['permission/fetchList'],
@@ -8,6 +10,7 @@ import { Card, Badge, Table, Divider } from 'antd';
 
 class Permisson extends Component {
 
+  state = {}
   componentDidMount() {
     this.requestList();
   }
@@ -53,14 +56,34 @@ class Permisson extends Component {
     }];
     
     return (
-      <Table
-      dataSource={permission.permissionList}
-      style={{ marginBottom: 24 }}
-      pagination={true}
-      loading={loading}
-      rowKey="id"
-      columns={columns} 
-    />
+      <div>
+      <PageHeaderWrapper title="权限列表">
+        <Card>
+          <Button onClick={()=>this.setState({openAddPermissionForm:true})}>添加权限</Button>
+        </Card>
+        <Table
+        dataSource={permission.permissionList}
+        style={{ marginBottom: 24 }}
+        pagination={true}
+        loading={loading}
+        rowKey="id"
+        columns={columns} 
+        />
+      </PageHeaderWrapper>
+      <Modal
+        title='添加权限'
+        visible={this.state.openAddPermissionForm}
+        width={500}
+        onCancel={()=>{
+            this.setState({
+              openAddPermissionForm:false,
+            })
+        }}
+        footer={false}
+      >
+        <AddPermissionForm/>
+      </Modal>
+      </div>
     );
   }
 }

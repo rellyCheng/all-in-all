@@ -259,6 +259,7 @@ export default [
         name: 'systemManage',
         icon: 'setting',
         path: '/systemManage',
+        authority: ['user'],
         routes: [
           // permission
           {

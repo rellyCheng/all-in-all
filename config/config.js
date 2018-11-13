@@ -77,10 +77,10 @@ export default {
       target: 'http://127.0.0.1:8426/',
       changeOrigin: true,
     },
-    '/permission': {
-      target: 'http://192.168.1.160:8135/',
-      changeOrigin: true,
-    },
+    // '/permission': {
+    //   target: 'http://192.168.1.160:8135/',
+    //   changeOrigin: true,
+    // },
   },
   // proxy: {
   //   '/permission': {
