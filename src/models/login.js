@@ -5,6 +5,7 @@ import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
 import token from '@/utils/token';
+import {message} from 'antd';
 
 export default {
   namespace: 'login',
@@ -16,12 +17,12 @@ export default {
   effects: {
     *login({ payload }, { call, put }) {
       const response = yield call(fakeAccountLogin, payload);
-      yield put({
-        type: 'changeLoginStatus',
-        payload: response,
-      });
       // Login successfully
       if (response.state === 'OK') {
+        yield put({
+          type: 'changeLoginStatus',
+          payload: response,
+        });
         token.save(response.data.token);
         reloadAuthorized();
         const urlParams = new URL(window.location.href);
@@ -40,6 +41,8 @@ export default {
           }
         }
         yield put(routerRedux.replace(redirect || '/'));
+      }else{
+        message.error(response.message);
       }
     },
 

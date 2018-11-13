@@ -137,7 +137,7 @@ export async function queryPermissionList(params) {
   let formData = new FormData();
   formData.append('pageCurrent', params.pageCurrent);
   formData.append('pageSize', params.pageSize);
-  return request(`/permission/get/permissionList`, {
+  return request(`/api/permission/getPermissionList`, {
     method: 'POST',
     body: formData,
   });
@@ -148,6 +148,15 @@ export async function queryUserList(params) {
   formData.append('pageCurrent', params.pageCurrent);
   formData.append('pageSize', params.pageSize);
   return request(`/api/user/getUserList`, {
+    method: 'POST',
+    body: formData,
+  });
+}
+
+export async function getParentPermissionList(params) {
+  let formData = new FormData();
+  formData.append('pageCurrent', params.type);
+  return request(`/api/permission/getParentPermissionList`, {
     method: 'POST',
     body: formData,
   });
