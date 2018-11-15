@@ -57,7 +57,7 @@ class Permisson extends Component {
     
     return (
       <div>
-      <PageHeaderWrapper title="权限列表">
+      <PageHeaderWrapper title="权限管理">
         <Card>
           <Button onClick={()=>this.setState({openAddPermissionForm:true})}>添加权限</Button>
         </Card>

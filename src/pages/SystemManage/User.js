@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Card, Badge, Table, Divider } from 'antd';
+import { Card, Badge, Table, Divider,Button,Modal  } from 'antd';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import AddUserForm from '@/pages/SystemManage/AddUserForm'
 @connect(({ sysUser, loading }) => ({
     sysUser,
   loading: loading.effects['sysUser/fetchList'],
@@ -9,7 +11,7 @@ import { Card, Badge, Table, Divider } from 'antd';
 class Permisson extends Component {
 
   state={
-    pageCurrent:1
+    page:1
   }
   componentDidMount() {
     this.requestList();
@@ -17,11 +19,8 @@ class Permisson extends Component {
   requestList = (page,values)=>{
     const { dispatch } = this.props;
     if(page==null){
-        page = this.state.pageCurrent
+        page = 1
     }
-    this.setState({
-      pageCurrent:page
-    })
     dispatch({
       type: 'sysUser/fetchList',
       payload: {
@@ -29,8 +28,28 @@ class Permisson extends Component {
         pageSize:5
       },
     });
-  
   }
+  handleAddUser =(values)=>{
+    const { dispatch } = this.props;
+      new Promise((resolve) => {
+        dispatch({
+          type: 'sysUser/addUser',
+          payload: {
+            resolve,
+            params:values
+          },
+        }) 
+      }).then((res) => {
+          console.log(res);
+          if(res.state=='OK'){
+            this.requestList();
+            this.setState({
+                openAddUserForm:false
+            })
+          }
+      })
+    }
+  
   render() {
     const { sysUser, loading } = this.props;
     console.log(sysUser);
@@ -53,25 +72,41 @@ class Permisson extends Component {
     }];
     
     return (
-      <Table
-      dataSource={sysUser.userList}
-      style={{ marginBottom: 24 }}
-      pagination={{
-        current:this.state.pageCurrent,
-        pageSize:5,
-        total: sysUser.rowCount,
-        showTotal:()=>{
-            return `共${sysUser.rowCount}条`
-        },
-        showQuickJumper:true,
-        onChange:(current)=>{
-          this.requestList(current);
-        },
-      }}
-      loading={loading}
-      rowKey="id"
-      columns={columns} 
-    />
+      <div>
+      <PageHeaderWrapper title="用户管理">
+         <Card>
+          <Button onClick={()=>this.setState({openAddUserForm:true})}>添加用户</Button>
+        </Card>
+        <Table
+          dataSource={sysUser.userList}
+          style={{ marginBottom: 24 }}
+          pagination={{
+            current:sysUser.pageCurrent,
+            pageSize:5,
+            total: sysUser.rowCount,
+            showTotal:()=>{
+                return `共${sysUser.rowCount}条`
+            },
+            showQuickJumper:true,
+            onChange:(current)=>{
+              this.requestList(current);
+            },
+          }}
+          loading={loading}
+          rowKey="id"
+          columns={columns} 
+        />
+      </PageHeaderWrapper>
+      <Modal
+          title='添加用户'
+          visible={this.state.openAddUserForm}
+          width={500}
+          onCancel={()=>this.setState({openAddUserForm:false})}
+          footer={false}
+        >
+          <AddUserForm onAddUser = {this.handleAddUser}/>
+        </Modal>
+     </div>
     );
   }
 }

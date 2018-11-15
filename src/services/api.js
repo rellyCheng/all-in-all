@@ -107,13 +107,13 @@ export async function fakeAccountLogin(params) {
   let formData = new FormData();
   formData.append('userName', params.userName);
   formData.append('password', params.password);
-  return request('/api/login/accountLogin', {
+  return request('/publicApi/login/accountLogin', {
     method: 'POST',
     body: formData,
   });
 }
 export async function fakeLogout() {
-  return request('/api/logout', {
+  return request('/publicApi/logout', {
     method: 'POST',
   });
 }
@@ -143,6 +143,7 @@ export async function queryPermissionList(params) {
   });
 }
 
+//User
 export async function queryUserList(params) {
   let formData = new FormData();
   formData.append('pageCurrent', params.pageCurrent);
@@ -150,6 +151,13 @@ export async function queryUserList(params) {
   return request(`/api/user/getUserList`, {
     method: 'POST',
     body: formData,
+  });
+}
+
+export async function addUser(params) {
+  return request(`/api/user/registUser`, {
+    method: 'POST',
+    body: params,
   });
 }
 
