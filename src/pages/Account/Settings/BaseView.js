@@ -99,7 +99,17 @@ class BaseView extends Component {
     return (
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
-          <Form layout="vertical" hideRequiredMark>
+          <Form layout="vertical" onSubmit = {this.handleSubmit} hideRequiredMark>
+          <FormItem label={formatMessage({ id: 'app.settings.basic.nickname' })}>
+              {getFieldDecorator('name', {
+                rules: [
+                  {
+                    required: true,
+                    message: formatMessage({ id: 'app.settings.basic.nickname-message' }, {}),
+                  },
+                ],
+              })(<Input disabled/>)}
+            </FormItem>
             <FormItem label={formatMessage({ id: 'app.settings.basic.email' })}>
               {getFieldDecorator('email', {
                 rules: [
@@ -110,16 +120,6 @@ class BaseView extends Component {
                 ],
               })(<Input />)}
             </FormItem>
-            {/* <FormItem label={formatMessage({ id: 'app.settings.basic.nickname' })}>
-              {getFieldDecorator('name', {
-                rules: [
-                  {
-                    required: true,
-                    message: formatMessage({ id: 'app.settings.basic.nickname-message' }, {}),
-                  },
-                ],
-              })(<Input />)}
-            </FormItem> */}
             <FormItem label={formatMessage({ id: 'app.settings.basic.profile' })}>
               {getFieldDecorator('profile', {
                 rules: [
@@ -183,7 +183,7 @@ class BaseView extends Component {
                 ],
               })(<PhoneView />)}
             </FormItem>
-            <Button onClick = {this.handleSubmit} type="primary">
+            <Button  htmlType='submit' type="primary">
               <FormattedMessage
                 id="app.settings.basic.update"
                 defaultMessage="Update Information"

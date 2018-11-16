@@ -5,11 +5,13 @@ export async function query() {
 }
 
 export async function queryCurrent() {
-  return request('/api/currentUser');
+  return request('/api/user/currentUser',{
+    method: 'POST',
+  });
 }
 
 export async function updateUserDetail(params) {
-  return request(`/api/user/updateUserDetail`, {
+  return request(`/api/updateUserDetail`, {
     method: 'POST',
     body: params,
   });

@@ -83,7 +83,7 @@ class Center extends PureComponent {
     const { newTags, inputVisible, inputValue } = this.state;
     const {
       listLoading,
-      currentUser,
+      // currentUser,
       currentUserLoading,
       project: { notice },
       projectLoading,
@@ -92,6 +92,7 @@ class Center extends PureComponent {
       children,
     } = this.props;
 
+    const currentUser = this.props.currentUser.data
     const operationTabList = [
       {
         key: 'articles',
@@ -127,7 +128,9 @@ class Center extends PureComponent {
               {currentUser && Object.keys(currentUser).length ? (
                 <div>
                   <div className={styles.avatarHolder}>
-                    <img alt="" src={currentUser.avatar} />
+                    {
+                      currentUser.avatar!=null?<img alt="" src={currentUser.avatar} />:<Avatar size={50} style={{  backgroundColor:currentUser.bgColor}}>{currentUser.name.substring(0,1) }</Avatar>
+                    }
                     <div className={styles.name}>{currentUser.name}</div>
                     <div>{currentUser.signature}</div>
                   </div>
@@ -142,12 +145,12 @@ class Center extends PureComponent {
                     </p>
                     <p>
                       <i className={styles.address} />
-                      {currentUser.geographic.province.label}
-                      {currentUser.geographic.city.label}
+                      {currentUser.geographic.province.label || ''}
+                      {currentUser.geographic.city.label || ''}
                     </p>
                   </div>
                   <Divider dashed />
-                  <div className={styles.tags}>
+                  {/* <div className={styles.tags}>
                     <div className={styles.tagsTitle}>标签</div>
                     {currentUser.tags.concat(newTags).map(item => (
                       <Tag key={item.key}>{item.label}</Tag>
@@ -172,7 +175,7 @@ class Center extends PureComponent {
                         <Icon type="plus" />
                       </Tag>
                     )}
-                  </div>
+                  </div> */}
                   <Divider style={{ marginTop: 16 }} dashed />
                   <div className={styles.team}>
                     <div className={styles.teamTitle}>团队</div>
