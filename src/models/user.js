@@ -1,4 +1,4 @@
-import { query as queryUsers, queryCurrent } from '@/services/user';
+import { query as queryUsers, queryCurrent,updateUserDetail } from '@/services/user';
 
 export default {
   namespace: 'user',
@@ -22,6 +22,9 @@ export default {
         type: 'saveCurrentUser',
         payload: response,
       });
+    },
+    *updateUserDetail({ payload }, { call }) {
+      const response = yield call(updateUserDetail,payload);
     },
   },
 

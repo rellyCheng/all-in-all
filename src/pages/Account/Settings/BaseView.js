@@ -81,7 +81,17 @@ class BaseView extends Component {
   getViewDom = ref => {
     this.view = ref;
   };
-
+  handleSubmit = () =>{
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+          const { dispatch } = this.props;
+          dispatch({
+            type: 'user/updateUserDetail',
+            payload:values
+          });
+      }
+    });
+  }
   render() {
     const {
       form: { getFieldDecorator },
@@ -89,7 +99,7 @@ class BaseView extends Component {
     return (
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
-          <Form layout="vertical" onSubmit={this.handleSubmit} hideRequiredMark>
+          <Form layout="vertical" hideRequiredMark>
             <FormItem label={formatMessage({ id: 'app.settings.basic.email' })}>
               {getFieldDecorator('email', {
                 rules: [
@@ -100,7 +110,7 @@ class BaseView extends Component {
                 ],
               })(<Input />)}
             </FormItem>
-            <FormItem label={formatMessage({ id: 'app.settings.basic.nickname' })}>
+            {/* <FormItem label={formatMessage({ id: 'app.settings.basic.nickname' })}>
               {getFieldDecorator('name', {
                 rules: [
                   {
@@ -109,7 +119,7 @@ class BaseView extends Component {
                   },
                 ],
               })(<Input />)}
-            </FormItem>
+            </FormItem> */}
             <FormItem label={formatMessage({ id: 'app.settings.basic.profile' })}>
               {getFieldDecorator('profile', {
                 rules: [
@@ -173,7 +183,7 @@ class BaseView extends Component {
                 ],
               })(<PhoneView />)}
             </FormItem>
-            <Button type="primary">
+            <Button onClick = {this.handleSubmit} type="primary">
               <FormattedMessage
                 id="app.settings.basic.update"
                 defaultMessage="Update Information"
