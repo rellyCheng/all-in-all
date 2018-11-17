@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import { Form, Input, Button, Select, Divider } from 'antd';
 import router from 'umi/router';
 
+
 const { Option } = Select;
 
 const formItemLayout = {
@@ -20,18 +21,37 @@ const formItemLayout = {
 @Form.create()
 class AddPermissionForm extends React.PureComponent {
 
+  state={
+    parentIdShow:'none'
+  }
   
   changeSourceType = (value) =>{
     const {dispatch} = this.props;
-    console.log(value)
+    console.log(value);
+    if(value=='twoMenu'||value=='threeMenu'){
+      this.setState({
+        parentIdShow:'block'
+      })
+    }else{
+      this.setState({
+        parentIdShow:'none'
+      })
+    }
+    // dispatch({
+    //   type: 'permission/getParentPermission',
+    //   payload: {
+    //     type:value,
+    //   },
+    // });
+  }
+  translate = (e)=>{
+   let value = e.target.value;
+    const {dispatch} = this.props;
     dispatch({
-      type: 'permission/getParentPermission',
-      payload: {
-        type:value,
-      },
+      type: 'permission/fetchTranslate',
+      payload:value
     });
   }
-
 
   render() {
     const { form } = this.props;
@@ -52,7 +72,7 @@ class AddPermissionForm extends React.PureComponent {
               </Select>
             )}
           </Form.Item>
-          <Form.Item  {...formItemLayout} label="父级菜单">
+          <Form.Item style={{display:this.state.parentIdShow}}  {...formItemLayout} label="父级菜单">
             {getFieldDecorator('parentId', {
               rules: [{ required: true, message: '请选择父级菜单' }],
             })(
@@ -69,10 +89,10 @@ class AddPermissionForm extends React.PureComponent {
             {getFieldDecorator('name', {
               rules: [{ required: true, message: '请输入权限描述' }],
             })(
-              <Input placeholder="请输入权限描述"/>
+              <Input onBlur={(e)=>this.translate(e)} placeholder="请输入权限描述"/>
             )}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="权限">
+          <Form.Item {...formItemLayout} label="权限代码">
             {getFieldDecorator('permission', {
               rules: [{ required: true, message: '请输入权限(英文)' }],
             })(

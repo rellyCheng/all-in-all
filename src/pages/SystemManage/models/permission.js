@@ -1,4 +1,4 @@
-import { queryPermissionList} from '@/services/api';
+import { queryPermissionList,fetchTranslate} from '@/services/api';
 
 export default {
   namespace: 'permission',
@@ -24,6 +24,15 @@ export default {
         payload: response.data,
       });
     },
+    *fetchTranslate({ payload }, { call, put }) {
+      const response = yield call(fetchTranslate,payload);
+
+      console.log(response)
+      // yield put({
+      //   type: 'translate',
+      //   payload: response.trans_result,
+      // });
+    },
    
   },
 
@@ -38,6 +47,11 @@ export default {
     parent(state, { payload }) {
       return {
        parentPermissionList:payload
+      };
+    },
+    translate(state, { payload }) {
+      return {
+        translateValue:payload
       };
     },
   },
