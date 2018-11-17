@@ -92,7 +92,7 @@ class Center extends PureComponent {
       children,
     } = this.props;
 
-    const currentUser = this.props.currentUser.data
+    const currentUser = this.props.currentUser
     const operationTabList = [
       {
         key: 'articles',
@@ -150,9 +150,9 @@ class Center extends PureComponent {
                     </p>
                   </div>
                   <Divider dashed />
-                  {/* <div className={styles.tags}>
+                  <div className={styles.tags}>
                     <div className={styles.tagsTitle}>标签</div>
-                    {currentUser.tags.concat(newTags).map(item => (
+                    {currentUser.tagsList.concat(newTags).map(item => (
                       <Tag key={item.key}>{item.label}</Tag>
                     ))}
                     {inputVisible && (
@@ -175,7 +175,7 @@ class Center extends PureComponent {
                         <Icon type="plus" />
                       </Tag>
                     )}
-                  </div> */}
+                  </div>
                   <Divider style={{ marginTop: 16 }} dashed />
                   <div className={styles.team}>
                     <div className={styles.teamTitle}>团队</div>

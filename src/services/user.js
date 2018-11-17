@@ -10,8 +10,14 @@ export async function queryCurrent() {
   });
 }
 
+// export async function queryCurrent() {
+//   return request('/api/currentUser',{
+//     method: 'GET',
+//   });
+// }
+
 export async function updateUserDetail(params) {
-  return request(`/api/updateUserDetail`, {
+  return request(`/api/user/updateUserDetail`, {
     method: 'POST',
     body: params,
   });

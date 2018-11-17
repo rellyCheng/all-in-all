@@ -49,10 +49,7 @@ export default class GlobalHeaderRight extends PureComponent {
       onNoticeClear,
       theme,
     } = this.props;
-
-    let currentUser = this.props.currentUser.data
-    console.log(currentUser)
-    let notifyCount = 10;
+    let currentUser = this.props.currentUser || {};
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item key="userCenter">
@@ -108,7 +105,7 @@ export default class GlobalHeaderRight extends PureComponent {
         </Tooltip>
         <NoticeIcon
           className={styles.action}
-          count={notifyCount}
+          count={currentUser.notifyCount}
           onItemClick={(item, tabProps) => {
             console.log(item, tabProps); // eslint-disable-line
           }}
@@ -161,7 +158,7 @@ export default class GlobalHeaderRight extends PureComponent {
                 alt="avatar"
               />:<Avatar  size='default'  style={{  backgroundColor:currentUser.bgColor}}>{currentUser.name.substring(0,1) }</Avatar>
               }
-              <span className={styles.name}>{currentUser.name}</span>
+              {/* <span className={styles.name}>{currentUser.name}</span> */}
             </span>
           </Dropdown>
         ) : (

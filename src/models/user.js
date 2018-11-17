@@ -18,9 +18,10 @@ export default {
     },
     *fetchCurrent(_, { call, put }) {
       const response = yield call(queryCurrent);
+      console.log(response)
       yield put({
         type: 'saveCurrentUser',
-        payload: response,
+        payload: response.data,
       });
     },
     *updateUserDetail({ payload }, { call }) {
