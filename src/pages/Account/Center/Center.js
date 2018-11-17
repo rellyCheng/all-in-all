@@ -68,14 +68,34 @@ class Center extends PureComponent {
   handleInputConfirm = () => {
     const { state } = this;
     const { inputValue } = state;
-    let { newTags } = state;
-    if (inputValue && newTags.filter(tag => tag.label === inputValue).length === 0) {
-      newTags = [...newTags, { key: `new-${newTags.length}`, label: inputValue }];
-    }
-    this.setState({
-      newTags,
-      inputVisible: false,
-      inputValue: '',
+    const { dispatch } = this.props;
+    new Promise((resolve) => {
+      if(inputValue){
+        dispatch({
+          type: 'user/updateTags',
+          payload: {
+            resolve,
+            params:inputValue
+          },
+        })
+      }else{
+        this.setState({
+          inputVisible: false,
+        });
+      }
+    }).then((res)=>{
+      console.log(res);
+      if(res.message=='OK'){
+        let { newTags } = state;
+        if (inputValue && newTags.filter(tag => tag.label === inputValue).length === 0) {
+          newTags = [...newTags, { key: `new-${newTags.length}`, label: inputValue }];
+        }
+        this.setState({
+          newTags,
+          inputVisible: false,
+          inputValue: '',
+        });
+      }
     });
   };
 
@@ -91,7 +111,6 @@ class Center extends PureComponent {
       location,
       children,
     } = this.props;
-
     const currentUser = this.props.currentUser
     const operationTabList = [
       {
@@ -120,6 +139,7 @@ class Center extends PureComponent {
       },
     ];
 
+    const color = ['#EE0000','#EE7600','#EEEE00','#006400','#48D1CC','#436EEE','#7D26CD','#FFE4E1']
     return (
       <GridContent className={styles.userCenter}>
         <Row gutter={24}>
@@ -129,7 +149,8 @@ class Center extends PureComponent {
                 <div>
                   <div className={styles.avatarHolder}>
                     {
-                      currentUser.avatar!=null?<img alt="" src={currentUser.avatar} />:<Avatar size={50} style={{  backgroundColor:currentUser.bgColor}}>{currentUser.name.substring(0,1) }</Avatar>
+                      currentUser.avatar!=null?<img alt="" src={currentUser.avatar} />
+                      :<Avatar size={100} style={{  backgroundColor:currentUser.bgColor}}><span style={{fontSize:'60px'}}>{currentUser.name.substring(0,1)}</span></Avatar>
                     }
                     <div className={styles.name}>{currentUser.name}</div>
                     <div>{currentUser.signature}</div>
@@ -152,8 +173,8 @@ class Center extends PureComponent {
                   <Divider dashed />
                   <div className={styles.tags}>
                     <div className={styles.tagsTitle}>标签</div>
-                    {currentUser.tagsList.concat(newTags).map(item => (
-                      <Tag key={item.key}>{item.label}</Tag>
+                    {currentUser.tagsList.concat(newTags).map((item,index) => (
+                      <Tag color={color[index]} key={item.key}>{item.label}</Tag>
                     ))}
                     {inputVisible && (
                       <Input

@@ -1,4 +1,4 @@
-import { query as queryUsers, queryCurrent,updateUserDetail } from '@/services/user';
+import { query as queryUsers, queryCurrent,updateUserDetail,updateTags } from '@/services/user';
 
 export default {
   namespace: 'user',
@@ -26,6 +26,12 @@ export default {
     },
     *updateUserDetail({ payload }, { call }) {
       const response = yield call(updateUserDetail,payload);
+    },
+
+    *updateTags({ payload }, { call }) {
+      const { resolve,params } = payload;
+      const response = yield call(updateTags,params);
+      resolve(response); // 返回数据
     },
   },
 

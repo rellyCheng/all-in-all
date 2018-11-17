@@ -22,3 +22,10 @@ export async function updateUserDetail(params) {
     body: params,
   });
 }
+
+export async function updateTags(params) {
+  console.log(params)
+  return request(`/api/user/updateTags?tag=`+params, {
+    method: 'POST',
+  });
+}

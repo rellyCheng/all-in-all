@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { formatMessage, FormattedMessage } from 'umi/locale';
-import { Form, Input, Upload, Select, Button } from 'antd';
+import { Form, Input, Upload, Select, Button, Avatar } from 'antd';
 import { connect } from 'dva';
 import styles from './BaseView.less';
 import GeographicView from './GeographicView';
@@ -11,13 +11,17 @@ const FormItem = Form.Item;
 const { Option } = Select;
 
 // 头像组件 方便以后独立，增加裁剪之类的功能
-const AvatarView = ({ avatar }) => (
+const AvatarView = ({ avatar,bgColor,name }) => (
+  
   <Fragment>
     <div className={styles.avatar_title}>
       <FormattedMessage id="app.settings.basic.avatar" defaultMessage="Avatar" />
     </div>
     <div className={styles.avatar}>
-      <img src={avatar} alt="avatar" />
+    {
+      avatar==1?<Avatar size={120} style={{backgroundColor:bgColor}}><span style={{fontSize:'70px'}}>{name}</span></Avatar>
+      :<img src={avatar} alt="avatar" />
+    }
     </div>
     <Upload fileList={[]}>
       <div className={styles.button_view}>
@@ -97,6 +101,7 @@ class BaseView extends Component {
     const {
       form: { getFieldDecorator },
     } = this.props;
+    const currentUser = this.props.currentUser
     return (
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
@@ -193,7 +198,10 @@ class BaseView extends Component {
           </Form>
         </div>
         <div className={styles.right}>
-          <AvatarView avatar={this.getAvatarURL()} />
+          {/* <AvatarView avatar={this.getAvatarURL()} /> */}
+          {
+            currentUser.avatar!=null? <AvatarView avatar={this.getAvatarURL()} /> :<AvatarView avatar={1} bgColor = {currentUser.bgColor} name = {currentUser.name.substring(0,1)}></AvatarView>
+          }
         </div>
       </div>
     );
