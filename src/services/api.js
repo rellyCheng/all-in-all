@@ -173,26 +173,24 @@ export async function getParentPermissionList(params) {
 }
 
 export async function fetchTranslate(params) {
-  console.log(params)
-  let sign = MD5.MD5('20181117000235668'+params+'123'+'N4GXy6lTXoWM1TkLRTVt')
-  // let formData = new FormData();
-  // formData.append('q', params);
-  // formData.append('from', 'zh');
-  // formData.append('to','en');
-  // formData.append('appid','20181117000235668');
-  // formData.append('salt','123');
-  // formData.append('sign',sign);
-    const q = params;
-    const from ='zh';
-    const to = 'en';
-    const appid = '20181117000235668';
-    const salt = '123';
-  return jsonp(`http://api.fanyi.baidu.com/api/trans/vip/translate?q=${params}&from=${from}&to=${to}&appid=${appid}&salt=${salt}&sign=${sign}`)
-  // return new Promise((resolve, reject) => {
-  //   jsonp(`http://api.fanyi.baidu.com/api/trans/vip/translate?q=${params}&from=${from}&to=${to}&appid=${appid}&salt=${salt}&sign=${sign}`, {
-  //       param: 'callback'
-  //   }, function (err, response) {
-  //           resolve(response);
-  //   })
-  // })
+  console.log(params);
+  let sign = MD5.MD5('20181117000235668' + params + '123' + 'N4GXy6lTXoWM1TkLRTVt');
+  const q = params;
+  const from = 'zh';
+  const to = 'en';
+  const appid = '20181117000235668';
+  const salt = '123';
+  return jsonp(
+    `http://api.fanyi.baidu.com/api/trans/vip/translate?q=${params}&from=${from}&to=${to}&appid=${appid}&salt=${salt}&sign=${sign}`
+  )
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(json) {
+      console.log(json);
+      return json;
+    })
+    .catch(function(ex) {
+      console.log('parsing failed', ex);
+    });
 }
