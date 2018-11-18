@@ -35,15 +35,15 @@ class Permisson extends Component {
       dataIndex: 'name',
       key: 'name',
     },{
-      title: '权限',
-      dataIndex: 'permissionUrl',
-      key: 'permissionUrl',
+      title: '权限代码',
+      dataIndex: 'permission',
+      key: 'permission',
     }, {
       title: '权限类别',
-      dataIndex: 'resourceType',
-      key: 'resourceType',
-      render(resourceType) {
-          return resourceType=='pmenu'?'父菜单权限':'子菜单权限'
+      dataIndex: 'resource_type',
+      key: 'resource_type',
+      render(resource_type) {
+          return resource_type=='oneMenu'?'一级菜单':resource_type=='twoMenu'?'二级菜单':resource_type=='threeMenu'?'三级菜单':'按钮权限'
       }
     },{
       title: '操作',
@@ -81,7 +81,7 @@ class Permisson extends Component {
         }}
         footer={false}
       >
-        <AddPermissionForm/>
+        <AddPermissionForm _this={this}/>
       </Modal>
       </div>
     );

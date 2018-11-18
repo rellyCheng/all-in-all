@@ -1,4 +1,4 @@
-import { queryPermissionList, fetchTranslate } from '@/services/api';
+import { queryPermissionList, fetchTranslate,getParentPermissionList,addPermission } from '@/services/api';
 
 export default {
   namespace: 'permission',
@@ -20,18 +20,28 @@ export default {
     *getParentPermissionList({ payload }, { call, put }) {
       const response = yield call(getParentPermissionList, payload);
       console.log(response);
-      yield put({
-        type: 'parent',
-        payload: response.data,
-      });
+      if(response.state=='OK'){
+        yield put({
+          type: 'parent',
+          payload: response.data,
+        });
+      }
+     
     },
     *fetchTranslate({ payload }, { call, put }) {
       const response = yield call(fetchTranslate, payload);
-      if (typeof response != 'undefined') {
-        yield put({
-          type: 'translate',
-          payload: response.trans_result[0].dst,
-        });
+        if (typeof response != 'undefined') {
+          yield put({
+            type: 'translate',
+            payload: response.trans_result[0].dst,
+          });
+        }
+      },
+    *addPermission({ payload }, { call, put }) {
+      const {resolve,values} = payload;
+      const response = yield call(addPermission, values);
+      if(response.state=='OK'){
+        resolve(response); // 返回数据
       }
     },
   },
@@ -46,11 +56,13 @@ export default {
     },
     parent(state, { payload }) {
       return {
+        ...state,
         parentPermissionList: payload,
       };
     },
     translate(state, { payload }) {
       return {
+        ...state,
         translateValue: payload,
       };
     },

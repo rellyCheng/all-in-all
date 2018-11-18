@@ -164,11 +164,8 @@ export async function addUser(params) {
 }
 
 export async function getParentPermissionList(params) {
-  let formData = new FormData();
-  formData.append('pageCurrent', params.type);
-  return request(`/api/permission/getParentPermissionList`, {
+  return request(`/api/permission/getParentPermissionList?type=${params}`, {
     method: 'POST',
-    body: formData,
   });
 }
 
@@ -193,4 +190,11 @@ export async function fetchTranslate(params) {
     .catch(function(ex) {
       console.log('parsing failed', ex);
     });
+}
+
+export async function addPermission(params) {
+  return request(`/api/permission/addPermission`, {
+    method: 'POST',
+    body: params,
+  });
 }

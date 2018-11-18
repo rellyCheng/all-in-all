@@ -20,27 +20,26 @@ const formItemLayout = {
 @Form.create()
 class AddPermissionForm extends React.PureComponent {
   state = {
-    parentIdShow: 'none',
+    parentIdShow: false,
   };
 
   changeSourceType = value => {
     const { dispatch } = this.props;
     console.log(value);
     if (value == 'twoMenu' || value == 'threeMenu') {
-      this.setState({
-        parentIdShow: 'block',
-      });
+        this.setState({
+          parentIdShow: true,
+        });
+        dispatch({
+          type: 'permission/getParentPermissionList',
+          payload:value
+        });
     } else {
       this.setState({
-        parentIdShow: 'none',
+        parentIdShow: false,
       });
     }
-    // dispatch({
-    //   type: 'permission/getParentPermission',
-    //   payload: {
-    //     type:value,
-    //   },
-    // });
+  
   };
   translate = e => {
     let value = e.target.value;
@@ -50,17 +49,39 @@ class AddPermissionForm extends React.PureComponent {
       payload: value,
     });
   };
-
+  handleSubmitForm=(e)=>{
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+          console.log(values);
+          const { dispatch } =this.props;
+        new Promise((resolve) => {
+          dispatch({
+            type:'permission/addPermission',
+            payload:{
+              resolve,
+              values
+            }
+          })
+        }).then((res)=>{
+          this.props._this.requestList(1);
+          this.props._this.setState({
+            openAddPermissionForm:false
+          })
+        })
+      }
+    });
+  }
   render() {
     const { form } = this.props;
     const { getFieldDecorator, validateFields } = form;
-    const parentPermissionList = [];
     const permission = this.props.permission;
+    const parentPermissionList = permission.parentPermissionList || [];
     console.log(permission);
     const pValue = permission.translateValue.replace(/\s+/g, '');
     return (
       <Fragment>
-        <Form layout="horizontal" hideRequiredMark>
+        <Form onSubmit={this.handleSubmitForm} layout="horizontal" hideRequiredMark>
           <Form.Item {...formItemLayout} label="权限类型">
             {getFieldDecorator('resource_type', {
               rules: [{ required: true, message: '请选择权限类型' }],
@@ -74,12 +95,12 @@ class AddPermissionForm extends React.PureComponent {
             )}
           </Form.Item>
           <Form.Item
-            style={{ display: this.state.parentIdShow }}
+            style={{ display: this.state.parentIdShow?'block':'none' }}
             {...formItemLayout}
             label="父级菜单"
           >
-            {getFieldDecorator('parentId', {
-              rules: [{ required: true, message: '请选择父级菜单' }],
+            {getFieldDecorator('parent_id', {
+              rules: [{ required: this.state.parentIdShow, message: '请选择父级菜单' }],
             })(
               <Select placeholder="请选择父级菜单">
                 {parentPermissionList.map(item => {
@@ -88,10 +109,10 @@ class AddPermissionForm extends React.PureComponent {
               </Select>
             )}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="权限描述">
+          <Form.Item {...formItemLayout} label="权限名称">
             {getFieldDecorator('name', {
-              rules: [{ required: true, message: '请输入权限描述' }],
-            })(<Input onBlur={e => this.translate(e)} placeholder="请输入权限描述" />)}
+              rules: [{ required: true, message: '请输入权限名称' }],
+            })(<Input onBlur={e => this.translate(e)} placeholder="请输入权限名称" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="权限代码">
             {getFieldDecorator('permission', {
@@ -100,7 +121,7 @@ class AddPermissionForm extends React.PureComponent {
             })(<Input placeholder="请输入权限(英文)" />)}
           </Form.Item>
           <div style={{ textAlign: 'center' }}>
-            <Button type="primary">提交</Button>
+            <Button htmlType='submit' type="primary">提交</Button>
           </div>
         </Form>
       </Fragment>
