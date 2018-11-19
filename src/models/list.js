@@ -1,4 +1,4 @@
-import { queryFakeList, removeFakeList, addFakeList, updateFakeList,getArticleListByUser } from '@/services/api';
+import { queryFakeList, removeFakeList, addFakeList, updateFakeList,getArticleListByUser,getArticleListByUserHavePage } from '@/services/api';
 
 export default {
   namespace: 'list',
@@ -17,6 +17,15 @@ export default {
     },
     *getArticleListByUser(_,{call,put}){
       const response = yield call(getArticleListByUser);
+      console.log(response.data);
+      yield put({
+        type: 'queryList',
+        payload: Array.isArray(response.data) ? response.data : [],
+      });
+    },
+
+    *getArticleListByUserHavePage({ payload },{call,put}){
+      const response = yield call(getArticleListByUserHavePage, payload);
       console.log(response.data);
       yield put({
         type: 'queryList',

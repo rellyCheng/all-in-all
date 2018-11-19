@@ -205,3 +205,9 @@ export async function getArticleListByUser(params) {
     body: params,
   });
 }
+
+export async function getMyArticleListMore(params){
+  return request(`/api/article/getMyArticleListMore?pageCurrent=${params}`,{
+    method:'POST'
+  })
+}

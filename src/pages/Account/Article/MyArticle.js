@@ -12,8 +12,8 @@ const FormItem = Form.Item;
 
 const pageSize = 5;
 
-@connect(({ list, loading }) => ({
-  list,
+@connect(({ myArticle, loading }) => ({
+  myArticle,
   loading: loading.models.list,
 }))
 @Form.create({
@@ -23,20 +23,22 @@ const pageSize = 5;
     console.log(changedValues, allValues);
     // 模拟查询表单生效
     dispatch({
-      type: 'list/fetch',
+      type: 'myArticle/getMyArticleListMore',
       payload: {
-        count: 5,
+        pageCurrent: 1,
       },
     });
   },
 })
-class SearchList extends Component {
+class MyArticle extends Component {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch,myArticle } = this.props;
+    console.log(myArticle);
+
     dispatch({
-      type: 'list/fetch',
+      type: 'myArticle/getMyArticleListMore',
       payload: {
-        count: 5,
+        pageCurrent: myArticle.pageCurrent,
       },
     });
   }
@@ -55,9 +57,10 @@ class SearchList extends Component {
   render() {
     const {
       form,
-      list: { list },
+      myArticle,
       loading,
     } = this.props;
+    const list = myArticle.list;
     const { getFieldDecorator } = form;
 
     const IconText = ({ type, text }) => (
@@ -184,4 +187,4 @@ class SearchList extends Component {
   }
 }
 
-export default SearchList;
+export default MyArticle;
