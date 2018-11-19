@@ -253,6 +253,12 @@ export default [
               },
             ],
           },
+          // 我的文章
+          {
+            path: '/account/article/myArticle',
+            name: 'myArticle',
+            component: './Account/Article/MyArticle',
+          },
         ],
       },
       {

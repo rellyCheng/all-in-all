@@ -74,6 +74,10 @@ class HeaderView extends PureComponent {
         type: 'login/logout',
       });
     }
+    if (key === 'myArticle') {
+      router.push('/account/Article/myArticle');
+      return;
+    }
   };
 
   handleNoticeVisibleChange = visible => {

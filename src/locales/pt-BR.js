@@ -69,6 +69,7 @@ export default {
   'menu.account': 'Conta',
   'menu.account.center': 'Central da Conta',
   'menu.account.settings': 'Configurar Conta',
+  'menu.account.myArticle': 'O MEU artigo',
   'menu.account.trigger': 'Disparar Erro',
   'menu.account.logout': 'Sair',
   'menu.systemManage': 'Sistema Gestão',

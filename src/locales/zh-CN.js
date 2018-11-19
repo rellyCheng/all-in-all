@@ -100,6 +100,7 @@ export default {
   'menu.account': '个人页',
   'menu.account.center': '个人中心',
   'menu.account.settings': '个人设置',
+  'menu.account.myArticle': '我的文章',
   'menu.account.trigger': '触发报错',
   'menu.account.logout': '退出登录',
   'menu.systemManage': '系统管理',

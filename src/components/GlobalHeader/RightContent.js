@@ -60,6 +60,10 @@ export default class GlobalHeaderRight extends PureComponent {
           <Icon type="setting" />
           <FormattedMessage id="menu.account.settings" defaultMessage="account settings" />
         </Menu.Item>
+        <Menu.Item key="myArticle">
+          <Icon type="read" />
+          <FormattedMessage id="menu.account.myArticle" defaultMessage="my article" />
+        </Menu.Item>
         <Menu.Item key="triggerError">
           <Icon type="close-circle" />
           <FormattedMessage id="menu.account.trigger" defaultMessage="Trigger Error" />
