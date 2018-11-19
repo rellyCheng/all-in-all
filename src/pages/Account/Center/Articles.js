@@ -18,6 +18,7 @@ class Center extends PureComponent {
         {text}
       </span>
     );
+    console.log(list);
     return (
       <List
         size="large"

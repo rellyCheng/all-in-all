@@ -6,12 +6,14 @@ import { Card, Row, Col, Icon, Avatar, Tag, Divider, Spin, Input } from 'antd';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import styles from './Center.less';
 
-@connect(({ loading, user, project }) => ({
-  listLoading: loading.effects['list/fetch'],
+@connect(({ loading, user, project,list }) => ({
+  // listLoading: loading.effects['list/fetch'],
+  listLoading: loading.effects['list/getArticleListByUser'],
   currentUser: user.currentUser,
   currentUserLoading: loading.effects['user/fetchCurrent'],
   project,
   projectLoading: loading.effects['project/fetchNotice'],
+  list,
 }))
 class Center extends PureComponent {
   state = {
@@ -26,14 +28,11 @@ class Center extends PureComponent {
       type: 'user/fetchCurrent',
     });
     dispatch({
-      type: 'list/fetch',
-      payload: {
-        count: 8,
-      },
+      type: 'list/getArticleListByUser',
     });
-    dispatch({
-      type: 'project/fetchNotice',
-    });
+    // dispatch({
+    //   type: 'project/fetchNotice',
+    // });
   }
 
   onTabChange = key => {
@@ -110,33 +109,35 @@ class Center extends PureComponent {
       match,
       location,
       children,
+      list,
     } = this.props;
-    const currentUser = this.props.currentUser
+    const currentUser = this.props.currentUser;
+    const articleListLength = list.list.length
     const operationTabList = [
       {
         key: 'articles',
         tab: (
           <span>
-            文章 <span style={{ fontSize: 14 }}>(8)</span>
+            文章 <span style={{ fontSize: 14 }}>({articleListLength})</span>
           </span>
         ),
       },
-      {
-        key: 'applications',
-        tab: (
-          <span>
-            应用 <span style={{ fontSize: 14 }}>(8)</span>
-          </span>
-        ),
-      },
-      {
-        key: 'projects',
-        tab: (
-          <span>
-            项目 <span style={{ fontSize: 14 }}>(8)</span>
-          </span>
-        ),
-      },
+      // {
+      //   key: 'applications',
+      //   tab: (
+      //     <span>
+      //       应用 <span style={{ fontSize: 14 }}>(8)</span>
+      //     </span>
+      //   ),
+      // },
+      // {
+      //   key: 'projects',
+      //   tab: (
+      //     <span>
+      //       项目 <span style={{ fontSize: 14 }}>(8)</span>
+      //     </span>
+      //   ),
+      // },
     ];
 
     const color = ['#EE0000','#EE7600','#EEEE00','#006400','#48D1CC','#436EEE','#7D26CD','#FFE4E1']

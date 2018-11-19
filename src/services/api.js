@@ -198,3 +198,10 @@ export async function addPermission(params) {
     body: params,
   });
 }
+
+export async function getArticleListByUser(params) {
+  return request(`/api/article/getArticleListByUser`, {
+    method: 'POST',
+    body: params,
+  });
+}

@@ -1,4 +1,4 @@
-import { queryFakeList, removeFakeList, addFakeList, updateFakeList } from '@/services/api';
+import { queryFakeList, removeFakeList, addFakeList, updateFakeList,getArticleListByUser } from '@/services/api';
 
 export default {
   namespace: 'list',
@@ -15,6 +15,15 @@ export default {
         payload: Array.isArray(response) ? response : [],
       });
     },
+    *getArticleListByUser(_,{call,put}){
+      const response = yield call(getArticleListByUser);
+      console.log(response.data);
+      yield put({
+        type: 'queryList',
+        payload: Array.isArray(response.data) ? response.data : [],
+      });
+    },
+
     *appendFetch({ payload }, { call, put }) {
       const response = yield call(queryFakeList, payload);
       yield put({
@@ -35,6 +44,7 @@ export default {
         payload: response,
       });
     },
+   
   },
 
   reducers: {
