@@ -14,7 +14,7 @@ const pageSize = 5;
 
 @connect(({ myArticle, loading }) => ({
   myArticle,
-  loading: loading.models.list,
+  loading: loading.models.myArticle,
 }))
 @Form.create({
   onValuesChange({ dispatch }, changedValues, allValues) {
@@ -45,11 +45,11 @@ class MyArticle extends Component {
 
 
   fetchMore = () => {
-    const { dispatch } = this.props;
+    const { dispatch,myArticle } = this.props;
     dispatch({
-      type: 'list/appendFetch',
+      type: 'myArticle/appendFetch',
       payload: {
-        count: pageSize,
+        pageCurrent: myArticle.pageCurrent+1,
       },
     });
   };
@@ -62,7 +62,6 @@ class MyArticle extends Component {
     } = this.props;
     const list = myArticle.list;
     const { getFieldDecorator } = form;
-
     const IconText = ({ type, text }) => (
       <span>
         <Icon type={type} style={{ marginRight: 8 }} />
