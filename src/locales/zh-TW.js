@@ -101,6 +101,7 @@ export default {
   'menu.account.center': '個人中心',
   'menu.account.settings': '個人設置',
   'menu.account.myArticle': '我的文章',
+  'menu.account.addArticle': '寫文章',
   'menu.account.trigger': '觸發報錯',
   'menu.account.logout': '退出登錄',
   'menu.systemManage': '系统管理',

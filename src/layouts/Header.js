@@ -75,7 +75,7 @@ class HeaderView extends PureComponent {
       });
     }
     if (key === 'myArticle') {
-      router.push('/account/Article/myArticle');
+      router.push('/account/myArticle');
       return;
     }
   };

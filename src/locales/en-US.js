@@ -103,6 +103,7 @@ export default {
   'menu.account.center': 'Account Center',
   'menu.account.settings': 'Account Settings',
   'menu.account.myArticle': 'My Article',
+  'menu.account.addArticle': 'Write Article',
   'menu.account.trigger': 'Trigger Error',
   'menu.account.logout': 'Logout',
   'menu.systemManage': 'System Manage',

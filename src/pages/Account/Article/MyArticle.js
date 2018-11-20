@@ -6,6 +6,7 @@ import TagSelect from '@/components/TagSelect';
 import StandardFormRow from '@/components/StandardFormRow';
 import ArticleListContent from '@/components/ArticleListContent';
 import styles from './MyArticle.less';
+import router from 'umi/router';
 
 const { Option } = Select;
 const FormItem = Form.Item;
@@ -54,6 +55,10 @@ class MyArticle extends Component {
     });
   };
 
+  handleWrite=()=>{
+    const { match } = this.props;
+    router.push(`/account/addArticle`);
+  }
   render() {
     const {
       form,
@@ -145,6 +150,14 @@ class MyArticle extends Component {
           bordered={false}
           bodyStyle={{ padding: '8px 32px 32px 32px' }}
         >
+          <Button
+              type="dashed"
+              style={{ width: '100%', marginBottom: 8 }}
+              icon="edit"
+              onClick={this.handleWrite}
+            >
+              写文章
+          </Button>
           <List
             size="large"
             loading={list.length === 0 ? loading : false}
