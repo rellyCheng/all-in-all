@@ -3,7 +3,7 @@ import E from 'wangeditor';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { Card,Input,Button, Switch, Icon,Upload,Modal  } from 'antd';
 
-class App extends Component {
+class AddArticle extends Component {
   constructor(props, context) {
       super(props, context);
       this.state = {
@@ -92,4 +92,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default AddArticle;
