@@ -74,7 +74,8 @@ export default {
   // },
   proxy: {
     '/api': {
-      target: 'http://127.0.0.1:8426/',
+      // target: 'http://127.0.0.1:8426/',
+      target: 'http://118.24.218.25:8426/',
       changeOrigin: true,
     },
     '/publicApi': {
@@ -119,6 +120,6 @@ export default {
     basePath: '/',
   },
 
-  hash:true,
+  hash: true,
   chainWebpack: webpackPlugin,
 };
