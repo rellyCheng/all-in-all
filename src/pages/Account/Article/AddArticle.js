@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import E from 'wangeditor';
+import { connect } from 'dva';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { Card, Input, Button, Switch, Icon, Upload, Modal } from 'antd';
-
+import token from '@/utils/token';
+@connect(({ global }) => ({
+  global
+}))
 class AddArticle extends Component {
   constructor(props, context) {
     super(props, context);
@@ -56,9 +60,13 @@ class AddArticle extends Component {
         <div className="ant-upload-text">Upload</div>
       </div>
     );
+    const tokenVal = token.get();
+    console.log(this.props.global.ftpIp)
     return (
       <PageHeaderWrapper title="写文章">
         <Input onChange={this.onChangeInput} placeholder="请输入文章标题" />
+        <br />
+        <br />
         {/* 将生成编辑器 */}
         <div ref="editorElem" style={{ textAlign: 'left' }} />
 
@@ -67,16 +75,13 @@ class AddArticle extends Component {
         <div className="clearfix">
           <span style={{ float: 'left' }}>封面图：</span>
           <Upload
-            action={'/ftp/uploadBatch'}
+            action={'/api/upload/singleUpload'}
             listType="picture-card"
             fileList={fileList}
             onPreview={this.handlePreview}
             onChange={this.handleChange}
-            // headers={{'Authorization':'Bearer '+token}}
-            data={{
-              fromPlace: 'b7cdc099-3721-11e8-b0aa-88d7f6c46d53',
-              userId: 'b7cdc099-3721-11e8-b0aa-88d7f6c46d53',
-            }}
+            headers={{'Authorization':'Bearer '+tokenVal}}
+           
           >
             {fileList.length >= 1 ? null : uploadButton}
           </Upload>
