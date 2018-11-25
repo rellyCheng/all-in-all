@@ -200,7 +200,7 @@ class Center extends PureComponent {
                   </div>
                   <Divider style={{ marginTop: 16 }} dashed />
                   <div className={styles.team}>
-                    <div className={styles.teamTitle}>团队</div>
+                    {/* <div className={styles.teamTitle}>团队</div>
                     <Spin spinning={projectLoading}>
                       <Row gutter={36}>
                         {notice.map(item => (
@@ -212,7 +212,7 @@ class Center extends PureComponent {
                           </Col>
                         ))}
                       </Row>
-                    </Spin>
+                    </Spin> */}
                   </div>
                 </div>
               ) : (
