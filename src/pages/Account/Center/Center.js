@@ -6,7 +6,7 @@ import { Card, Row, Col, Icon, Avatar, Tag, Divider, Spin, Input } from 'antd';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import styles from './Center.less';
 
-@connect(({ loading, user, project,list }) => ({
+@connect(({ loading, user, project, list }) => ({
   // listLoading: loading.effects['list/fetch'],
   listLoading: loading.effects['list/getArticleListByUser'],
   currentUser: user.currentUser,
@@ -68,23 +68,23 @@ class Center extends PureComponent {
     const { state } = this;
     const { inputValue } = state;
     const { dispatch } = this.props;
-    new Promise((resolve) => {
-      if(inputValue){
+    new Promise(resolve => {
+      if (inputValue) {
         dispatch({
           type: 'user/updateTags',
           payload: {
             resolve,
-            params:inputValue
+            params: inputValue,
           },
-        })
-      }else{
+        });
+      } else {
         this.setState({
           inputVisible: false,
         });
       }
-    }).then((res)=>{
+    }).then(res => {
       console.log(res);
-      if(res.message=='OK'){
+      if (res.message == 'OK') {
         let { newTags } = state;
         if (inputValue && newTags.filter(tag => tag.label === inputValue).length === 0) {
           newTags = [...newTags, { key: `new-${newTags.length}`, label: inputValue }];
@@ -112,7 +112,7 @@ class Center extends PureComponent {
       list,
     } = this.props;
     const currentUser = this.props.currentUser;
-    const articleListLength = list.list.length
+    const articleListLength = list.list.length;
     const operationTabList = [
       {
         key: 'articles',
@@ -140,7 +140,16 @@ class Center extends PureComponent {
       // },
     ];
 
-    const color = ['#EE0000','#EE7600','#EEEE00','#006400','#48D1CC','#436EEE','#7D26CD','#FFE4E1']
+    const color = [
+      '#EE0000',
+      '#EE7600',
+      '#EEEE00',
+      '#006400',
+      '#48D1CC',
+      '#436EEE',
+      '#7D26CD',
+      '#FFE4E1',
+    ];
     return (
       <GridContent className={styles.userCenter}>
         <Row gutter={24}>
@@ -149,10 +158,13 @@ class Center extends PureComponent {
               {currentUser && Object.keys(currentUser).length ? (
                 <div>
                   <div className={styles.avatarHolder}>
-                    {
-                      currentUser.avatar!=null?<img alt="" src={currentUser.avatar} />
-                      :<Avatar size={100} style={{  backgroundColor:currentUser.bgColor}}><span style={{fontSize:'60px'}}>{currentUser.name.substring(0,1)}</span></Avatar>
-                    }
+                    {currentUser.avatar != null ? (
+                      <img alt="" src={currentUser.avatar} />
+                    ) : (
+                      <Avatar size={100} style={{ backgroundColor: currentUser.bgColor }}>
+                        <span style={{ fontSize: '60px' }}>{currentUser.name.substring(0, 1)}</span>
+                      </Avatar>
+                    )}
                     <div className={styles.name}>{currentUser.name}</div>
                     <div>{currentUser.signature}</div>
                   </div>
@@ -174,8 +186,10 @@ class Center extends PureComponent {
                   <Divider dashed />
                   <div className={styles.tags}>
                     <div className={styles.tagsTitle}>标签</div>
-                    {currentUser.tagsList.concat(newTags).map((item,index) => (
-                      <Tag color={color[index]} key={item.key}>{item.label}</Tag>
+                    {currentUser.tagsList.concat(newTags).map((item, index) => (
+                      <Tag color={color[index]} key={item.key}>
+                        {item.label}
+                      </Tag>
                     ))}
                     {inputVisible && (
                       <Input
