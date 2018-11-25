@@ -211,3 +211,16 @@ export async function getMyArticleListMore(params){
     method:'POST'
   })
 }
+
+export async function saveArticle(params){
+  return request(`/api/article/save`,{
+    method:'POST',
+    body:params
+  })
+}
+
+export async function articleDetail(params){
+  return request(`/api/article/getArticleDetail?articleId=${params}`,{
+    method:'POST',
+  })
+}

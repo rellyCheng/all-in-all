@@ -18,24 +18,24 @@ const pageSize = 5;
   loading: loading.models.myArticle,
 }))
 @Form.create({
-  onValuesChange({ dispatch }, changedValues, allValues) {
-    // 表单项变化时请求数据
-    // eslint-disable-next-line
-    console.log(changedValues, allValues);
-    // 模拟查询表单生效
-    dispatch({
-      type: 'myArticle/getMyArticleListMore',
-      payload: {
-        pageCurrent: 1,
-      },
-    });
-  },
+  // onValuesChange({ dispatch }, changedValues, allValues) {
+  //   // 表单项变化时请求数据
+  //   // eslint-disable-next-line
+  //   console.log(changedValues, allValues);
+  //   // 模拟查询表单生效
+  //   dispatch({
+  //     type: 'myArticle/getMyArticleListMore',
+  //     payload: {
+  //       pageCurrent: 1,
+  //     },
+  //   });
+  // },
 })
 class MyArticle extends Component {
   componentDidMount() {
     const { dispatch,myArticle } = this.props;
     console.log(myArticle);
-
+    myArticle.pageCurrent = 1;
     dispatch({
       type: 'myArticle/getMyArticleListMore',
       payload: {
@@ -56,8 +56,12 @@ class MyArticle extends Component {
   };
 
   handleWrite=()=>{
-    const { match } = this.props;
     router.push(`/account/addArticle`);
+  }
+  handleArticleDetail = (id)=>{
+    const { dispatch,myArticle } = this.props;
+    myArticle.articleId=id;
+    router.push(`/account/articleDetail`);
   }
   render() {
     const {
@@ -65,7 +69,8 @@ class MyArticle extends Component {
       myArticle,
       loading,
     } = this.props;
-    const list = myArticle.list;
+    const list = myArticle.list || [];
+    console.log(list)
     const { getFieldDecorator } = form;
     const IconText = ({ type, text }) => (
       <span>
@@ -174,6 +179,7 @@ class MyArticle extends Component {
                   <IconText type="message" text={item.message} />,
                 ]}
                 extra={<div className={styles.listItemExtra} />}
+                onClick={()=>this.handleArticleDetail(item.articleId)} 
               >
                 <List.Item.Meta
                   title={

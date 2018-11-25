@@ -1,12 +1,14 @@
-import { getMyArticleListMore } from '@/services/api';
-import {message} from 'antd'
+import { getMyArticleListMore, saveArticle } from '@/services/api';
+import {message} from 'antd';
+
 
 export default {
   namespace: 'myArticle',
 
   state: {
     list: [],
-    pageCurrent:1
+    pageCurrent:1,
+    articleId:null
   },
 
   effects: {
@@ -28,6 +30,10 @@ export default {
       }else{
         message.info('没有更多了！')
       }
+    },
+    *save({ payload },{call,put}){
+      const response = yield call(saveArticle, payload);
+     console.log(response);
     },
   },
 

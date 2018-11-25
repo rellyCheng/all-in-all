@@ -264,6 +264,11 @@ export default [
             name: 'addArticle',
             component: './Account/Article/AddArticle',
           },
+          {
+            path: '/account/articleDetail',
+            name: 'articleDetail',
+            component: './Account/Article/ArticleDetail',
+          },
         ],
       },
       {

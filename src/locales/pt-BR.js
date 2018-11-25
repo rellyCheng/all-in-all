@@ -71,6 +71,7 @@ export default {
   'menu.account.settings': 'Configurar Conta',
   'menu.account.myArticle': 'O MEU artigo',
   'menu.account.addArticle': 'Escrever artigo',
+  'menu.account.articleDetail': 'O artigo Detalhes',
   'menu.account.trigger': 'Disparar Erro',
   'menu.account.logout': 'Sair',
   'menu.systemManage': 'Sistema Gestão',
