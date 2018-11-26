@@ -16,9 +16,10 @@ export default {
         payload: true,
       });
       const response = yield call(queryProvince);
+      console.log(response.data)
       yield put({
         type: 'setProvince',
-        payload: response,
+        payload: response.data,
       });
       yield put({
         type: 'changeLoading',
@@ -33,7 +34,7 @@ export default {
       const response = yield call(queryCity, payload);
       yield put({
         type: 'setCity',
-        payload: response,
+        payload: response.data,
       });
       yield put({
         type: 'changeLoading',
