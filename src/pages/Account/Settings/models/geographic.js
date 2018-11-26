@@ -16,7 +16,6 @@ export default {
         payload: true,
       });
       const response = yield call(queryProvince);
-      console.log(response.data)
       yield put({
         type: 'setProvince',
         payload: response.data,
