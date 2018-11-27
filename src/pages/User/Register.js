@@ -45,7 +45,7 @@ class Register extends Component {
     confirmDirty: false,
     visible: false,
     help: '',
-    prefix: '86',
+    // prefix: '86',
   };
 
   componentDidUpdate() {
@@ -249,7 +249,7 @@ class Register extends Component {
               />
             )}
           </FormItem>
-          <FormItem>
+          {/* <FormItem>
             <InputGroup compact>
               <Select
                 size="large"
@@ -279,8 +279,8 @@ class Register extends Component {
                 />
               )}
             </InputGroup>
-          </FormItem>
-          <FormItem>
+          </FormItem> */}
+          {/* <FormItem>
             <Row gutter={8}>
               <Col span={16}>
                 {getFieldDecorator('captcha', {
@@ -310,7 +310,7 @@ class Register extends Component {
                 </Button>
               </Col>
             </Row>
-          </FormItem>
+          </FormItem> */}
           <FormItem>
             <Button
               size="large"
