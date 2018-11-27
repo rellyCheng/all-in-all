@@ -18,11 +18,12 @@ export default [
     authority: ['admin', 'user'],
     routes: [
       // dashboard
-      { path: '/', redirect: '/dashboard/analysis' },
+      { path: '/', redirect: '/account/center' },
       {
         path: '/dashboard',
         name: 'dashboard',
         icon: 'dashboard',
+        authority: ['admin'],
         routes: [
           {
             path: '/dashboard/analysis',
@@ -46,6 +47,7 @@ export default [
         path: '/form',
         icon: 'form',
         name: 'form',
+        authority: ['admin'],
         routes: [
           {
             path: '/form/basic-form',
@@ -92,6 +94,7 @@ export default [
         path: '/list',
         icon: 'table',
         name: 'list',
+        authority: ['admin'],
         routes: [
           {
             path: '/list/table-list',
@@ -140,6 +143,7 @@ export default [
         path: '/profile',
         name: 'profile',
         icon: 'profile',
+        authority: ['admin'],
         routes: [
           // profile
           {
@@ -159,6 +163,7 @@ export default [
         name: 'result',
         icon: 'check-circle-o',
         path: '/result',
+        authority: ['admin'],
         routes: [
           // result
           {
@@ -173,6 +178,7 @@ export default [
         name: 'exception',
         icon: 'warning',
         path: '/exception',
+        authority: ['admin'],
         routes: [
           // exception
           {
@@ -268,6 +274,7 @@ export default [
             path: '/account/articleDetail',
             name: 'articleDetail',
             component: './Account/Article/ArticleDetail',
+            hideInMenu: true,
           },
         ],
       },
