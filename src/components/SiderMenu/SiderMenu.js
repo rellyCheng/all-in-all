@@ -109,8 +109,8 @@ export default class SiderMenu extends PureComponent {
       >
         <div className={styles.logo} id="logo">
           <Link to="/">
-            <img src={logo} alt="logo" />
-            <h1>All In All</h1>
+            <img style={{height:'60px',width:'200px'}} src={logo} alt="logo" />
+            {/* <h1>总之</h1> */}
           </Link>
         </div>
         <BaseMenu
