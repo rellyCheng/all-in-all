@@ -94,11 +94,11 @@ class BasicLayout extends React.PureComponent {
     menuData: this.getMenuData(),
   };
 
-  componentWillMount(){
+  componentWillMount() {
     const tokenVal = token.get();
-    if(tokenVal==null){
-      window.location.href=("/user/login");
-      message.info("小伙子请出示令牌!");
+    if (tokenVal == null) {
+      window.location.href = '/user/login';
+      message.info('小伙子请出示令牌!');
       return null;
     }
   }
@@ -187,13 +187,13 @@ class BasicLayout extends React.PureComponent {
     const currRouterData = this.matchParamsPath(pathname);
 
     if (!currRouterData) {
-      return 'Ant Design Pro';
+      return 'All In All';
     }
     const message = formatMessage({
       id: currRouterData.locale || currRouterData.name,
       defaultMessage: currRouterData.name,
     });
-    return `${message} - Ant Design Pro`;
+    return `${message} - All In All`;
   };
 
   getLayoutStyle = () => {

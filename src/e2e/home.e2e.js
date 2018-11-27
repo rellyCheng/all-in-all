@@ -11,7 +11,7 @@ describe('Homepage', () => {
     const page = await browser.newPage();
     await page.goto(BASE_URL, { waitUntil: 'networkidle2' });
     const text = await page.evaluate(() => document.getElementsByTagName('h1')[0].innerText);
-    expect(text).toContain('Ant Design Pro');
+    expect(text).toContain('All In All');
 
     await page.close();
     browser.close();
