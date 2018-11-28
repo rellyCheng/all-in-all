@@ -253,3 +253,21 @@ export async function addPermissionForRole(params){
     body:formData
   })
 }
+
+export async function getUserByRole(params){
+  return request(`/api/role/getUserByRole?roleId=${params}`,{
+    method:'POST'
+  })
+}
+
+addUserForRole
+export async function addUserForRole(params){
+  let formData = new FormData();
+  formData.append('addUsers', params.addUsers);
+  formData.append('deleteUsers', params.deleteUsers);
+  formData.append('roleId', params.roleId);
+  return request(`/api/role/addUserForRole`,{
+    method:'POST',
+    body:formData
+  })
+}

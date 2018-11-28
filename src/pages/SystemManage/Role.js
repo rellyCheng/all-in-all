@@ -50,7 +50,28 @@ class Role extends Component {
         })
       }
     })
-}
+  }
+
+  openRoleUser=(record)=>{
+    const { dispatch } = this.props;
+    new Promise((resolve) => {
+        dispatch({
+            type:'role/getUserByRole',
+            payload:{
+                resolve,
+                params:record.id
+            }
+        })
+    }).then((res) => {
+      if(res.state=='OK'){
+        this.setState({
+          userRes : res.data,
+          openRoleUser:true,
+          record:record
+        })
+      }
+    })
+  }
   render() {
     const { role, loading } = this.props;
     console.log(role);
@@ -67,7 +88,9 @@ class Role extends Component {
       key: 'action',
       render: (text, record) => (
         <span>
-          <a href="javascript:;" onClick={()=>this.openRolePermission(record)}>分配用户</a>
+          <a href="javascript:;" onClick={()=>this.openRolePermission(record)}>分配权限</a>
+          <Divider type='vertical'/>
+          <a href="javascript:;" onClick={()=>this.openRoleUser(record)}>分配用户</a>
         </span>
       ),
     }];
@@ -110,11 +133,12 @@ class Role extends Component {
       <Modal
           title='分配用户'
           visible={this.state.openRoleUser}
-          width={800}
+          width={695}
           onCancel={()=>this.setState({openRoleUser:false})}
           footer={false}
+          destroyOnClose={true}
         >
-          <RoleUser _this={this}/>
+          <RoleUser _this={this} record = {this.state.record} userRes = {this.state.userRes}/>
       </Modal>
       <Modal
           title='分配权限'
@@ -122,6 +146,7 @@ class Role extends Component {
           width={695}
           onCancel={()=>this.setState({openRolePermission:false})}
           footer={false}
+          destroyOnClose={true}
         >
           <RolePermission _this={this} record = {this.state.record} permissionRes = {this.state.permissionRes}/>
       </Modal>

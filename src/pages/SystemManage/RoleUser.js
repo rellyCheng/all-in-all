@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from 'dva';
-import {  Transfer, Button  } from 'antd';
+import {  Transfer, Button, message   } from 'antd';
 
 
 @connect(({ role }) => ({
@@ -8,24 +8,49 @@ import {  Transfer, Button  } from 'antd';
 }))
 class RoleUser extends React.PureComponent {
   
-    componentDidMount(){
-        const roleId = this.props._this.state.selectRecord.id;
-        this.handleAddPermissionForRole(roleId);
+    constructor(props){
+        super(props)
+        console.log(this.props.userRes)
+        this.state={
+            targetData:this.props.userRes.haveList,
+            originData:this.props.userRes.haveList,
+            dataSource:this.props.userRes.allUserList
+        }
     }
-    state ={
-
-    }
-
     
     //提交添加权限
-    handleSubmitRolePermission=()=>{
+    handleSubmitRoleUser=()=>{
         let a = this.state.originData
         let b = this.state.targetData
-        let deletePermissions = a.filter(item => !b.includes(item))
-        let addPermissions = b.filter(item => !a.includes(item))
-        console.log(addPermissions);
-        console.log(deletePermissions);
-
+        let deleteUsers = a.filter(item => !b.includes(item))
+        let addUsers = b.filter(item => !a.includes(item))
+        console.log(addUsers);
+        console.log(deleteUsers);
+        
+        const { dispatch,record } = this.props;
+        new Promise((resolve) => {
+            dispatch({
+              type: 'role/addUserForRole',
+              payload: {
+                resolve,
+                params: {
+                    addUsers:addUsers,
+                    roleId:record.id,
+                    deleteUsers:deleteUsers
+                }
+              }
+            }) 
+          }).then((res) => {
+              console.log(res);
+              if(res.state=='OK'){
+                this.props._this.requestList();
+                this.props._this.setState({
+                    openRoleUser:false
+                })
+              }else{
+                  message.error(res.message)
+              }
+          })
          
     }
     //穿梭框 搜索
@@ -37,10 +62,12 @@ class RoleUser extends React.PureComponent {
         this.setState({ targetData:targetKeys });
     }
   render() {
+    const { role } = this.props;
+    console.log(this.state)
     return (
-      <Fragment>
+      <div>
         <Transfer
-            titles={['未拥有此角色', '已拥有此角色']}
+            titles={['未分配的用户', '已分配的用户']}
             dataSource={this.state.dataSource}
             showSearch
             filterOption={this.filterOption}
@@ -49,9 +76,10 @@ class RoleUser extends React.PureComponent {
             render={item => item.name}
             listStyle={{width:'300px',height:'400px'}}
          />
-         <Button onClick = {this.handleSubmitRolePermission}>提交</Button>
-      </Fragment>
-      
+         <div style={{textAlign:'center',marginTop:'10px'}}>
+         <Button onClick = {this.handleSubmitRoleUser}>提交</Button>
+         </div>
+      </div>
     );
   }
 }

@@ -1,4 +1,4 @@
-import { queryRoleList,addRole,getPermissionByRole,addPermissionForRole} from '@/services/api';
+import { queryRoleList,addRole,getPermissionByRole,addPermissionForRole,getUserByRole,addUserForRole} from '@/services/api';
 export default {
   namespace: 'role',
 
@@ -31,9 +31,22 @@ export default {
       !!resolve && resolve(response); // 返回数据
     },
 
+    *getUserByRole({ payload }, { call }) {
+      const { resolve,params } = payload;
+      const response = yield call(getUserByRole,params);
+      !!resolve && resolve(response); // 返回数据
+    },
+
     *addPermissionForRole({ payload }, { call }) {
       const { resolve,params } = payload;
       const response = yield call(addPermissionForRole,params);
+      !!resolve && resolve(response); // 返回数据
+    },
+
+    *addUserForRole({ payload }, { call }) {
+      console.log(payload)
+      const { resolve,params } = payload;
+      const response = yield call(addUserForRole,params);
       !!resolve && resolve(response); // 返回数据
     },
   },
