@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Card, Badge, Table, Divider,Button,Modal  } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import AddRoleForm from '@/pages/SystemManage/AddRoleForm'
+import AddRoleForm from '@/pages/SystemManage/AddRoleForm';
+import RoleUser from '@/pages/SystemManage/RoleUser';
+import RolePermission from '@/pages/SystemManage/RolePermission';
 @connect(({ role, loading }) => ({
     role,
   loading: loading.effects['role/fetchList'],
@@ -29,6 +31,26 @@ class Role extends Component {
       },
     });
   }
+  openRolePermission=(record)=>{
+    const { dispatch } = this.props;
+    new Promise((resolve) => {
+        dispatch({
+            type:'role/getPermissionByRole',
+            payload:{
+                resolve,
+                params:record.id
+            }
+        })
+    }).then((res) => {
+      if(res.state=='OK'){
+        this.setState({
+          permissionRes : res.data,
+          openRolePermission:true,
+          record:record
+        })
+      }
+    })
+}
   render() {
     const { role, loading } = this.props;
     console.log(role);
@@ -45,7 +67,7 @@ class Role extends Component {
       key: 'action',
       render: (text, record) => (
         <span>
-          <a href="javascript:;" onClick={()=> this.editRole()}>编辑</a>
+          <a href="javascript:;" onClick={()=>this.openRolePermission(record)}>分配用户</a>
         </span>
       ),
     }];
@@ -84,7 +106,25 @@ class Role extends Component {
           footer={false}
         >
           <AddRoleForm _this={this}/>
-        </Modal>
+      </Modal>
+      <Modal
+          title='分配用户'
+          visible={this.state.openRoleUser}
+          width={800}
+          onCancel={()=>this.setState({openRoleUser:false})}
+          footer={false}
+        >
+          <RoleUser _this={this}/>
+      </Modal>
+      <Modal
+          title='分配权限'
+          visible={this.state.openRolePermission}
+          width={695}
+          onCancel={()=>this.setState({openRolePermission:false})}
+          footer={false}
+        >
+          <RolePermission _this={this} record = {this.state.record} permissionRes = {this.state.permissionRes}/>
+      </Modal>
      </div>
     );
   }

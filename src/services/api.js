@@ -236,3 +236,20 @@ export async function queryRoleList(params){
     method:'POST'
   })
 }
+
+export async function getPermissionByRole(params){
+  return request(`/api/role/getPermissionByRole?roleId=${params}`,{
+    method:'POST'
+  })
+}
+
+export async function addPermissionForRole(params){
+  let formData = new FormData();
+  formData.append('addPermissions', params.addPermissions);
+  formData.append('deletePermissions', params.deletePermissions);
+  formData.append('roleId', params.roleId);
+  return request(`/api/role/addPermissionForRole`,{
+    method:'POST',
+    body:formData
+  })
+}

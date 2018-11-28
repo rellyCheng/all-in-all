@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from 'dva';
-import { Form, Input, Button, Select, Divider, Avatar, message  } from 'antd';
-import router from 'umi/router';
-const { Option } = Select;
+import { Form, Input, Button, message  } from 'antd';
 const formItemLayout = {
   labelCol: {
     span: 5,
