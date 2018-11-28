@@ -108,6 +108,7 @@ export default {
   'menu.systemManage': '系统管理',
   'menu.systemManage.permission': '權限管理',
   'menu.systemManage.user': '用戶管理',
+  'menu.systemManage.role': '角色管理',
   'app.login.message-invalid-credentials': '賬戶或密碼錯誤（admin/ant.design）',
   'app.login.message-invalid-verification-code': '驗證碼錯誤',
   'app.login.tab-login-credentials': '賬戶密碼登錄',

@@ -19,7 +19,6 @@ export default {
     },
     *getParentPermissionList({ payload }, { call, put }) {
       const response = yield call(getParentPermissionList, payload);
-      console.log(response);
       if(response.state=='OK'){
         yield put({
           type: 'parent',
@@ -29,6 +28,7 @@ export default {
      
     },
     *fetchTranslate({ payload }, { call, put }) {
+      console.log(payload)
       const response = yield call(fetchTranslate, payload);
         if (typeof response != 'undefined') {
           yield put({

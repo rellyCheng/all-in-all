@@ -170,7 +170,6 @@ export async function getParentPermissionList(params) {
 }
 
 export async function fetchTranslate(params) {
-  console.log(params);
   let sign = MD5.MD5('20181117000235668' + params + '123' + 'N4GXy6lTXoWM1TkLRTVt');
   const q = params;
   const from = 'zh';
@@ -222,5 +221,18 @@ export async function saveArticle(params){
 export async function articleDetail(params){
   return request(`/api/article/getArticleDetail?articleId=${params}`,{
     method:'POST',
+  })
+}
+
+export async function addRole(params){
+  return request(`/api/role/addRole`,{
+    method:'POST',
+    body:params
+  })
+}
+
+export async function queryRoleList(params){
+  return request(`/api/role/getRoleList?pageCurrent=${params.pageCurrent}&pageSize=${params.pageSize}`,{
+    method:'POST'
   })
 }

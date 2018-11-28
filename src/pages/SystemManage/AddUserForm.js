@@ -15,7 +15,7 @@ const formItemLayout = {
 };
 
 @Form.create()
-class AddPermissionForm extends React.PureComponent {
+class AddUserForm extends React.PureComponent {
   
     state ={
         name:"",
@@ -96,4 +96,4 @@ class AddPermissionForm extends React.PureComponent {
   }
 }
 
-export default AddPermissionForm;
+export default AddUserForm;

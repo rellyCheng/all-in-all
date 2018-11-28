@@ -8,7 +8,7 @@ import AddUserForm from '@/pages/SystemManage/AddUserForm'
   loading: loading.effects['sysUser/fetchList'],
 }))
 
-class Permisson extends Component {
+class User extends Component {
 
   state={
     page:1
@@ -110,4 +110,4 @@ class Permisson extends Component {
     );
   }
 }
-export default Permisson;
+export default User;

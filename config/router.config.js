@@ -296,6 +296,12 @@ export default [
             name: 'user',
             component: './SystemManage/User',
           },
+           // role
+           {
+            path: '/systemManage/role',
+            name: 'role',
+            component: './SystemManage/Role',
+          },
         ],
       },
       {
