@@ -64,19 +64,19 @@ class AddRoleForm extends React.PureComponent {
     return (
       <Fragment>
         <Form layout="horizontal" onSubmit={this.handleSubmit}  hideRequiredMark>
-          <Form.Item {...formItemLayout} label="角色描述">
+          <Form.Item {...formItemLayout} label="角色名称">
             {getFieldDecorator('description', {
-              rules: [{ required: true, message: '请输入角色描述' }],
+              rules: [{ required: true, message: '请输入角色名称' }],
             })(
-                <Input onBlur={e => this.translate(e)}  placeholder="请输入角色描述"/>
+                <Input onBlur={e => this.translate(e)}  placeholder="请输入角色名称"/>
             )}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="角色">
+          <Form.Item {...formItemLayout} label="角色代码">
             {getFieldDecorator('role', {
-              rules: [{ required: true, message: '请输入角色' }],
+              rules: [{ required: true, message: '请输入角色代码' }],
               initialValue: pValue,
             })(
-                <Input placeholder="请输入角色"/>
+                <Input placeholder="请输入角色代码"/>
             )}
           </Form.Item>
           <div style={{textAlign:'center'}}>
