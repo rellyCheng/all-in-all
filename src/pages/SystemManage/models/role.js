@@ -4,7 +4,6 @@ export default {
 
   state: {
     roleList:[],
-    openAddRoleForm:true
   },
 
   effects: {

@@ -15,7 +15,7 @@ export default [
     path: '/',
     component: '../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
-    authority: ['admin', 'user'],
+    // authority: ['admin', 'user'],
     routes: [
       // dashboard
       { path: '/', redirect: '/account/center' },
@@ -204,6 +204,7 @@ export default [
           },
         ],
       },
+      //个人页
       {
         name: 'account',
         icon: 'user',
@@ -278,11 +279,12 @@ export default [
           },
         ],
       },
+      //系统管理
       {
         name: 'systemManage',
         icon: 'setting',
         path: '/systemManage',
-        authority: ['user'],
+        // authority: ['admin'],
         routes: [
           // permission
           {
