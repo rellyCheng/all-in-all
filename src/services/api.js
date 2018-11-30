@@ -127,8 +127,13 @@ export async function fakeRegister(params) {
   });
 }
 
+// export async function queryNotices() {
+//   return request('/api/notices');
+// }
 export async function queryNotices() {
-  return request('/api/notices');
+  return request('/api/notice/getNoticeList',{
+    method:'POST'
+  });
 }
 
 export async function getFakeCaptcha(mobile) {

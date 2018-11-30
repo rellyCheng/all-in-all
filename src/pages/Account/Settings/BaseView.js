@@ -5,31 +5,25 @@ import { connect } from 'dva';
 import styles from './BaseView.less';
 import GeographicView from './GeographicView';
 import PhoneView from './PhoneView';
+import token from '@/utils/token';
 // import { getTimeDistance } from '@/utils/utils';
 
 const FormItem = Form.Item;
 const { Option } = Select;
+const tokenVal = token.get();
 
 // 头像组件 方便以后独立，增加裁剪之类的功能
-const AvatarView = ({ avatar,bgColor,name }) => (
-  
+const AvatarView = ({ avatarType,bgColor,name,avatar }) => (
   <Fragment>
     <div className={styles.avatar_title}>
       <FormattedMessage id="app.settings.basic.avatar" defaultMessage="Avatar" />
     </div>
-    <div className={styles.avatar}>
+    <div style={{display:avatarType==3?'none':'block'}} className={styles.avatar}>
     {
-      avatar==1?<Avatar size={120} style={{backgroundColor:bgColor}}><span style={{fontSize:'70px'}}>{name}</span></Avatar>
-      :<img src={avatar} alt="avatar" />
+      avatarType==1?<Avatar size={120} style={{backgroundColor:bgColor}}><span style={{fontSize:'70px'}}>{name}</span></Avatar>
+      : avatarType==2?<img src={avatar} alt="avatar" />:''
     }
     </div>
-    <Upload fileList={[]}>
-      <div className={styles.button_view}>
-        <Button icon="upload">
-          <FormattedMessage id="app.settings.basic.change-avatar" defaultMessage="Change avatar" />
-        </Button>
-      </div>
-    </Upload>
   </Fragment>
 );
 
@@ -63,7 +57,9 @@ class BaseView extends Component {
   componentDidMount() {
     this.setBaseInfo();
   }
-
+  state = {
+    fileData:[]
+  }
   setBaseInfo = () => {
     const { currentUser, form } = this.props;
     console.log(currentUser)
@@ -90,6 +86,9 @@ class BaseView extends Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
           const { dispatch } = this.props;
+          if(this.state.fileData.length>0){
+            values.avatar = this.state.fileData[0].response.data.filePath;
+          }
           dispatch({
             type: 'user/updateUserDetail',
             payload:values
@@ -97,11 +96,27 @@ class BaseView extends Component {
       }
     });
   }
+  handleUpload = (fileList)=>{
+    this.setState({
+      fileData:fileList.fileList
+    })
+  }
   render() {
     const {
       form: { getFieldDecorator },
     } = this.props;
     const currentUser = this.props.currentUser
+    let avatarType;
+    console.log(this.state.fileData)
+    if(this.state.fileData.length>0){
+      avatarType = 3
+    }else{
+      if(currentUser.avatar){
+        avatarType = 2
+      }else{
+        avatarType = 1
+      }
+    }
     return (
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
@@ -200,7 +215,16 @@ class BaseView extends Component {
         <div className={styles.right}>
           {/* <AvatarView avatar={this.getAvatarURL()} /> */}
           {
-            currentUser.avatar!=null? <AvatarView avatar={this.getAvatarURL()} /> :<AvatarView avatar={1} bgColor = {currentUser.bgColor} name = {currentUser.name.substring(0,1)}></AvatarView>
+            <div>
+           <AvatarView avatarType={avatarType} bgColor = {currentUser.bgColor} name = {currentUser.name.substring(0,1)} avatar = {currentUser.avatar}></AvatarView>
+           <Upload  action='/api/upload/singleUpload' onChange = {this.handleUpload}  listType="picture" headers={{'Authorization':'Bearer '+tokenVal}}>
+              {this.state.fileData.length>0?'':
+                <Button icon="upload">
+                  <FormattedMessage id="app.settings.basic.change-avatar" defaultMessage="Change avatar" />
+                </Button>
+              }
+            </Upload>
+            </div>
           }
         </div>
       </div>

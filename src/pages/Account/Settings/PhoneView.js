@@ -9,6 +9,9 @@ class PhoneView extends PureComponent {
     if (value) {
       values = value.split('-');
     }
+    if(values[0] ==null || values[0] == ''){
+      values[0] = '+86'
+    }
     return (
       <Fragment>
         <Input

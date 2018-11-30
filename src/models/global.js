@@ -14,11 +14,11 @@ export default {
       const data = yield call(queryNotices);
       yield put({
         type: 'saveNotices',
-        payload: data,
+        payload: data.data,
       });
       yield put({
         type: 'user/changeNotifyCount',
-        payload: data.length,
+        payload: data.data.length,
       });
     },
     *clearNotices({ payload }, { put, select }) {
