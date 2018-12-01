@@ -34,8 +34,9 @@ const passwordProgressMap = {
   poor: 'exception',
 };
 
-@connect(({ register, loading }) => ({
+@connect(({ register, loading,permission }) => ({
   register,
+  permission,
   submitting: loading.effects['register/submit'],
 }))
 @Form.create()
@@ -63,6 +64,17 @@ class Register extends Component {
 
   componentWillUnmount() {
     clearInterval(this.interval);
+   
+  }
+
+  componentDidMount(){
+    this.getAddressByIp();
+  }
+  getAddressByIp =()=>{
+    const { dispatch } = this.props;
+    dispatch({
+      type:'register/getAddressByIp'
+    })
   }
 
   onGetCaptcha = () => {
@@ -91,21 +103,57 @@ class Register extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { form, dispatch } = this.props;
+    const { form, dispatch,register } = this.props;
     form.validateFields({ force: true }, (err, values) => {
       if (!err) {
-        const { prefix } = this.state;
+        console.log(values)
+        // const { prefix } = this.state;
+        // dispatch({
+        //   type: 'register/submit',
+        //   payload: {
+        //     ...values,
+        //     prefix,
+        //   },
+        // });
+        values.provinceKey=register.provinceId;
+        values.province=register.province;
+        values.cityKey=register.cityId;
+        values.city=register.city;
+        values.ipAddress=register.ip;
+        values.country=register.country;
+        values.bgColor = this.state.bgColor;
         dispatch({
           type: 'register/submit',
-          payload: {
-            ...values,
-            prefix,
-          },
+          payload: values
         });
       }
     });
   };
+//名字图
+  tranColor = (name) => {
+    var str ='';
+    for(var i=0; i<name.length; i++) {
+      str += parseInt(name[i].charCodeAt(0), 10).toString(16);
+    }
+    return '#' + str.slice(1, 4);
+  }
 
+  changeName = (e) =>{
+    //翻译
+    let value = e.target.value;
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'permission/fetchTranslate',
+      payload: value,
+    });
+    //名字头像
+    const name = e.target.value.substring(0,1);
+    const bgColor = this.tranColor(name);
+    this.setState({
+      name:name,
+      bgColor
+    })
+  }
   handleConfirmBlur = e => {
     const { value } = e.target;
     const { confirmDirty } = this.state;
@@ -174,9 +222,10 @@ class Register extends Component {
   };
 
   render() {
-    const { form, submitting } = this.props;
+    const { form, submitting,permission } = this.props;
     const { getFieldDecorator } = form;
     const { count, prefix, help, visible } = this.state;
+    let pValue = permission.translateValue.replace(/\s+/g, '');
     return (
       <div className={styles.main}>
         <h3>
@@ -184,7 +233,7 @@ class Register extends Component {
         </h3>
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
-            {getFieldDecorator('mail', {
+            {getFieldDecorator('email', {
               rules: [
                 {
                   required: true,
@@ -197,6 +246,32 @@ class Register extends Component {
               ],
             })(
               <Input size="large" placeholder={formatMessage({ id: 'form.email.placeholder' })} />
+            )}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator('name', {
+              rules: [
+                {
+                  required: true,
+                  message: formatMessage({ id: 'validation.name.required' }),
+                },
+              ],
+            })(
+              <Input size="large" onBlur={(e)=>this.changeName(e)}  placeholder={formatMessage({ id: 'form.name.placeholder' })} />
+            )}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator('userName', {
+              initialValue:pValue,
+              rules: [
+                {
+                  required: true,
+                  message: formatMessage({ id: 'validation.userName.required' }),
+                },
+               
+              ],
+            })(
+              <Input size="large" placeholder={formatMessage({ id: 'form.userName.placeholder' })} />
             )}
           </FormItem>
           <FormItem help={help}>

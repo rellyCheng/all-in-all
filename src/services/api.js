@@ -120,8 +120,15 @@ export async function fakeLogout() {
   });
 }
 
+// export async function fakeRegister(params) {
+//   return request('/api/register', {
+//     method: 'POST',
+//     body: params,
+//   });
+// }
+
 export async function fakeRegister(params) {
-  return request('/api/register', {
+  return request('/publicApi/register', {
     method: 'POST',
     body: params,
   });
@@ -274,5 +281,11 @@ export async function addUserForRole(params){
   return request(`/api/role/addUserForRole`,{
     method:'POST',
     body:formData
+  })
+}
+
+export async function getAddressByIp() {
+  return request(`/service/getIpInfo2.php?ip=myip`,{
+    method:'POST',
   })
 }
