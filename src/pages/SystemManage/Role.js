@@ -133,7 +133,7 @@ class Role extends Component {
       <Modal
           title='分配用户'
           visible={this.state.openRoleUser}
-          width={695}
+          width={'54%'}
           onCancel={()=>this.setState({openRoleUser:false})}
           footer={false}
           destroyOnClose={true}

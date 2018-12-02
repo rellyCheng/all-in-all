@@ -61,15 +61,17 @@ class User extends Component {
       title: '用户名',
       dataIndex: 'userName',
       key: 'userName',
-    },{
-      title: '操作',
-      key: 'action',
-      render: (text, record) => (
-        <span>
-          <a href="javascript:;" onClick={()=> this.editUser()}>编辑</a>
-        </span>
-      ),
-    }];
+    },
+    // {
+    //   title: '操作',
+    //   key: 'action',
+    //   render: (text, record) => (
+    //     <span>
+    //       <a href="javascript:;" onClick={()=> this.editUser()}>编辑</a>
+    //     </span>
+    //   ),
+    // }
+  ];
     
     return (
       <div>

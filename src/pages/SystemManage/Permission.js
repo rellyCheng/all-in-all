@@ -45,15 +45,17 @@ class Permisson extends Component {
       render(resource_type) {
           return resource_type=='oneMenu'?'一级菜单':resource_type=='twoMenu'?'二级菜单':resource_type=='threeMenu'?'三级菜单':'按钮权限'
       }
-    },{
-      title: '操作',
-      key: 'action',
-      render: (text, record) => (
-        <span>
-          <a href="javascript:;" onClick={()=> this.delPermission()}>删除权限</a>
-        </span>
-      ),
-    }];
+    },
+    // {
+    //   title: '操作',
+    //   key: 'action',
+    //   render: (text, record) => (
+    //     <span>
+    //       <a href="javascript:;" onClick={()=> this.delPermission()}>删除权限</a>
+    //     </span>
+    //   ),
+    // }
+  ];
     
     return (
       <div>

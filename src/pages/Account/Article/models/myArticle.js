@@ -1,5 +1,7 @@
 import { getMyArticleListMore, saveArticle } from '@/services/api';
 import {message} from 'antd';
+router.push(`/account/myArticle`);
+import router from 'umi/router';
 
 
 export default {
@@ -34,6 +36,10 @@ export default {
     *save({ payload },{call,put}){
       const response = yield call(saveArticle, payload);
      console.log(response);
+     if(response.state=="OK"){
+       message.success("发布成功！跳转到我的文章列表页。")
+      router.push(`/account/myArticle`);
+     }
     },
   },
 

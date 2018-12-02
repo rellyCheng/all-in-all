@@ -74,7 +74,7 @@ class RolePermission extends React.PureComponent {
             targetKeys={this.state.targetData}
             onChange={this.handleChange}
             render={item => item.name}
-            listStyle={{width:'300px',height:'400px'}}
+            listStyle={{width:'42%'}}
          />
          <div style={{textAlign:'center',marginTop:'10px'}}>
          <Button onClick = {this.handleSubmitRolePermission}>提交</Button>

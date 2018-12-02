@@ -6,6 +6,7 @@ import { Card, Input, Button, Switch, Icon, Upload, Modal, Select, Form, message
 import token from '@/utils/token';
 const FormItem = Form.Item;
 
+
 @connect(({ global,loading,myArticle }) => ({
   global,
   myArticle,
@@ -61,7 +62,7 @@ class AddArticle extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        values.description = this.state.editorContent.replace(/<[^>]+>/g,"");
+        values.description = this.state.editorContent.replace(/<[^>]+>/g,"").substring(0,50);
         values.content = this.state.editorContent;
         values.cover =  values.file[0].response.data.filePath;
         console.log(values)
@@ -70,6 +71,10 @@ class AddArticle extends Component {
           type: 'myArticle/save',
           payload: values
         });
+        this.setState({
+          open:false
+        })
+        
       }
     });
   }
