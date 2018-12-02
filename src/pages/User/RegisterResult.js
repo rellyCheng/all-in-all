@@ -12,7 +12,7 @@ const actions = (
         <FormattedMessage id="app.register-result.view-mailbox" />
       </Button>
     </a>
-    <Link to="/">
+    <Link to="/account/center/">
       <Button size="large">
         <FormattedMessage id="app.register-result.back-home" />
       </Button>

@@ -19,10 +19,10 @@ export default {
       const response = yield call(fakeRegister, payload);
       if(response.state=="OK"){
         token.save(response.data.token);
-        message.success("注册成功！三秒后跳转！")
-        setTimeout(() => {
-          router.push(`/account/center`)},3000
-        );
+        // message.success("注册成功！三秒后跳转！")
+        // setTimeout(() => {
+        //   router.push(`/account/center`)},3000
+        // );
        
         yield put({
           type: 'registerHandle',
@@ -58,7 +58,7 @@ export default {
       reloadAuthorized();
       return {
         ...state,
-        status: payload.status,
+        status: payload.state,
       };
     },
     ipInfo(state, { payload }) {

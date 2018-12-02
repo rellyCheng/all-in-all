@@ -50,8 +50,8 @@ class Register extends Component {
 
   componentDidUpdate() {
     const { form, register } = this.props;
-    const account = form.getFieldValue('mail');
-    if (register.status === 'ok') {
+    const account = form.getFieldValue('userName');
+    if (register.status === 'OK') {
       router.push({
         pathname: '/user/register-result',
         state: {
@@ -121,10 +121,10 @@ class Register extends Component {
         values.ipAddress=register.ip;
         values.country=register.country;
         values.bgColor = this.state.bgColor;
-        dispatch({
-          type: 'register/submit',
-          payload: values
-        });
+       dispatch({
+         type:'register/submit',
+         payload:values
+       })
       }
     });
   };
