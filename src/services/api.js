@@ -285,7 +285,7 @@ export async function addUserForRole(params){
 }
 
 export async function getAddressByIp() {
-  return request(`/service/getIpInfo2.php?ip=myip`,{
+  return request(`/publicApi/getIpInfo`,{
     method:'POST',
   })
 }

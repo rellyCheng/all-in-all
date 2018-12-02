@@ -1,4 +1,4 @@
-import { fakeRegister,getAddressByIp } from '@/services/api';
+import { fakeRegister,getAddressByIp,fetchTranslate } from '@/services/api';
 import { setAuthority } from '@/utils/authority';
 import { reloadAuthorized } from '@/utils/Authorized';
 import router from 'umi/router';
@@ -11,6 +11,7 @@ export default {
 
   state: {
     status: undefined,
+    translateValue:''
   },
 
   effects: {
@@ -29,13 +30,25 @@ export default {
         });
       }
     },
+
     *getAddressByIp({ _ }, { call, put }) {
       const response = yield call(getAddressByIp);
-      console.log(response)
+      console.log(JSON.parse(response.data.ipInfo))
       yield put({
         type: 'ipInfo',
-        payload: response.data,
+        payload: JSON.parse(response.data.ipInfo).data,
       });
+    },
+
+    *fetchTranslate({ payload }, { call, put }) {
+      console.log(payload)
+      const response = yield call(fetchTranslate, payload);
+        if (typeof response != 'undefined') {
+          yield put({
+            type: 'translate',
+            payload: response.trans_result[0].dst,
+          });
+        }
     },
   },
 
@@ -57,6 +70,12 @@ export default {
         cityId:payload.city_id,
         ip:payload.ip,
         country:payload.country
+      };
+    },
+    translate(state, { payload }) {
+      return {
+        ...state,
+        translateValue: payload,
       };
     },
   },

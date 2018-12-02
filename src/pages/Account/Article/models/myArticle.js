@@ -1,6 +1,5 @@
 import { getMyArticleListMore, saveArticle } from '@/services/api';
 import {message} from 'antd';
-router.push(`/account/myArticle`);
 import router from 'umi/router';
 
 

@@ -34,9 +34,8 @@ const passwordProgressMap = {
   poor: 'exception',
 };
 
-@connect(({ register, loading,permission }) => ({
+@connect(({ register, loading }) => ({
   register,
-  permission,
   submitting: loading.effects['register/submit'],
 }))
 @Form.create()
@@ -143,7 +142,7 @@ class Register extends Component {
     let value = e.target.value;
     const { dispatch } = this.props;
     dispatch({
-      type: 'permission/fetchTranslate',
+      type: 'register/fetchTranslate',
       payload: value,
     });
     //名字头像
@@ -222,10 +221,12 @@ class Register extends Component {
   };
 
   render() {
-    const { form, submitting,permission } = this.props;
+    const { form, submitting,register } = this.props;
     const { getFieldDecorator } = form;
     const { count, prefix, help, visible } = this.state;
-    let pValue = permission.translateValue.replace(/\s+/g, '');
+    console.log(register)
+    let pValue;
+    pValue = register.translateValue.replace(/\s+/g, '');
     return (
       <div className={styles.main}>
         <h3>

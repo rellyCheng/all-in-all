@@ -27,16 +27,7 @@ export default {
       }
      
     },
-    *fetchTranslate({ payload }, { call, put }) {
-      console.log(payload)
-      const response = yield call(fetchTranslate, payload);
-        if (typeof response != 'undefined') {
-          yield put({
-            type: 'translate',
-            payload: response.trans_result[0].dst,
-          });
-        }
-      },
+    
     *addPermission({ payload }, { call, put }) {
       const {resolve,values} = payload;
       const response = yield call(addPermission, values);
