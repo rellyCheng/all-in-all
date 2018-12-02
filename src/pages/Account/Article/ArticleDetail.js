@@ -48,7 +48,7 @@ class ArticleDetail extends Component {
             </div>
             }
             // extra={<a onClick={this.handleEdite}>编辑</a>}
-            cover={<div style={{textAlign:'center'}}><img style={{width:'50%',marginTop:'10px'}} src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" /></div>}
+            cover={<div style={{textAlign:'center'}}><img style={{width:'50%',marginTop:'10px'}} src={articleDetail.cover} /></div>}
             >
                 <div dangerouslySetInnerHTML={{__html: articleDetail.content}} />
             </Card>
