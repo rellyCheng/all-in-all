@@ -19,6 +19,9 @@ import Header from './Header';
 import Context from './MenuContext';
 import Exception403 from '../pages/Exception/403';
 import token from '@/utils/token';
+import { reloadAuthorized } from '@/utils/Authorized';
+import { setAuthority } from '@/utils/authority';
+
 const { Content } = Layout;
 
 // Conversion router to menu.
@@ -96,10 +99,19 @@ class BasicLayout extends React.PureComponent {
   };
 
   componentWillMount() {
+    console.log(this.props.location);
+    console.log(this.props.match)
+    let query = this.props.location.query;
+    if(Object.keys(query).length != 0){
+      token.save(query.token);
+      console.log()
+      setAuthority(query.auth.replace(/\s+/g,"").replace("[","").replace("]","").split(','));
+      reloadAuthorized();
+
+    }
     const tokenVal = token.get();
     if (tokenVal == null) {
       window.location.href = '/user/login';
-      message.info('小伙子请出示令牌!');
       return null;
     }
   }
