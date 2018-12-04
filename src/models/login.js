@@ -40,7 +40,7 @@ export default {
             return;
           }
         }
-        yield put(routerRedux.replace(redirect || '/'));
+        yield put(routerRedux.replace(redirect || '/account/center'));
       }else{
         message.error(response.message);
       }
