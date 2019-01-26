@@ -48,6 +48,10 @@ class Register extends Component {
     // prefix: '86',
   };
 
+  componentDidMount(){
+    this.getAddressByIp();
+  }
+
   componentDidUpdate() {
     const { form, register } = this.props;
     const account = form.getFieldValue('userName');
@@ -66,9 +70,6 @@ class Register extends Component {
    
   }
 
-  componentDidMount(){
-    this.getAddressByIp();
-  }
   getAddressByIp =()=>{
     const { dispatch } = this.props;
     dispatch({
@@ -106,14 +107,6 @@ class Register extends Component {
     form.validateFields({ force: true }, (err, values) => {
       if (!err) {
         console.log(values)
-        // const { prefix } = this.state;
-        // dispatch({
-        //   type: 'register/submit',
-        //   payload: {
-        //     ...values,
-        //     prefix,
-        //   },
-        // });
         values.provinceKey=register.provinceId;
         values.province=register.province;
         values.cityKey=register.cityId;
@@ -128,31 +121,33 @@ class Register extends Component {
       }
     });
   };
-//名字图
+
+// 名字图
   tranColor = (name) => {
-    var str ='';
-    for(var i=0; i<name.length; i++) {
+    let str ='';
+    for(let i=0; i<name.length; i++) {
       str += parseInt(name[i].charCodeAt(0), 10).toString(16);
     }
-    return '#' + str.slice(1, 4);
+    return `#${  str.slice(1, 4)}`;
   }
 
   changeName = (e) =>{
-    //翻译
-    let value = e.target.value;
+    // 翻译
+    const value = e.target.value;
     const { dispatch } = this.props;
     dispatch({
       type: 'register/fetchTranslate',
       payload: value,
     });
-    //名字头像
+    // 名字头像
     const name = e.target.value.substring(0,1);
     const bgColor = this.tranColor(name);
     this.setState({
-      name:name,
+      name,
       bgColor
     })
   }
+
   handleConfirmBlur = e => {
     const { value } = e.target;
     const { confirmDirty } = this.state;
@@ -258,7 +253,7 @@ class Register extends Component {
                 },
               ],
             })(
-              <Input size="large" onBlur={(e)=>this.changeName(e)}  placeholder={formatMessage({ id: 'form.name.placeholder' })} />
+              <Input size="large" onBlur={(e)=>this.changeName(e)} placeholder={formatMessage({ id: 'form.name.placeholder' })} />
             )}
           </FormItem>
           <FormItem>

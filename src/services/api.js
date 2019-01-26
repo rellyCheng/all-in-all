@@ -272,7 +272,6 @@ export async function getUserByRole(params){
   })
 }
 
-addUserForRole
 export async function addUserForRole(params){
   let formData = new FormData();
   formData.append('addUsers', params.addUsers);
