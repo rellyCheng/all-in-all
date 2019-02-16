@@ -8,10 +8,11 @@ import {isEmpty} from '@/utils/utils'
 const { Meta } = Card;
 const { toString,toContentState  } = Mention;
 
-@connect(({ myArticle, loading,articleDetail }) => ({
+@connect(({ myArticle, loading,articleDetail,user }) => ({
     myArticle,
     articleDetail,
     loading: loading.effects['articleDetail/articleDetail'],
+    currentUser: user.currentUser,
 }))
 
 class ArticleDetail extends Component {
@@ -166,6 +167,7 @@ class ArticleDetail extends Component {
             return ''
         }
     }
+    const currentUser = this.props.currentUser;
     return (
       <div>
       <PageHeaderWrapper title="文章详情">
@@ -180,15 +182,16 @@ class ArticleDetail extends Component {
             >
                 <div dangerouslySetInnerHTML={{__html: articleDetail1.content}} />
             </Card>
-            <Card  bordered = {false}   title={<p><Icon type="smile" /> 发表一点想法</p>}style={{  marginTop: 10 }}>
+            <Card  bordered = {false}   title={<p><Icon type="smile" /> 发表一点想法</p>} style={{  marginTop: 10 }}>
             <div style={{width:1000}}  >
                 <Comment
-                    avatar={(
-                        <Avatar
-                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                        alt="Han Solo"
-                        />
-                    )}
+                    avatar={currentUser.avatar != null ? (
+                        <Avatar alt="" src={currentUser.avatar} />
+                      ) : (
+                        <Avatar  style={{ backgroundColor: currentUser.bgColor }}>
+                          <span >{currentUser.name.substring(0, 1)}</span>
+                        </Avatar>
+                      )}
                     content={
                         <div>
                         <Form.Item>
@@ -243,12 +246,13 @@ class ArticleDetail extends Component {
                                             <Comment
                                             actions={[<Popover placement="bottomLeft"  visible={item1.id==this.state.parentItem.id&&isEmpty(this.state.sItem)?true:false} content={content}  trigger="click"><span onClick={()=>this.handleReply(item1)}>Reply to</span></Popover>]}
                                             author={<div><a>{item1.name}</a> <span>{item1.rank}楼</span></div>}
-                                            avatar={(
-                                                <Avatar
-                                                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                                                alt="Han Solo"
-                                                />
-                                            )}
+                                            avatar={item1.avatar != null ? (
+                                                <Avatar alt="" src={item1.avatar} />
+                                              ) : (
+                                                <Avatar  style={{ backgroundColor: item1.bgColor }}>
+                                                  <span >{item1.name.substring(0, 1)}</span>
+                                                </Avatar>
+                                              )}
                                             datetime={
                                                 <Tooltip title={moment(item1.createTime).format('YYYY-MM-DD HH:mm:ss')}>
                                                 <span>{moment(item1.createTime).fromNow()}</span>
@@ -262,12 +266,13 @@ class ArticleDetail extends Component {
                                                                     key={index}
                                                                     actions={[<Popover placement="bottomLeft" visible={item.id==this.state.sItem.id&&!isEmpty(this.state.parentItem)?true:false} content={content}  trigger="click"><span onClick={()=>this.handleReply(item1,item)}>Reply to</span></Popover>]}
                                                                     author={<div><a>{item.name}</a></div>}
-                                                                    avatar={(
-                                                                    <Avatar
-                                                                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                                                                        alt="Han Solo"
-                                                                    />
-                                                                    )}
+                                                                    avatar={item.avatar != null ? (
+                                                                        <Avatar alt="" src={item.avatar} />
+                                                                      ) : (
+                                                                        <Avatar  style={{ backgroundColor: item.bgColor }}>
+                                                                          <span >{item.name.substring(0, 1)}</span>
+                                                                        </Avatar>
+                                                                      )}
                                                                     datetime={
                                                                         <Tooltip title={moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')}>
                                                                         <span>{moment(item.createTime).fromNow()}</span>
