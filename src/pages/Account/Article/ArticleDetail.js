@@ -144,9 +144,8 @@ class ArticleDetail extends Component {
                             }}
                             renderItem={item1 => (
                             <Comment
-                            // key={index}
                             actions={[<Popover placement="bottomLeft"  content={content}  trigger="click"><span onClick={()=>this.handleReply(item1)}>Reply to</span></Popover>]}
-                            author={<div><a>{item1.name}</a> <span>{moment(item1.createTime).format('YYYY-MM-DD HH:mm:ss')}</span> <span>{item1.rank}楼</span></div>}
+                            author={<div><a>{item1.name}</a> <span>{item1.rank}楼</span></div>}
                             avatar={(
                                 <Avatar
                                 src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
@@ -155,7 +154,7 @@ class ArticleDetail extends Component {
                             )}
                             datetime={
                                 <Tooltip title={moment(item1.createTime).format('YYYY-MM-DD HH:mm:ss')}>
-                                <span>{moment(item1.createTime).format('YYYY-MM-DD').fromNow()}</span>
+                                <span>{moment(item1.createTime).fromNow()}</span>
                                 </Tooltip>
                             }
                             content={<p>{item1.commentContent}.</p>}
@@ -174,8 +173,8 @@ class ArticleDetail extends Component {
                                                     />
                                                     )}
                                                     datetime={
-                                                        <Tooltip title={moment(item1.createTime).format('YYYY-MM-DD HH:mm:ss')}>
-                                                        <span>{moment(item1.createTime).format('YYYY-MM-DD').fromNow()}</span>
+                                                        <Tooltip title={moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')}>
+                                                        <span>{moment(item.createTime).fromNow()}</span>
                                                         </Tooltip>
                                                     }
                                                     content={<p>{item.commentContent}.</p>}
