@@ -241,6 +241,13 @@ export async function fetchArticleComment(params){
   })
 }
 
+export async function fetchAddArticleComment(params){
+  return request(`/api/article/addMessageForArticle`,{
+    method:'POST',
+    body:params
+  })
+}
+
 export async function addRole(params){
   return request(`/api/role/addRole`,{
     method:'POST',

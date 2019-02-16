@@ -1,4 +1,4 @@
-import { articleDetail,fetchArticleComment } from '@/services/api';
+import { articleDetail,fetchArticleComment,fetchAddArticleComment } from '@/services/api';
 import {message} from 'antd';
 
 export default {
@@ -25,7 +25,14 @@ export default {
           payload: response.data,
         });
       }
-  },
+    },
+    
+    *fetchAddArticleComment({ payload,callback },{call,put}){
+      const response = yield call(fetchAddArticleComment, payload);
+      if(response.state=="OK"){
+        callback(response); // 返回结果
+      }
+    },
   },
 
   reducers: {
