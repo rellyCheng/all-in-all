@@ -231,8 +231,20 @@ export async function saveArticle(params){
 }
 
 export async function articleDetail(params){
-  return request(`/api/article/getArticleDetail?articleId=${params}`,{
+  return request(`/api/article/getArticleDetail?articleId=${params.articleId}`,{
     method:'POST',
+  })
+}
+export async function fetchArticleComment(params){
+  return request(`/api/article/getArticleMessageDetail?articleId=${params.articleId}&pageSize=${params.pageSize}&pageCurrent=${params.pageCurrent}`,{
+    method:'POST',
+  })
+}
+
+export async function fetchAddArticleComment(params){
+  return request(`/api/article/addMessageForArticle`,{
+    method:'POST',
+    body:params
   })
 }
 

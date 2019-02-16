@@ -66,7 +66,7 @@ class Permisson extends Component {
         <Table
         dataSource={permission.permissionList}
         style={{ marginBottom: 24 }}
-        pagination={true}
+        // pagination={true}
         loading={loading}
         rowKey="id"
         columns={columns} 

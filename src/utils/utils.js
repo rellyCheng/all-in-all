@@ -182,3 +182,13 @@ export function formatWan(val) {
 export function isAntdPro() {
   return window.location.hostname === 'preview.pro.ant.design';
 }
+
+export function isEmpty(value){
+  var regu = "^[ ]+$";
+  var re = new RegExp(regu);
+  if(typeof value == "undefined" || value == null || value == ""||re.test(value)||JSON.stringify(value) == "{}"){
+      return true;
+  }else{
+      return false;
+  }
+}
