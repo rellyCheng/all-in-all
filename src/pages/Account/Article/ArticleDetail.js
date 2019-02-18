@@ -70,14 +70,14 @@ class ArticleDetail extends Component {
         this.setState({
             defaultMention:toContentState('@'+sitem.name+"  "),
             parentItem:item,
-            aite:sitem.name,
+            aite:item.userId||sitem.userId,
             sItem:sitem
         })
     }else{
         this.setState({
             defaultMention:null,
             parentItem:item,
-            aite:null
+            aite:item.userId||sitem.userId,
         })
     }
   }
@@ -195,7 +195,7 @@ class ArticleDetail extends Component {
                     content={
                         <div>
                         <Form.Item>
-                        <Input.TextArea value={this.state.commentContent1} rows={4} onChange={this.handleChangeEditor} />
+                        <Input.TextArea ref={node => {this.inputTextArea = node}} value={this.state.commentContent1} rows={4} onChange={this.handleChangeEditor} />
                         </Form.Item>
                         <Form.Item>
                             <Button
@@ -213,13 +213,13 @@ class ArticleDetail extends Component {
             </Card>
             <Card style={{marginTop: 10 }} 
             bordered = {false}
-            title={<p><Icon type="message" /> 精彩评论</p>}
+            title={<p><Icon type="message" /> 精彩评论<a href="#CommentList">#</a></p>}
             >
                
                     {
                           articleDetail.articleComment.rowCount==0?(
                             <div style={{textAlign:'center'}}>
-                                <p>智慧如你，不想<a>发表一点想法</a>咩~</p>
+                                <p>智慧如你，不想<a onClick={()=>this.inputTextArea.focus()}>发表一点想法</a>咩~</p>
                             </div>
                           ):(
                             <List
