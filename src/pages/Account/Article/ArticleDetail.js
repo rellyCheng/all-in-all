@@ -18,7 +18,8 @@ const { toString,toContentState  } = Mention;
 class ArticleDetail extends Component {
   state = { 
     parentItem:{},
-    sItem:{}
+    sItem:{},
+    commentContent1:'',
   };
   componentDidMount(){
     const { dispatch,myArticle } = this.props;
@@ -54,8 +55,7 @@ class ArticleDetail extends Component {
         pageCurrent:pageCurrent,
         parentItem:{},
         sItem:{},
-        commentContent1:null,
-        commentContent:null
+        commentContent1:'',
     })
   }
   handleCancelComment=()=>{
@@ -63,22 +63,24 @@ class ArticleDetail extends Component {
         parentItem:{},
         sItem:{},
         aite:null,
-        defaultMention:null,
+        defaultMention:'',
     })
   }
-  handleReply=(item,sitem={})=>{
-    if( typeof sitem.name !=='undefined'){
+  handleReply=(item,sitem,commentFloor)=>{
+    if( commentFloor==2){
         this.setState({
-            defaultMention:toContentState('@'+sitem.name+"  "),
+            defaultMention:'@'+sitem.name+"  ",
             parentItem:item,
             aite:item.userId||sitem.userId,
-            sItem:sitem
+            sitem:sitem,
+            commentFloor:commentFloor
         })
     }else{
         this.setState({
-            defaultMention:null,
+            defaultMention:'',
             parentItem:item,
             aite:item.userId||sitem.userId,
+            commentFloor:commentFloor
         })
     }
   }
@@ -92,7 +94,7 @@ class ArticleDetail extends Component {
             articleId:myArticle.articleId,
             parentId:parentItem.id,
             aite:this.state.aite,
-            content:this.state.commentContent||this.state.commentContent1
+            content:this.state.commentContent1
         },
         callback: (res) => {
             
@@ -104,13 +106,7 @@ class ArticleDetail extends Component {
     });
 
   }
-  handleChangeComment=(e)=>{
-    this.setState({
-        commentContent:toString(e)
-    })
-  }
   handleChangeEditor=(e)=>{
-    console.log(e.target.value);
     this.setState({
         commentContent1:e.target.value
     })
@@ -122,52 +118,36 @@ class ArticleDetail extends Component {
     if(articleDetail1==null){
         return ''
     }
+    let commentContent = '';
+    if(isEmpty(this.state.commentContent1)){
+        commentContent = this.state.defaultMention+this.state.commentContent1;
+    }else{
+        commentContent = this.state.commentContent1;
+    }
+     
     const content = (
-        <div style={{width:1000}} >
-            <Form.Item>
-                <Mention
-                    style={{ width: '100%', height: 100 }}
-                    defaultValue={this.state.defaultMention}
-                    onChange={this.handleChangeComment}
-                />
-            </Form.Item>
-            <Button
-                type="primary"
-                onClick={this.handleComment}
-            >
-                Reply
-            </Button>
+          <div style={{width:1000}}>
+          <Form.Item>
+          <Input.TextArea ref={node => {this.inputTextArea = node}} value={commentContent} rows={4} onChange={this.handleChangeEditor} />
+          </Form.Item>
+          <Form.Item>
+              <Button
+              htmlType="submit"
+              onClick={this.handleComment}
+              type="primary"
+              >
+              Reply
+              </Button>
             <Button
             style={{marginLeft:'10px'}}
                 onClick={this.handleCancelComment}
             >
                 Cancel
             </Button>
-        </div>
+          </Form.Item>
+          </div>
     );
-
     const commentList = articleDetail.articleComment.pageData || [];
-    const CommentChildren = ({ childrenList,item1 }) => {
-        if(childrenList!=null){
-            return childrenList.map((item,index)=>{
-                return  <Comment
-                             key={index}
-                             actions={[<Popover placement="bottomLeft"  content={content} trigger="click" ><span onClickCapture={()=>this.handleReply(item1,item)}>Reply to</span></Popover>]}
-                             author={<div><a>{item.name}</a> <span>{item.createTime}</span></div>}
-                             avatar={(
-                             <Avatar
-                                 src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                                 alt="Han Solo"
-                             />
-                             )}
-                             content={<p>{item.commentContent}.</p>}
-                         >
-                         </Comment>
-             })
-        }else{
-            return ''
-        }
-    }
     const currentUser = this.props.currentUser;
     return (
       <div>
@@ -245,7 +225,7 @@ class ArticleDetail extends Component {
                                     
                                         return (
                                             <Comment
-                                            actions={[<Popover placement="bottomLeft"  visible={item1.id==this.state.parentItem.id&&isEmpty(this.state.sItem)?true:false} content={content}  trigger="click"><span onClick={()=>this.handleReply(item1)}>Reply to</span></Popover>]}
+                                            actions={[<Popover placement="bottomLeft"  visible={this.state.commentFloor==1&&item1.id==this.state.parentItem.id&&isEmpty(this.state.sItem)?true:false} content={content}  trigger="click"><span onClick={()=>this.handleReply(item1,{},1)}>Reply to</span></Popover>]}
                                             author={<div><a>{item1.name}</a> <span>{item1.rank}楼</span></div>}
                                             avatar={item1.avatar != null ? (
                                                 <Avatar alt="" src={item1.avatar} />
@@ -265,7 +245,7 @@ class ArticleDetail extends Component {
                                                 item1.children.map((item,index)=>{
                                                     return  <Comment
                                                                     key={index}
-                                                                    actions={[<Popover placement="bottomLeft" visible={item.id==this.state.sItem.id&&!isEmpty(this.state.parentItem)?true:false} content={content}  trigger="click"><span onClick={()=>this.handleReply(item1,item)}>Reply to</span></Popover>]}
+                                                                    actions={[<Popover placement="bottomLeft" visible={this.state.commentFloor==2&&item.id==this.state.sitem.id&&!isEmpty(this.state.parentItem)?true:false} content={content}  trigger="click"><span onClick={()=>this.handleReply(item1,item,2)}>Reply to</span></Popover>]}
                                                                     author={<div><a>{item.name}</a></div>}
                                                                     avatar={item.avatar != null ? (
                                                                         <Avatar alt="" src={item.avatar} />
