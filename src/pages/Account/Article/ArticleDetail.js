@@ -54,7 +54,8 @@ class ArticleDetail extends Component {
         pageCurrent:pageCurrent,
         parentItem:{},
         sItem:{},
-        commentContent1:null
+        commentContent1:null,
+        commentContent:null
     })
   }
   handleCancelComment=()=>{
@@ -213,7 +214,7 @@ class ArticleDetail extends Component {
             </Card>
             <Card style={{marginTop: 10 }} 
             bordered = {false}
-            title={<p><Icon type="message" /> 精彩评论<a href="#CommentList">#</a></p>}
+            title={<p><Icon type="message" /> 精彩评论</p>}
             >
                
                     {

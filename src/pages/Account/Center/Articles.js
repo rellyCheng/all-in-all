@@ -31,7 +31,7 @@ class Center extends PureComponent {
             key={item.id}
             actions={[
               <IconText type="star-o" text={item.star} />,
-              <IconText type="like-o" text={item.like} />,
+              <IconText type="like-o" text={item.likeNum} />,
               <IconText type="message" text={item.message} />,
             ]}
           >
