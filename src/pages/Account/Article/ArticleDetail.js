@@ -225,6 +225,7 @@ class ArticleDetail extends Component {
                                     renderItem={(item1) =>{
                                     
                                         return (
+                                          <div>
                                             <Comment
                                             actions={[<Popover placement="bottomLeft"  visible={this.state.commentFloor==1&&item1.id==this.state.parentItem.id&&isEmpty(this.state.sItem)?true:false} content={content}  trigger="click"><span onClick={()=>this.handleReply(item1,{},1)}>Reply to</span></Popover>]}
                                             author={<div><a>{item1.name}</a> <span>{item1.rank}楼</span></div>}
@@ -266,6 +267,8 @@ class ArticleDetail extends Component {
                                                     })
                                             }
                                             </Comment>
+                                            <Divider dashed={true}/>
+                                            </div>
                                         )
                                     } }
                             />

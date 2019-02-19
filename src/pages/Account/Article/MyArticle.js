@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'dva';
-import { Form, Card, Select, List, Tag, Icon, Row, Col, Button } from 'antd';
+import { Form, Card, Select, List, Tag, Icon, Row, Col, Button,Avatar } from 'antd';
 
 import TagSelect from '@/components/TagSelect';
 import StandardFormRow from '@/components/StandardFormRow';
@@ -178,7 +178,7 @@ class MyArticle extends Component {
                   <IconText type="like-o" text={item.likeNum} />,
                   <IconText type="message" text={item.message} />,
                 ]}
-                extra={<div className={styles.listItemExtra} />}
+                extra={<img width={272} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
                 onClick={()=>this.handleArticleDetail(item.articleId)} 
               >
                 <List.Item.Meta
@@ -186,6 +186,15 @@ class MyArticle extends Component {
                     <a className={styles.listItemMetaTitle} href={item.href}>
                       {item.title}
                     </a>
+                  }
+                  avatar={
+                    item.avatar != null ? (
+                      <Avatar alt="" src={item.avatar} />
+                    ) : (
+                      <Avatar  style={{ backgroundColor: item.bgColor }}>
+                        <span style={{ fontSize: '12px' }}>{item.ownerName.substring(0, 1)}</span>
+                      </Avatar>
+                    )
                   }
                   description={
                     <span>
