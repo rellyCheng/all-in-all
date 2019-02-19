@@ -1,4 +1,4 @@
-import { queryNotices } from '@/services/api';
+import { queryNotices,clearNotices } from '@/services/api';
 
 export default {
   namespace: 'global',
@@ -21,7 +21,8 @@ export default {
         payload: data.data.length,
       });
     },
-    *clearNotices({ payload }, { put, select }) {
+    *clearNotices({ payload }, {call, put, select }) {
+      const data = yield call(clearNotices,payload);
       yield put({
         type: 'saveClearedNotices',
         payload,

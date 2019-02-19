@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { formatMessage } from 'umi/locale';
-import { Layout, message } from 'antd';
+import { Layout, message,notification  } from 'antd';
 import Animate from 'rc-animate';
 import { connect } from 'dva';
 import router from 'umi/router';
@@ -9,14 +9,30 @@ import TopNavHeader from '@/components/TopNavHeader';
 import styles from './Header.less';
 import Authorized from '@/utils/Authorized';
 import token from '@/utils/token';
-
+import { socket } from '@/utils/mySocket';
 const { Header } = Layout;
 
 class HeaderView extends PureComponent {
   state = {
     visible: true,
   };
-
+  connectSocket=()=>{
+    const mysocket = socket();
+    mysocket.on('connect', function() {
+      console.log('socket连接成功');
+    });
+    socket.on('disconnect', function () {
+      console.log('socket断开连接');
+      socket.open();
+    });
+    socket.on('enewbuy', function(data) {
+      notification.open({
+        message: data.noticeTitle,
+        description: data.noticeContent,
+      });
+      this.handleNoticeVisibleChange(true);
+    }.bind(this))
+  }
   static getDerivedStateFromProps(props, state) {
     if (!props.autoHideHeader && !state.visible) {
       return {
@@ -27,6 +43,8 @@ class HeaderView extends PureComponent {
   }
   componentDidMount() {
     document.addEventListener('scroll', this.handScroll, { passive: true });
+    //连接socket
+    this.connectSocket();
   }
 
   componentWillUnmount() {

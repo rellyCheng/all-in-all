@@ -300,3 +300,20 @@ export async function getAddressByIp() {
     method:'POST',
   })
 }
+
+
+export async function clearNotices(payload) { 
+  let type;
+  if(payload=='message'){
+    type=1;
+  }
+  if(payload=='notification'){
+    type=0;
+  }
+  if(payload=='event'){
+    type=2;
+  }
+  return request(`/api/notice/clearNotices?type=${type}`,{
+    method:'POST',
+  })
+}

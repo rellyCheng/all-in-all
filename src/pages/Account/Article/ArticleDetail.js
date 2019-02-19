@@ -56,6 +56,7 @@ class ArticleDetail extends Component {
         parentItem:{},
         sItem:{},
         commentContent1:'',
+        aite:null
     })
   }
   handleCancelComment=()=>{

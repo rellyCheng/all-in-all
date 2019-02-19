@@ -4,18 +4,10 @@ import Link from 'umi/link';
 import Debounce from 'lodash-decorators/debounce';
 import styles from './index.less';
 import RightContent from './RightContent';
-import { socket } from '@/utils/mySocket';
+
 
 export default class GlobalHeader extends PureComponent {
-  componentDidMount() {
-    setTimeout(()=>{
-      const mysocket = socket();
-      mysocket.on('connect', function() {
-        console.log('socket连接成功');
-      });
-    },1000)
-   
-  }
+
   componentWillUnmount() {
     this.triggerResizeEvent.cancel();
   }
