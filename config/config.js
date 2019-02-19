@@ -36,6 +36,12 @@ const plugins = [
   ],
 ];
 
+let API_SERVER = 'http://118.24.218.25:8426/';
+if(process.env.API_ENV=='dev'){
+  API_SERVER = 'http://127.0.0.1:8426/';
+}    
+
+
 // judge add ga
 if (process.env.APP_TYPE === 'site') {
   plugins.push([
@@ -45,7 +51,7 @@ if (process.env.APP_TYPE === 'site') {
     },
   ]);
 }
-console.log(process.env.NODE_ENV);
+console.log(process.env.API_ENV);
 export default {
   // add for transfer to umi
   plugins,
@@ -54,6 +60,9 @@ export default {
   },
   define: {
     APP_TYPE: process.env.APP_TYPE || '',
+    'process.env': {
+      API_ENV: process.env.API_ENV,    // 这里是重点吧，获取配置
+    },
   },
   // 路由配置
   routes: pageRoutes,
@@ -74,22 +83,18 @@ export default {
   // },
   proxy: {
     '/api': {
-      target: 'http://127.0.0.1:8426/',
+      target: API_SERVER,
       // target: 'http://118.24.218.25:8426/',
       changeOrigin: true,
     },
     '/publicApi': {
-      target: 'http://127.0.0.1:8426/',
+      target: API_SERVER,
       // target: 'http://118.24.218.25:8426/',
       changeOrigin: true,
     },
+  
   },
-  // proxy: {
-  //   '/permission': {
-  //     target: 'http://192.168.1.160:8135/',
-  //     changeOrigin: true,
-  //   },
-  // },
+
   ignoreMomentLocale: true,
   lessLoaderOptions: {
     javascriptEnabled: true,
