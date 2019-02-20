@@ -217,12 +217,14 @@ class BaseView extends Component {
           {
             <div>
            <AvatarView avatarType={avatarType} bgColor = {currentUser.bgColor} name = {currentUser.name.substring(0,1)} avatar = {currentUser.avatar}></AvatarView>
-           <Upload  action='/api/upload/singleUpload' onChange = {this.handleUpload}  listType="picture" headers={{'Authorization':'Bearer '+tokenVal}}>
-              {this.state.fileData.length>0?'':
-                <Button icon="upload">
+           <Upload  
+              action='/api/upload/singleUpload'
+              onChange = {this.handleUpload}
+              listType="picture"
+              headers={{'Authorization':'Bearer '+tokenVal}}>
+                <Button style={{display: this.state.fileData.length>0?'none':'block'}} icon="upload">
                   <FormattedMessage id="app.settings.basic.change-avatar" defaultMessage="Change avatar" />
                 </Button>
-              }
             </Upload>
             </div>
           }

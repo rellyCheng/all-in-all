@@ -6,7 +6,6 @@ export default {
   state: {
     collapsed: false,
     notices: [],
-    ftpIp: 'http://ftp.1024er.club',
   },
 
   effects: {

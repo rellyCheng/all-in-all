@@ -70,7 +70,6 @@ class MyArticle extends Component {
       loading,
     } = this.props;
     const list = myArticle.list || [];
-    console.log(list)
     const { getFieldDecorator } = form;
     const IconText = ({ type, text }) => (
       <span>
@@ -101,7 +100,7 @@ class MyArticle extends Component {
           </Button>
         </div>
       ) : null;
-
+      console.log(SERVER_IP.API)
     return (
       <Fragment>
         <Card bordered={false}>
@@ -178,7 +177,7 @@ class MyArticle extends Component {
                   <IconText type="like-o" text={item.likeNum} />,
                   <IconText type="message" text={item.message} />,
                 ]}
-                extra={<img width={272} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
+                extra={<img width={272} alt="logo" src={SERVER_IP.API+item.cover} />}
                 onClick={()=>this.handleArticleDetail(item.articleId)} 
               >
                 <List.Item.Meta
@@ -198,9 +197,7 @@ class MyArticle extends Component {
                   }
                   description={
                     <span>
-                      <Tag>Ant Design</Tag>
-                      <Tag>设计语言</Tag>
-                      <Tag>蚂蚁金服</Tag>
+                      <Tag>{item.articleTypeStr}</Tag>
                     </span>
                   }
                 />

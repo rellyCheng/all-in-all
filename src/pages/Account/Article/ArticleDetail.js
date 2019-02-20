@@ -160,7 +160,6 @@ class ArticleDetail extends Component {
             <span>{articleDetail1.title}</span>
             </div>
             }
-            cover={<div style={{textAlign:'center'}}><img style={{width:'50%',marginTop:'10px'}} src={articleDetail1.cover} /></div>}
             >
                 <div dangerouslySetInnerHTML={{__html: articleDetail1.content}} />
             </Card>

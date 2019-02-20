@@ -78,7 +78,11 @@ class AddArticle extends Component {
           // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
   
           // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
-          var url = 'http://ftp.1024er.club/'+result.data.filePath
+          let API_SERVER = 'http://118.24.218.25:8426';
+          if(process.env.API_ENV=='dev'){
+            API_SERVER = 'http://192.168.1.160:8426';
+          } 
+          var url = API_SERVER+result.data.filePath
           insertImg(url)
   
           // result 必须是一个 JSON 格式字符串！！！否则报错
@@ -265,7 +269,8 @@ class AddArticle extends Component {
               placeholder="文章分类"
               onChange={(value)=>this.setState({type:value})}
               >
-                <Select.Option value="1">IT</Select.Option>
+                <Select.Option value="0">IT</Select.Option>
+                <Select.Option value="1">财经</Select.Option>
                 <Select.Option value="2">科技</Select.Option>
                 <Select.Option value="3">体育</Select.Option>
                 <Select.Option value="4">汽车</Select.Option>

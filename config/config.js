@@ -36,12 +36,6 @@ const plugins = [
   ],
 ];
 
-let API_SERVER = 'http://118.24.218.25:8426/';
-if(process.env.API_ENV=='dev'){
-  API_SERVER = 'http://127.0.0.1:8426/';
-}    
-
-
 // judge add ga
 if (process.env.APP_TYPE === 'site') {
   plugins.push([
@@ -63,6 +57,10 @@ export default {
     'process.env': {
       API_ENV: process.env.API_ENV,    // 这里是重点吧，获取配置
     },
+    SERVER_IP:{
+      API:process.env.API_ENV=='dev'?'http://120.0.0.1:8426/':'http://118.24.218.25:8426/',
+      SOCKET:process.env.API_ENV=='dev'?'http://120.0.0.1:9090/':'http://118.24.218.25:9090/',
+    }
   },
   // 路由配置
   routes: pageRoutes,
@@ -83,12 +81,12 @@ export default {
   // },
   proxy: {
     '/api': {
-      target: API_SERVER,
+      target: 'http://192.168.1.160:8426/',
       // target: 'http://118.24.218.25:8426/',
       changeOrigin: true,
     },
     '/publicApi': {
-      target: API_SERVER,
+      target: 'http://192.168.1.160:8426/',
       // target: 'http://118.24.218.25:8426/',
       changeOrigin: true,
     },
