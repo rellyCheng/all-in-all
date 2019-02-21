@@ -30,9 +30,9 @@ class Center extends PureComponent {
           <List.Item
             key={item.id}
             actions={[
-              <IconText type="star-o" text={item.star} />,
+              <IconText type="star-o" text={item.starNum} />,
               <IconText type="like-o" text={item.likeNum} />,
-              <IconText type="message" text={item.message} />,
+              <IconText type="message" text={item.messageNum} />,
             ]}
           >
             <List.Item.Meta
@@ -43,9 +43,7 @@ class Center extends PureComponent {
               }
               description={
                 <span>
-                  <Tag>Ant Design</Tag>
-                  <Tag>设计语言</Tag>
-                  <Tag>蚂蚁金服</Tag>
+                  <Tag>{item.articleTypeStr}</Tag>
                 </span>
               }
             />

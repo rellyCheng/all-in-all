@@ -317,3 +317,15 @@ export async function clearNotices(payload) {
     method:'POST',
   })
 }
+
+export async function fetchLikeArticle(payload) {
+  return request(`/api/article/likeArticle?articleId=${payload.articleId}`,{
+    method:'POST',
+  })
+}
+
+export async function fetchStarArticle(payload) {
+  return request(`/api/article/starArticle?articleId=${payload.articleId}`,{
+    method:'POST',
+  })
+}

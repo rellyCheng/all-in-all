@@ -30,9 +30,6 @@ class Center extends PureComponent {
     dispatch({
       type: 'list/getArticleListByUser',
     });
-    // dispatch({
-    //   type: 'project/fetchNotice',
-    // });
   }
 
   onTabChange = key => {
@@ -41,8 +38,8 @@ class Center extends PureComponent {
       case 'articles':
         router.push(`${match.url}/articles`);
         break;
-      case 'applications':
-        router.push(`${match.url}/applications`);
+      case 'myStarArticles':
+        router.push(`${match.url}/myStarArticles`);
         break;
       case 'projects':
         router.push(`${match.url}/projects`);
@@ -122,14 +119,14 @@ class Center extends PureComponent {
           </span>
         ),
       },
-      // {
-      //   key: 'applications',
-      //   tab: (
-      //     <span>
-      //       应用 <span style={{ fontSize: 14 }}>(8)</span>
-      //     </span>
-      //   ),
-      // },
+      {
+        key: 'myStarArticles',
+        tab: (
+          <span>
+            我的Star<span style={{ fontSize: 14 }}>(8)</span>
+          </span>
+        ),
+      },
       // {
       //   key: 'projects',
       //   tab: (

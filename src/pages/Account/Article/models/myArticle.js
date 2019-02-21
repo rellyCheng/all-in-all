@@ -1,4 +1,4 @@
-import { getMyArticleListMore, saveArticle } from '@/services/api';
+import { getMyArticleListMore, saveArticle,fetchLikeArticle,fetchStarArticle } from '@/services/api';
 import {message} from 'antd';
 import router from 'umi/router';
 
@@ -34,11 +34,23 @@ export default {
     },
     *save({ payload },{call,put}){
       const response = yield call(saveArticle, payload);
-     console.log(response);
      if(response.state=="OK"){
-       message.success("发布成功！跳转到我的文章列表页。")
-      router.push(`/account/myArticle`);
+        message.success("发布成功！")
+        router.push(`/account/myArticle`);
      }
+    },
+    *fetchLikeArticle({ payload,callback },{call,put}){
+      const response = yield call(fetchLikeArticle, payload);
+      if(response.state=="OK"){
+        callback(response); // 返回结果
+      }
+    },
+    
+    *fetchStarArticle({ payload,callback },{call,put}){
+      const response = yield call(fetchStarArticle, payload);
+      if(response.state=="OK"){
+        callback(response); // 返回结果
+      }
     },
   },
 

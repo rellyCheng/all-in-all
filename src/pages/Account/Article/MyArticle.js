@@ -16,6 +16,7 @@ const pageSize = 5;
 @connect(({ myArticle, loading }) => ({
   myArticle,
   loading: loading.models.myArticle,
+  appendLoading:loading.effects['myArticle/appendFetch'],
 }))
 @Form.create({
   // onValuesChange({ dispatch }, changedValues, allValues) {
@@ -63,17 +64,60 @@ class MyArticle extends Component {
     myArticle.articleId=id;
     router.push(`/account/articleDetail`);
   }
+  handleLike=(e,item)=>{
+    e.stopPropagation();
+    const { dispatch,myArticle } = this.props;
+    dispatch({
+      type: 'myArticle/fetchLikeArticle',
+      payload: {
+        articleId: item.articleId,
+      },
+      callback:(res)=>{
+        console.log(res);
+        myArticle.list.map((item1,index1)=>{
+          if(item.articleId==item1.articleId){
+            item1.likeNum++;
+          }
+        })
+      }
+    });
+  }
+  handleStar=(e,item)=>{
+    e.stopPropagation();
+    const { dispatch,myArticle } = this.props;
+    dispatch({
+      type: 'myArticle/fetchStarArticle',
+      payload: {
+        articleId: item.articleId,
+      },
+      callback:(res)=>{
+        console.log(res);
+        myArticle.list.map((item1,index1)=>{
+          if(item.articleId==item1.articleId){
+            if(res.message=="star"){
+              item1.isStar = true;
+              item1.starNum ++;
+            }else{
+              item1.isStar = false;
+              item1.starNum --;
+            }
+          }
+        })
+      }
+    });
+  }
   render() {
     const {
       form,
       myArticle,
       loading,
+      appendLoading
     } = this.props;
     const list = myArticle.list || [];
     const { getFieldDecorator } = form;
-    const IconText = ({ type, text }) => (
+    const IconText = ({ type, text,theme }) => (
       <span>
-        <Icon type={type} style={{ marginRight: 8 }} />
+        <Icon type={type} style={{ marginRight: 8 }} theme = {theme} />
         {text}
       </span>
     );
@@ -90,7 +134,7 @@ class MyArticle extends Component {
       list.length > 0 ? (
         <div style={{ textAlign: 'center', marginTop: 16 }}>
           <Button onClick={this.fetchMore} style={{ paddingLeft: 48, paddingRight: 48 }}>
-            {loading ? (
+            {appendLoading ? (
               <span>
                 <Icon type="loading" /> 加载中...
               </span>
@@ -163,7 +207,7 @@ class MyArticle extends Component {
               写文章
           </Button>
           <List
-            size="large"
+            size="small"
             loading={list.length === 0 ? loading : false}
             rowKey="id"
             itemLayout="vertical"
@@ -173,11 +217,17 @@ class MyArticle extends Component {
               <List.Item
                 key={item.id}
                 actions={[
-                  <IconText type="star-o" text={item.star} />,
-                  <IconText type="like-o" text={item.likeNum} />,
-                  <IconText type="message" text={item.message} />,
+                  <p  onClick={(e)=>this.handleStar(e,item)}>
+                  <IconText theme={item.isStar?'twoTone':'outlined'} type="star-o" text={item.starNum==0?'':item.starNum} />
+                  </p>,
+                  <p  onClick={(e)=>this.handleLike(e,item)}>
+                    <IconText type="like-o" text={item.likeNum} />
+                  </p>,
+                   <p  onClick={(e)=>this.handleMessage(e,item)}>
+                  <IconText type="message" text={item.messageNum} />
+                  </p>,
                 ]}
-                extra={<img width={272} alt="logo" src={SERVER_IP.API+item.cover} />}
+                extra={<img width={272} height={180} alt="logo" src={SERVER_IP.API+item.cover} />}
                 onClick={()=>this.handleArticleDetail(item.articleId)} 
               >
                 <List.Item.Meta
