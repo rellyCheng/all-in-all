@@ -55,12 +55,13 @@ export default {
   define: {
     APP_TYPE: process.env.APP_TYPE || '',
     'process.env': {
-      API_ENV: process.env.API_ENV,    // 这里是重点吧，获取配置
+      API_ENV: process.env.API_ENV, // 这里是重点吧，获取配置
     },
-    SERVER_IP:{
-      API:process.env.API_ENV=='dev'?'http://localhost:8426/':'http://118.24.218.25:8426/',
-      SOCKET:process.env.API_ENV=='dev'?'http://192.168.1.160:9090/':'http://118.24.218.25:9090/',
-    }
+    SERVER_IP: {
+      API: process.env.API_ENV == 'dev' ? 'http://localhost:8426/' : 'http://118.24.218.25:8426/',
+      SOCKET:
+        process.env.API_ENV == 'dev' ? 'http://192.168.1.160:9090/' : 'http://118.24.218.25:9090/',
+    },
   },
   // 路由配置
   routes: pageRoutes,
@@ -81,16 +82,15 @@ export default {
   // },
   proxy: {
     '/api': {
-      target: 'http://192.168.1.160:8426/',
+      target: 'http://localhost:8426/',
       // target: 'http://118.24.218.25:8426/',
       changeOrigin: true,
     },
     '/publicApi': {
-      target: 'http://192.168.1.160:8426/',
+      target: 'http://localhost:8426/',
       // target: 'http://118.24.218.25:8426/',
       changeOrigin: true,
     },
-  
   },
 
   ignoreMomentLocale: true,
