@@ -36,12 +36,13 @@ class AddArticle extends Component {
         editorContent: html,
       });
     };
-    editor.customConfig.uploadImgServer = '/api/upload/singleUpload';
+    editor.customConfig.uploadImgServer = '/api/qiNiu/upload';
     editor.customConfig.uploadFileName = 'file'
     editor.customConfig.uploadImgTimeout = 3000000
     editor.customConfig.uploadImgHeaders = {
       'Authorization':'Bearer '+tokenVal
     }
+   
     editor.customConfig.uploadImgHooks = {
       before: function (xhr, editor, files) {
           // 图片上传之前触发
@@ -78,13 +79,10 @@ class AddArticle extends Component {
           // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
   
           // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
-          let API_SERVER = 'http://118.24.218.25:8426';
-          if(process.env.API_ENV=='dev'){
-            API_SERVER = 'http://192.168.1.160:8426';
-          } 
-          var url = API_SERVER+result.data.filePath
+         if(result.state=="OK"){
+          var url = SERVER_IP.FILE+'/'+result.data.key
           insertImg(url)
-  
+         }
           // result 必须是一个 JSON 格式字符串！！！否则报错
       }
       }
@@ -117,7 +115,7 @@ class AddArticle extends Component {
       if (!err) {
         values.description = this.state.editorContent.replace(/<[^>]+>/g,"").substring(0,50);
         values.content = this.state.editorContent;
-        values.cover =  values.file[0].response.data.filePath;
+        values.cover =  values.file[0].response.data.key;
         console.log(values)
         const { dispatch } = this.props;
         dispatch({
@@ -223,7 +221,7 @@ class AddArticle extends Component {
             ],
           })(
             <Upload 
-            action='/api/upload/singleUpload'
+            action='/api/qiNiu/upload'
             listType="picture-card"
             onPreview={this.handlePreview}
             onChange={this.handleChange}

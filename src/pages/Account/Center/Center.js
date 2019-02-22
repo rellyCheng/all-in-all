@@ -156,7 +156,7 @@ class Center extends PureComponent {
                 <div>
                   <div className={styles.avatarHolder}>
                     {currentUser.avatar != null ? (
-                      <img alt="" src={currentUser.avatar} />
+                      <img alt="" src={SERVER_IP.FILE+currentUser.avatar} />
                     ) : (
                       <Avatar size={100} style={{ backgroundColor: currentUser.bgColor }}>
                         <span style={{ fontSize: '60px' }}>{currentUser.name.substring(0, 1)}</span>

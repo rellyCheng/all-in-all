@@ -167,7 +167,7 @@ class ArticleDetail extends Component {
             <div style={{width:1000}}  >
                 <Comment
                     avatar={currentUser.avatar != null ? (
-                        <Avatar alt="" src={currentUser.avatar} />
+                        <Avatar alt="" src={SERVER_IP.FILE+currentUser.avatar} />
                       ) : (
                         <Avatar  style={{ backgroundColor: currentUser.bgColor }}>
                           <span >{currentUser.name.substring(0, 1)}</span>
@@ -229,7 +229,7 @@ class ArticleDetail extends Component {
                                             actions={[<Popover placement="bottomLeft"  visible={this.state.commentFloor==1&&item1.id==this.state.parentItem.id&&isEmpty(this.state.sItem)?true:false} content={content}  trigger="click"><span onClick={()=>this.handleReply(item1,{},1)}>Reply to</span></Popover>]}
                                             author={<div><a>{item1.name}</a> <span>{item1.rankNum}楼</span></div>}
                                             avatar={item1.avatar != null ? (
-                                                <Avatar alt="" src={item1.avatar} />
+                                                <Avatar alt="" src={SERVER_IP.FILE+item1.avatar} />
                                               ) : (
                                                 <Avatar  style={{ backgroundColor: item1.bgColor }}>
                                                   <span >{item1.name.substring(0, 1)}</span>
@@ -249,7 +249,7 @@ class ArticleDetail extends Component {
                                                                     actions={[<Popover placement="bottomLeft" visible={this.state.commentFloor==2&&item.id==this.state.sitem.id&&!isEmpty(this.state.parentItem)?true:false} content={content}  trigger="click"><span onClick={()=>this.handleReply(item1,item,2)}>Reply to</span></Popover>]}
                                                                     author={<div><a>{item.name}</a></div>}
                                                                     avatar={item.avatar != null ? (
-                                                                        <Avatar alt="" src={item.avatar} />
+                                                                        <Avatar alt="" src={SERVER_IP.FILE+item.avatar} />
                                                                       ) : (
                                                                         <Avatar  style={{ backgroundColor: item.bgColor }}>
                                                                           <span >{item.name.substring(0, 1)}</span>
