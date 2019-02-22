@@ -21,7 +21,7 @@ const AvatarView = ({ avatarType,bgColor,name,avatar }) => (
     <div style={{display:avatarType==3?'none':'block'}} className={styles.avatar}>
     {
       avatarType==1?<Avatar size={120} style={{backgroundColor:bgColor}}><span style={{fontSize:'70px'}}>{name}</span></Avatar>
-      : avatarType==2?<img src={avatar} alt="avatar" />:''
+      : avatarType==2?<Avatar size={130} src={avatar} alt="avatar" />:''
     }
     </div>
   </Fragment>
@@ -87,7 +87,7 @@ class BaseView extends Component {
       if (!err) {
           const { dispatch } = this.props;
           if(this.state.fileData.length>0){
-            values.avatar = this.state.fileData[0].response.data.filePath;
+            values.avatar = this.state.fileData[0].response.data.key;
           }
           dispatch({
             type: 'user/updateUserDetail',
@@ -97,6 +97,7 @@ class BaseView extends Component {
     });
   }
   handleUpload = (fileList)=>{
+    console.log(fileList)
     this.setState({
       fileData:fileList.fileList
     })
@@ -216,9 +217,9 @@ class BaseView extends Component {
           {/* <AvatarView avatar={this.getAvatarURL()} /> */}
           {
             <div>
-           <AvatarView avatarType={avatarType} bgColor = {currentUser.bgColor} name = {currentUser.name.substring(0,1)} avatar = {currentUser.avatar}></AvatarView>
+           <AvatarView avatarType={avatarType} bgColor = {currentUser.bgColor} name = {currentUser.name.substring(0,1)} avatar = {SERVER_IP.FILE+currentUser.avatar}></AvatarView>
            <Upload  
-              action='/api/upload/singleUpload'
+              action='/api/qiNiu/upload'
               onChange = {this.handleUpload}
               listType="picture"
               headers={{'Authorization':'Bearer '+tokenVal}}>

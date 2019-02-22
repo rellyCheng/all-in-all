@@ -160,7 +160,7 @@ export default class GlobalHeaderRight extends PureComponent {
                 currentUser.avatar!=null?<Avatar
                 size="small"
                 className={styles.avatar}
-                src={currentUser.avatar}
+                src={SERVER_IP.FILE+currentUser.avatar}
                 alt="avatar"
               />:<Avatar  size='default'  style={{  backgroundColor:currentUser.bgColor}}>{currentUser.name.substring(0,1) }</Avatar>
               }

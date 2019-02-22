@@ -115,7 +115,7 @@ class AddArticle extends Component {
       if (!err) {
         values.description = this.state.editorContent.replace(/<[^>]+>/g,"").substring(0,50);
         values.content = this.state.editorContent;
-        values.cover =  values.file[0].response.data.filePath;
+        values.cover =  values.file[0].response.data.key;
         console.log(values)
         const { dispatch } = this.props;
         dispatch({
@@ -221,7 +221,7 @@ class AddArticle extends Component {
             ],
           })(
             <Upload 
-            action='/api/upload/singleUpload'
+            action='/api/qiNiu/upload'
             listType="picture-card"
             onPreview={this.handlePreview}
             onChange={this.handleChange}

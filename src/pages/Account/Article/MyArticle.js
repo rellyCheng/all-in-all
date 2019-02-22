@@ -227,7 +227,7 @@ class MyArticle extends Component {
                   <IconText type="message" text={item.messageNum} />
                   </p>,
                 ]}
-                extra={<img width={272} height={180} alt="logo" src={SERVER_IP.API+item.cover} />}
+                extra={<img width={272} height={180} alt="logo" src={SERVER_IP.FILE+item.cover} />}
                 onClick={()=>this.handleArticleDetail(item.articleId)} 
               >
                 <List.Item.Meta
@@ -238,7 +238,7 @@ class MyArticle extends Component {
                   }
                   avatar={
                     item.avatar != null ? (
-                      <Avatar alt="" src={item.avatar} />
+                      <Avatar alt="" src={SERVER_IP.FILE+item.avatar} />
                     ) : (
                       <Avatar  style={{ backgroundColor: item.bgColor }}>
                         <span style={{ fontSize: '12px' }}>{item.ownerName.substring(0, 1)}</span>
