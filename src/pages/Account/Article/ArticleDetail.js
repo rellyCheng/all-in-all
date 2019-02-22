@@ -227,7 +227,7 @@ class ArticleDetail extends Component {
                                           <div>
                                             <Comment
                                             actions={[<Popover placement="bottomLeft"  visible={this.state.commentFloor==1&&item1.id==this.state.parentItem.id&&isEmpty(this.state.sItem)?true:false} content={content}  trigger="click"><span onClick={()=>this.handleReply(item1,{},1)}>Reply to</span></Popover>]}
-                                            author={<div><a>{item1.name}</a> <span>{item1.rank}楼</span></div>}
+                                            author={<div><a>{item1.name}</a> <span>{item1.rankNum}楼</span></div>}
                                             avatar={item1.avatar != null ? (
                                                 <Avatar alt="" src={item1.avatar} />
                                               ) : (
