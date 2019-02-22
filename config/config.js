@@ -58,8 +58,9 @@ export default {
       API_ENV: process.env.API_ENV,    // 这里是重点吧，获取配置
     },
     SERVER_IP:{
-      API:process.env.API_ENV=='dev'?'http://localhost:8426/':'http://118.24.218.25:8426/',
-      SOCKET:process.env.API_ENV=='dev'?'http://192.168.1.160:9090/':'http://118.24.218.25:9090/',
+      API:process.env.API_ENV=='dev'?'http://localhost:8426':'http://118.24.218.25:8426',
+      SOCKET:process.env.API_ENV=='dev'?'http://localhost:9090/':'http://118.24.218.25:9090',
+      FILE:'http://pnb3vr21n.bkt.clouddn.com'
     }
   },
   // 路由配置
