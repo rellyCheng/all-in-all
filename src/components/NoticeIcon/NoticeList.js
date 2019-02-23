@@ -31,7 +31,7 @@ export default function NoticeList({
           // eslint-disable-next-line no-nested-ternary
           const leftIcon = item.avatar ? (
             typeof item.avatar === 'string' ? (
-              <Avatar className={styles.avatar} src={item.avatar} />
+              <Avatar className={styles.avatar} src={SERVER_IP.FILE+item.avatar} />
             ) : (
               item.avatar
             )

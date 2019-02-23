@@ -36,7 +36,7 @@ class AddArticle extends Component {
         editorContent: html,
       });
     };
-    editor.customConfig.uploadImgServer = '/api/qiNiu/upload';
+    editor.customConfig.uploadImgServer = '/api/qiNiu/upload1';
     editor.customConfig.uploadFileName = 'file'
     editor.customConfig.uploadImgTimeout = 3000000
     editor.customConfig.uploadImgHeaders = {
