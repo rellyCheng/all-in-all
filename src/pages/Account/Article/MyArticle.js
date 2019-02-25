@@ -227,7 +227,7 @@ class MyArticle extends Component {
                   <IconText type="message" text={item.messageNum} />
                   </p>,
                 ]}
-                extra={<img width={272} height={180} alt="logo" src={SERVER_IP.FILE+item.cover} />}
+                extra={<img style={{borderRadius:'5px'}} width={272} height={180} alt="logo" src={SERVER_IP.FILE+item.cover} />}
                 onClick={()=>this.handleArticleDetail(item.articleId)} 
               >
                 <List.Item.Meta
