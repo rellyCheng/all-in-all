@@ -204,6 +204,14 @@ export default [
           },
         ],
       },
+      //首页
+      {
+        path: '/index',
+        name: 'index',
+        icon: 'dashboard',
+        // authority: ['admin'],
+        component: './Index/Index',
+      },
       //个人页
       {
         name: 'account',
@@ -306,6 +314,7 @@ export default [
           },
         ],
       },
+
       {
         component: '404',
       },

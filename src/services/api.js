@@ -223,6 +223,14 @@ export async function getMyArticleListMore(params){
   })
 }
 
+
+export async function getAllArticleListMore(params){
+  return request(`/api/article/getAllArticleListMore?pageCurrent=${params.pageCurrent}`,{
+    method:'POST',
+    body: params.articleFilter,
+  })
+}
+
 export async function saveArticle(params){
   return request(`/api/article/save`,{
     method:'POST',
