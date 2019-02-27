@@ -60,9 +60,7 @@ class MyArticle extends Component {
     router.push(`/account/addArticle`);
   }
   handleArticleDetail = (id)=>{
-    const { dispatch,myArticle } = this.props;
-    myArticle.articleId=id;
-    router.push(`/account/articleDetail`);
+    router.push(`/account/articleDetail?articleId=${id}`);
   }
   handleLike=(e,item)=>{
     e.stopPropagation();
@@ -147,7 +145,7 @@ class MyArticle extends Component {
       console.log(SERVER_IP.API)
     return (
       <Fragment>
-        <Card bordered={false}>
+        {/* <Card bordered={false}>
           <Form layout="inline">
             <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
               <FormItem>
@@ -192,7 +190,7 @@ class MyArticle extends Component {
               </Row>
             </StandardFormRow>
           </Form>
-        </Card>
+        </Card> */}
         <Card
           style={{ marginTop: 24 }}
           bordered={false}

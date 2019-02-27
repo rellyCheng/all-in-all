@@ -23,13 +23,16 @@ class ArticleDetail extends Component {
   };
   componentDidMount(){
     const { dispatch,myArticle } = this.props;
+    console.log(this.props.location);
+    console.log(this.props.match)
+    const articleId = this.props.location.query.articleId;
     new Promise((resolve) => {
         dispatch({
         type: 'articleDetail/articleDetail',
         payload: {
             resolve,
             params:{
-                articleId:myArticle.articleId,
+                articleId:articleId,
             }
           }
         })
@@ -43,10 +46,11 @@ class ArticleDetail extends Component {
   }
   fetchComment=(pageCurrent=1)=>{
     const { dispatch,myArticle } = this.props;
+    const articleId = this.props.location.query.articleId;
     dispatch({
         type: 'articleDetail/fetchArticleComment',
         payload: {
-            articleId:myArticle.articleId,
+            articleId:articleId,
             pageSize:5,
             pageCurrent:pageCurrent
         },
@@ -89,10 +93,11 @@ class ArticleDetail extends Component {
     const {parentItem} = this.state;
     console.log(parentItem);
     const { dispatch,articleDetail,myArticle } = this.props;
+    const articleId = this.props.location.query.articleId;
     dispatch({
         type: 'articleDetail/fetchAddArticleComment',
         payload: {
-            articleId:myArticle.articleId,
+            articleId:articleId,
             parentId:parentItem.id,
             aite:this.state.aite,
             content:this.state.commentContent1

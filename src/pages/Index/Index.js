@@ -71,7 +71,7 @@ class Index extends Component {
   handleArticleDetail = (id)=>{
     const { dispatch,allArticle } = this.props;
     allArticle.articleId=id;
-    router.push(`/account/articleDetail`);
+    router.push(`/account/articleDetail?articleId=${id}`);
   }
   handleLike=(e,item)=>{
     e.stopPropagation();

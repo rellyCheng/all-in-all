@@ -102,10 +102,9 @@ class BasicLayout extends React.PureComponent {
     console.log(this.props.location);
     console.log(this.props.match)
     let query = this.props.location.query;
-    if(Object.keys(query).length != 0){
+    if(Object.keys(query).length != 0 && query.token){
       token.save(query.token);
-      console.log()
-      setAuthority(query.auth.replace(/\s+/g,"").replace("[","").replace("]","").split(','));
+        setAuthority(query.auth.replace(/\s+/g,"").replace("[","").replace("]","").split(','));
       reloadAuthorized();
 
     }

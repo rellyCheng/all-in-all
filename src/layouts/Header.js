@@ -11,13 +11,13 @@ import Authorized from '@/utils/Authorized';
 import token from '@/utils/token';
 import { socket } from '@/utils/mySocket';
 const { Header } = Layout;
-
+const mysocket = socket();
 class HeaderView extends PureComponent {
   state = {
     visible: true,
   };
   connectSocket=()=>{
-    const mysocket = socket();
+   
     mysocket.on('connect', function() {
       console.log('socket连接成功');
     });
@@ -44,7 +44,10 @@ class HeaderView extends PureComponent {
   componentDidMount() {
     document.addEventListener('scroll', this.handScroll, { passive: true });
     //连接socket
-    this.connectSocket();
+    setTimeout(() => {
+       this.connectSocket();
+    }, 2000);
+   
   }
 
   componentWillUnmount() {

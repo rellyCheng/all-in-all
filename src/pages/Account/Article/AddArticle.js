@@ -267,14 +267,14 @@ class AddArticle extends Component {
               placeholder="文章分类"
               onChange={(value)=>this.setState({type:value})}
               >
-                <Select.Option value="0">IT</Select.Option>
-                <Select.Option value="1">财经</Select.Option>
-                <Select.Option value="2">科技</Select.Option>
-                <Select.Option value="3">体育</Select.Option>
-                <Select.Option value="4">汽车</Select.Option>
-                <Select.Option value="5">八卦</Select.Option>
-                <Select.Option value="6">军事</Select.Option>
-                <Select.Option value="7">随笔</Select.Option>
+                <Select.Option value="0">文集</Select.Option>
+                <Select.Option value="1">科学理论</Select.Option>
+                <Select.Option value="2">每日英语</Select.Option>
+                <Select.Option value="3">学习小技巧</Select.Option>
+                <Select.Option value="4">生活感悟</Select.Option>
+                <Select.Option value="5">随笔</Select.Option>
+                <Select.Option value="6">体育</Select.Option>
+                <Select.Option value="7">其他</Select.Option>
               </Select>
               )}
             </FormItem>
