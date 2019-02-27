@@ -44,9 +44,7 @@ class HeaderView extends PureComponent {
   componentDidMount() {
     document.addEventListener('scroll', this.handScroll, { passive: true });
     //连接socket
-    setTimeout(() => {
-       this.connectSocket();
-    }, 2000);
+    this.connectSocket();
    
   }
 
