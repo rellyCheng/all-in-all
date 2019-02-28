@@ -7,12 +7,12 @@ import styles from './RegisterResult.less';
 
 const actions = (
   <div className={styles.actions}>
-    <a href="">
+    <a href="https://www.baidu.com/s?ie=UTF-8&wd=%E9%82%AE%E7%AE%B1">
       <Button size="large" type="primary">
         <FormattedMessage id="app.register-result.view-mailbox" />
       </Button>
     </a>
-    <Link to="/account/center/">
+    <Link to="/index">
       <Button size="large">
         <FormattedMessage id="app.register-result.back-home" />
       </Button>
