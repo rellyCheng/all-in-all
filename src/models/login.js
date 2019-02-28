@@ -6,7 +6,7 @@ import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
 import token from '@/utils/token';
 import {message} from 'antd';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 
 export default {
   namespace: 'login',
@@ -26,7 +26,7 @@ export default {
         });
         token.save(response.data.token);
         reloadAuthorized();
-        io.connect(SERVER_IP.SOCKET+`?token=${token.get()}`);
+        // io.connect(SERVER_IP.SOCKET+`?token=${token.get()}`);
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params;

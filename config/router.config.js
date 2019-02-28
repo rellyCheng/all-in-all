@@ -163,13 +163,18 @@ export default [
         name: 'result',
         icon: 'check-circle-o',
         path: '/result',
-        authority: ['superAdmin'],
+        hideInMenu:true,
         routes: [
           // result
           {
             path: '/result/success',
             name: 'success',
             component: './Result/Success',
+          },
+          {
+            path: '/result/activationSuccess',
+            name: 'success',
+            component: './Result/ActivationSuccess',
           },
           { path: '/result/fail', name: 'fail', component: './Result/Error' },
         ],

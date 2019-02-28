@@ -9,21 +9,23 @@ import TopNavHeader from '@/components/TopNavHeader';
 import styles from './Header.less';
 import Authorized from '@/utils/Authorized';
 import token from '@/utils/token';
-import { socket } from '@/utils/mySocket';
+import io from 'socket.io-client';
 const { Header } = Layout;
-const mysocket = socket();
 class HeaderView extends PureComponent {
   state = {
     visible: true,
   };
   connectSocket=()=>{
-   
+    if(token.get()==null){
+        return;
+    }
+    const socket = io.connect(SERVER_IP.SOCKET+`?token=${token.get()}`);
     socket.on('connect', function() {
       console.log('socket连接成功');
     });
     socket.on('disconnect', function () {
       console.log('socket断开连接');
-      socket.open();
+      // socket.open();
     });
     socket.on('reconnecting', (timeout) => {
       console.log(timeout)
