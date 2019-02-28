@@ -4,7 +4,7 @@ import { Button, Card } from 'antd';
 import Result from '@/components/Result';
 import Link from 'umi/link';
 
-export default class registerResult extends Component {
+export default class RegisterSuccess extends Component {
   render() {
     const actions = (
         <Fragment>

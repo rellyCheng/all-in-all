@@ -172,6 +172,11 @@ export default [
             component: './Result/Success',
           },
           {
+            path: '/result/registerSuccess',
+            name: 'success',
+            component: './Result/RegisterSuccess',
+          },
+          {
             path: '/result/activationSuccess',
             name: 'success',
             component: './Result/ActivationSuccess',
