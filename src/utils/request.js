@@ -1,5 +1,5 @@
 import fetch from 'dva/fetch';
-import { notification } from 'antd';
+import { notification,message } from 'antd';
 import router from 'umi/router';
 import hash from 'hash.js';
 import { isAntdPro } from './utils';
@@ -139,14 +139,15 @@ export default function request(url, option) {
     })
     .catch(e => {
       const status = e.name;
-      // if (status === 401) {
-      //   // @HACK
-      //   /* eslint-disable no-underscore-dangle */
-      //   window.g_app._store.dispatch({
-      //     type: 'login/logout',
-      //   });
-      //   return;
-      // }
+      if (status === 401) {
+        // @HACK
+        /* eslint-disable no-underscore-dangle */
+        message.info("你还没有登陆,请先登陆后操作!");
+        window.g_app._store.dispatch({
+          type: 'login/logout',
+        });
+        return;
+      }
       // environment should not be used
       // if (status === 403) {
       //   router.push('/exception/403');
