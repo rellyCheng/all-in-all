@@ -171,7 +171,7 @@ class ArticleDetail extends Component {
             <Card  bordered = {false}   title={<p><Icon type="smile" /> 发表一点想法</p>} style={{  marginTop: 10 }}>
             <div style={{width:1000}}  >
                 <Comment
-                    avatar={currentUser.avatar != null ? (
+                    avatar={currentUser.bgColor==null?null:currentUser.avatar != null ? (
                         <Avatar alt="" src={SERVER_IP.FILE+currentUser.avatar} />
                       ) : (
                         <Avatar  style={{ backgroundColor: currentUser.bgColor }}>

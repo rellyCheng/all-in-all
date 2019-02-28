@@ -163,7 +163,7 @@ export default [
         name: 'result',
         icon: 'check-circle-o',
         path: '/result',
-        authority: ['admin'],
+        authority: ['superAdmin'],
         routes: [
           // result
           {
@@ -209,8 +209,14 @@ export default [
         path: '/index',
         name: 'index',
         icon: 'compass',
-        // authority: ['admin'],
         component: './Index/Index',
+      },
+      {
+        path: '/index/articleDetail',
+        name: 'index',
+        icon: 'compass',
+        component: './Account/Article/ArticleDetail',
+        hideInMenu: true,
       },
     
       //个人页
@@ -218,6 +224,7 @@ export default [
         name: 'account',
         icon: 'user',
         path: '/account',
+        authority: ['currentUser'],
         routes: [
           {
             path: '/account/center',

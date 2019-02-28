@@ -7,6 +7,7 @@ import NoticeIcon from '../NoticeIcon';
 import HeaderSearch from '../HeaderSearch';
 import SelectLang from '../SelectLang';
 import styles from './index.less';
+import Link from 'umi/link';
 
 export default class GlobalHeaderRight extends PureComponent {
   getNoticeData() {
@@ -110,6 +111,7 @@ export default class GlobalHeaderRight extends PureComponent {
           </a>
         </Tooltip>
         <NoticeIcon
+          hidden
           className={styles.action}
           count={currentUser.notifyCount}
           onItemClick={(item, tabProps) => {
@@ -168,7 +170,10 @@ export default class GlobalHeaderRight extends PureComponent {
             </span>
           </Dropdown>
         ) : (
-          <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
+          // <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
+          <Link to="/user/login">
+          Sign in
+          </Link>
         )}
         <SelectLang className={styles.action} />
       </div>

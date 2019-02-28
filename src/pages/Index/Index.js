@@ -7,6 +7,7 @@ import StandardFormRow from '@/components/StandardFormRow';
 import ArticleListContent from '@/components/ArticleListContent';
 import styles from './MyArticle.less';
 import router from 'umi/router';
+import { reloadAuthorized } from '@/utils/Authorized';
 
 const { Option } = Select;
 const FormItem = Form.Item;
@@ -51,6 +52,7 @@ class Index extends Component {
         articleFilter:allArticle.articleFilter
       },
     });
+    reloadAuthorized();
   }
 
 
@@ -71,7 +73,7 @@ class Index extends Component {
   handleArticleDetail = (id)=>{
     const { dispatch,allArticle } = this.props;
     allArticle.articleId=id;
-    router.push(`/account/articleDetail?articleId=${id}`);
+    router.push(`/index/articleDetail?articleId=${id}`);
   }
   handleLike=(e,item)=>{
     e.stopPropagation();

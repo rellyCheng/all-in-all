@@ -137,27 +137,27 @@ export default function request(url, option) {
       }
       return response.json();
     })
-    // .catch(e => {
-    //   const status = e.name;
-    //   if (status === 401) {
-    //     // @HACK
-    //     /* eslint-disable no-underscore-dangle */
-    //     window.g_app._store.dispatch({
-    //       type: 'login/logout',
-    //     });
-    //     return;
-    //   }
-    //   // environment should not be used
-    //   if (status === 403) {
-    //     router.push('/exception/403');
-    //     return;
-    //   }
-    //   if (status <= 504 && status >= 500) {
-    //     router.push('/exception/500');
-    //     return;
-    //   }
-    //   if (status >= 404 && status < 422) {
-    //     router.push('/exception/404');
-    //   }
-    // });
+    .catch(e => {
+      const status = e.name;
+      // if (status === 401) {
+      //   // @HACK
+      //   /* eslint-disable no-underscore-dangle */
+      //   window.g_app._store.dispatch({
+      //     type: 'login/logout',
+      //   });
+      //   return;
+      // }
+      // environment should not be used
+      // if (status === 403) {
+      //   router.push('/exception/403');
+      //   return;
+      // }
+      // if (status <= 504 && status >= 500) {
+      //   router.push('/exception/500');
+      //   return;
+      // }
+      // if (status >= 404 && status < 422) {
+      //   router.push('/exception/404');
+      // }
+    });
 }

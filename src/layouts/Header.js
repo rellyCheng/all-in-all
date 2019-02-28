@@ -18,12 +18,18 @@ class HeaderView extends PureComponent {
   };
   connectSocket=()=>{
    
-    mysocket.on('connect', function() {
+    socket.on('connect', function() {
       console.log('socket连接成功');
     });
     socket.on('disconnect', function () {
       console.log('socket断开连接');
       socket.open();
+    });
+    socket.on('reconnecting', (timeout) => {
+      console.log(timeout)
+      if(timeout>3){
+          socket.close();
+      }
     });
     socket.on('enewbuy', function(data) {
       notification.open({

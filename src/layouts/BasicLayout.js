@@ -108,18 +108,17 @@ class BasicLayout extends React.PureComponent {
       reloadAuthorized();
 
     }
-    const tokenVal = token.get();
-    if (tokenVal == null) {
-      window.location.href = '/user/login';
-      return null;
-    }
+  
   }
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch({
-      type: 'user/fetchCurrent',
-    });
+    const tokenVal = token.get();
+    if(tokenVal!=null){
+      dispatch({
+        type: 'user/fetchCurrent',
+      });
+    }
     dispatch({
       type: 'setting/getSetting',
     });

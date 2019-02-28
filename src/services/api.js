@@ -225,7 +225,7 @@ export async function getMyArticleListMore(params){
 
 
 export async function getAllArticleListMore(params){
-  return request(`/api/article/getAllArticleListMore?pageCurrent=${params.pageCurrent}`,{
+  return request(`/publicApi/article/getAllArticleListMore?pageCurrent=${params.pageCurrent}`,{
     method:'POST',
     body: params.articleFilter,
   })
@@ -239,12 +239,12 @@ export async function saveArticle(params){
 }
 
 export async function articleDetail(params){
-  return request(`/api/article/getArticleDetail?articleId=${params.articleId}`,{
+  return request(`/publicApi/article/getArticleDetail?articleId=${params.articleId}`,{
     method:'POST',
   })
 }
 export async function fetchArticleComment(params){
-  return request(`/api/article/getArticleMessageDetail?articleId=${params.articleId}&pageSize=${params.pageSize}&pageCurrent=${params.pageCurrent}`,{
+  return request(`/publicApi/article/getArticleMessageDetail?articleId=${params.articleId}&pageSize=${params.pageSize}&pageCurrent=${params.pageCurrent}`,{
     method:'POST',
   })
 }
