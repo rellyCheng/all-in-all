@@ -82,12 +82,12 @@ export default {
   // },
   proxy: {
     '/api': {
-      target: 'http://localhost:8426/',
+      target: process.env.API_ENV=='dev'?'http://localhost:8426':'http://118.24.218.25:8426',
       // target: 'http://118.24.218.25:8426/',
       changeOrigin: true,
     },
     '/publicApi': {
-      target: 'http://localhost:8426/',
+      target: process.env.API_ENV=='dev'?'http://localhost:8426':'http://118.24.218.25:8426',
       // target: 'http://118.24.218.25:8426/',
       changeOrigin: true,
     },
