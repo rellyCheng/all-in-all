@@ -76,7 +76,7 @@ class ArticleDetail extends Component {
         this.setState({
             defaultMention:'@'+sitem.name+"  ",
             parentItem:item,
-            aite:item.userId||sitem.userId,
+            aite:sitem.userId,
             sitem:sitem,
             commentFloor:commentFloor
         })
