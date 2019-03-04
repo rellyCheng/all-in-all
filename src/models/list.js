@@ -1,10 +1,11 @@
-import { queryFakeList, removeFakeList, addFakeList, updateFakeList,getArticleListByUser,getArticleListByUserHavePage } from '@/services/api';
+import { queryFakeList, removeFakeList, addFakeList, updateFakeList,getArticleListByUser,getArticleListByUserHavePage,getMyStarArticles } from '@/services/api';
 
 export default {
   namespace: 'list',
 
   state: {
     list: [],
+    myStarArticles:{}
   },
 
   effects: {
@@ -21,6 +22,15 @@ export default {
       yield put({
         type: 'queryList',
         payload: Array.isArray(response.data) ? response.data : [],
+      });
+    },
+
+    *getMyStarArticles({payload},{call,put}){
+      const response = yield call(getMyStarArticles,payload);
+      console.log(response.data);
+      yield put({
+        type: 'saveMyStarArticles',
+        payload: response.data,
       });
     },
 
@@ -69,5 +79,11 @@ export default {
         list: state.list.concat(action.payload),
       };
     },
+    saveMyStarArticles(state,{payload}){
+      return {
+        ...state,
+        myStarArticles: payload,
+      };
+    }
   },
 };

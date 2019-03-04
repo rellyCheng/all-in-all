@@ -337,3 +337,9 @@ export async function fetchStarArticle(payload) {
     method:'POST',
   })
 }
+
+export async function getMyStarArticles(payload) {
+  return request(`/api/article/getMyStarArticles?pageCurrent=${payload.pageCurrent}&pageSize=${payload.pageSize}`,{
+    method:'POST',
+  })
+}

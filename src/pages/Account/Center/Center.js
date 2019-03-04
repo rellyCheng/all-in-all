@@ -32,6 +32,7 @@ class Center extends PureComponent {
     });
   }
 
+
   onTabChange = key => {
     const { match } = this.props;
     switch (key) {
@@ -110,6 +111,7 @@ class Center extends PureComponent {
     } = this.props;
     const currentUser = this.props.currentUser;
     const articleListLength = list.list.length;
+    const myStarArticlesLength = this.props.list.myStarArticles.rowCount;
     const operationTabList = [
       {
         key: 'articles',
@@ -123,7 +125,7 @@ class Center extends PureComponent {
         key: 'myStarArticles',
         tab: (
           <span>
-            我的Star<span style={{ fontSize: 14 }}>(8)</span>
+            我的Star<span style={{ fontSize: 14 }}>({myStarArticlesLength})</span>
           </span>
         ),
       },

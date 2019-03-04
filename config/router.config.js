@@ -250,8 +250,8 @@ export default [
                 component: './Account/Center/Articles',
               },
               {
-                path: '/account/center/applications',
-                component: './Account/Center/Applications',
+                path: '/account/center/myStarArticles',
+                component: './Account/Center/MyStarArticles',
               },
               {
                 path: '/account/center/projects',
