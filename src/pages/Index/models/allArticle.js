@@ -1,4 +1,4 @@
-import { getAllArticleListMore,fetchLikeArticle,fetchStarArticle } from '@/services/api';
+import { getAllArticleListMore,fetchLikeArticle,fetchStarArticle,fetchArticleByTitle } from '@/services/api';
 import {message} from 'antd';
 import router from 'umi/router';
 
@@ -48,6 +48,15 @@ export default {
       const response = yield call(fetchStarArticle, payload);
       if(response.state=="OK"){
         callback(response); // 返回结果
+      }
+    },
+    *fetchArticleByTitle({ payload },{call,put}){
+      const response = yield call(fetchArticleByTitle, payload);
+      if(response.state=="OK"){
+        yield put({
+          type: 'queryList',
+          payload: Array.isArray(response.data.pageData) ? response.data.pageData : [],
+        });
       }
     },
   },

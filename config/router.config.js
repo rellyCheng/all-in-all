@@ -85,10 +85,6 @@ export default [
                 path: '/account/center/myStarArticles',
                 component: './Account/Center/MyStarArticles',
               },
-              {
-                path: '/account/center/projects',
-                component: './Account/Center/Projects',
-              },
             ],
           },
           {

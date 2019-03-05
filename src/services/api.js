@@ -343,3 +343,10 @@ export async function getMyStarArticles(payload) {
     method:'POST',
   })
 }
+
+
+export async function fetchArticleByTitle(payload) {
+  return request(`/publicApi/article/getArticleByTitle?title=${payload.title}`,{
+    method:'POST',
+  })
+}

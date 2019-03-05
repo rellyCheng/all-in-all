@@ -8,7 +8,11 @@ import HeaderSearch from '../HeaderSearch';
 import SelectLang from '../SelectLang';
 import styles from './index.less';
 import Link from 'umi/link';
+import { connect } from 'dva';
 
+@connect(({ allArticle }) => ({
+  allArticle,
+}))
 export default class GlobalHeaderRight extends PureComponent {
   getNoticeData() {
     const { notices = [] } = this.props;
@@ -88,16 +92,23 @@ export default class GlobalHeaderRight extends PureComponent {
         <HeaderSearch
           className={`${styles.action} ${styles.search}`}
           placeholder={formatMessage({ id: 'component.globalHeader.search' })}
-          dataSource={[
-            formatMessage({ id: 'component.globalHeader.search.example1' }),
-            formatMessage({ id: 'component.globalHeader.search.example2' }),
-            formatMessage({ id: 'component.globalHeader.search.example3' }),
-          ]}
+          // dataSource={[
+          //   formatMessage({ id: 'component.globalHeader.search.example1' }),
+          //   formatMessage({ id: 'component.globalHeader.search.example2' }),
+          //   formatMessage({ id: 'component.globalHeader.search.example3' }),
+          // ]}
           onSearch={value => {
             console.log('input', value); // eslint-disable-line
           }}
           onPressEnter={value => {
             console.log('enter', value); // eslint-disable-line
+            const { dispatch } = this.props;
+            dispatch({
+              type:'allArticle/fetchArticleByTitle',
+              payload:{
+                title:value
+              }
+            })
           }}
         />
         <Tooltip title={formatMessage({ id: 'component.globalHeader.help' })}>
