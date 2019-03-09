@@ -55,9 +55,12 @@ export default [
       },
       {
         path: '/index/articleDetail',
-        name: 'index',
-        icon: 'compass',
         component: './Account/Article/ArticleDetail',
+        hideInMenu: true,
+      },
+      {
+        path: '/index/searchResult',
+        component: './Index/SearchResult',
         hideInMenu: true,
       },
 

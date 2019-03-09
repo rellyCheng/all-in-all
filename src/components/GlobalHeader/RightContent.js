@@ -19,7 +19,7 @@ export default class GlobalHeaderRight extends PureComponent {
     if (notices.length === 0) {
       return {};
     }
-    console.log(notices)
+    console.log(notices);
     const newNotices = notices.map(notice => {
       const newNotice = { ...notice };
       if (newNotice.datetime) {
@@ -82,7 +82,7 @@ export default class GlobalHeaderRight extends PureComponent {
       </Menu>
     );
     const noticeData = this.getNoticeData();
-    console.log(noticeData)
+    console.log(noticeData);
     let className = styles.right;
     if (theme === 'dark') {
       className = `${styles.right}  ${styles.dark}`;
@@ -90,6 +90,7 @@ export default class GlobalHeaderRight extends PureComponent {
     return (
       <div className={className}>
         <HeaderSearch
+          defaultOpen={true}
           className={`${styles.action} ${styles.search}`}
           placeholder={formatMessage({ id: 'component.globalHeader.search' })}
           // dataSource={[
@@ -102,13 +103,16 @@ export default class GlobalHeaderRight extends PureComponent {
           }}
           onPressEnter={value => {
             console.log('enter', value); // eslint-disable-line
+            if (!value) {
+              return;
+            }
             const { dispatch } = this.props;
             dispatch({
-              type:'allArticle/fetchArticleByTitle',
-              payload:{
-                title:value
-              }
-            })
+              type: 'allArticle/fetchArticleByKey',
+              payload: {
+                key: value,
+              },
+            });
           }}
         />
         <Tooltip title={formatMessage({ id: 'component.globalHeader.help' })}>
@@ -169,22 +173,24 @@ export default class GlobalHeaderRight extends PureComponent {
                 src={currentUser.avatar}
                 alt="avatar"
               /> */}
-              {
-                currentUser.avatar!=null?<Avatar
-                size="small"
-                className={styles.avatar}
-                src={SERVER_IP.FILE+currentUser.avatar}
-                alt="avatar"
-              />:<Avatar  size='default'  style={{  backgroundColor:currentUser.bgColor}}>{currentUser.name.substring(0,1) }</Avatar>
-              }
+              {currentUser.avatar != null ? (
+                <Avatar
+                  size="small"
+                  className={styles.avatar}
+                  src={SERVER_IP.FILE + currentUser.avatar}
+                  alt="avatar"
+                />
+              ) : (
+                <Avatar size="default" style={{ backgroundColor: currentUser.bgColor }}>
+                  {currentUser.name.substring(0, 1)}
+                </Avatar>
+              )}
               {/* <span className={styles.name}>{currentUser.name}</span> */}
             </span>
           </Dropdown>
         ) : (
           // <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
-          <Link to="/user/login">
-          Sign in
-          </Link>
+          <Link to="/user/login">Sign in</Link>
         )}
         <SelectLang className={styles.action} />
       </div>

@@ -56,7 +56,7 @@ export default {
   'form.publicUsers.option.A': '同事甲',
   'form.publicUsers.option.B': '同事乙',
   'form.publicUsers.option.C': '同事丙',
-  'component.globalHeader.search': '站内搜索',
+  'component.globalHeader.search': '站内搜索（标题、内容、作者）',
   'component.globalHeader.search.example1': '搜索提示一',
   'component.globalHeader.search.example2': '搜索提示二',
   'component.globalHeader.search.example3': '搜索提示三',
@@ -113,8 +113,8 @@ export default {
   'menu.systemManage.permission': '权限管理',
   'menu.systemManage.user': '用户管理',
   'menu.systemManage.role': '角色管理',
-  "menu.index":'发现',
-  "menu.rankList":'草榜',
+  'menu.index': '发现',
+  'menu.rankList': '草榜',
   'app.login.message-invalid-credentials': '账户或密码错误',
   'app.login.message-invalid-verification-code': '验证码错误',
   'app.login.tab-login-credentials': '账户密码登录',
@@ -244,7 +244,7 @@ export default {
   'app.settings.open': '开',
   'app.settings.close': '关',
   'app.exception.back': '返回首页',
-  'app.exception.description.403': '抱歉，你无权访问该页面',
+  'app.exception.description.403': '抱歉，你无权访问该页面，请登录',
   'app.exception.description.404': '抱歉，你访问的页面不存在',
   'app.exception.description.500': '抱歉，服务器出错了',
   'app.result.error.title': '提交失败',
@@ -301,5 +301,4 @@ export default {
   'app.setting.copyinfo': '拷贝成功，请到 src/defaultSettings.js 中替换默认配置',
   'app.setting.production.hint':
     '配置栏只在开发环境用于预览，生产环境不会展现，请拷贝后手动修改配置文件',
-   
 };

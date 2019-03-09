@@ -138,8 +138,8 @@ export async function fakeRegister(params) {
 //   return request('/api/notices');
 // }
 export async function queryNotices() {
-  return request('/api/notice/getNoticeList',{
-    method:'POST'
+  return request('/api/notice/getNoticeList', {
+    method: 'POST',
   });
 }
 
@@ -217,136 +217,146 @@ export async function getArticleListByUser(params) {
   });
 }
 
-export async function getMyArticleListMore(params){
-  return request(`/api/article/getMyArticleListMore?pageCurrent=${params}`,{
-    method:'POST'
-  })
+export async function getMyArticleListMore(params) {
+  return request(`/api/article/getMyArticleListMore?pageCurrent=${params}`, {
+    method: 'POST',
+  });
 }
 
-
-export async function getAllArticleListMore(params){
-  return request(`/publicApi/article/getAllArticleListMore?pageCurrent=${params.pageCurrent}`,{
-    method:'POST',
+export async function getAllArticleListMore(params) {
+  return request(`/publicApi/article/getAllArticleListMore?pageCurrent=${params.pageCurrent}`, {
+    method: 'POST',
     body: params.articleFilter,
-  })
+  });
 }
 
-export async function saveArticle(params){
-  return request(`/api/article/save`,{
-    method:'POST',
-    body:params
-  })
+export async function saveArticle(params) {
+  return request(`/api/article/save`, {
+    method: 'POST',
+    body: params,
+  });
 }
 
-export async function articleDetail(params){
-  return request(`/publicApi/article/getArticleDetail?articleId=${params.articleId}`,{
-    method:'POST',
-  })
+export async function articleDetail(params) {
+  return request(`/publicApi/article/getArticleDetail?articleId=${params.articleId}`, {
+    method: 'POST',
+  });
 }
-export async function fetchArticleComment(params){
-  return request(`/publicApi/article/getArticleMessageDetail?articleId=${params.articleId}&pageSize=${params.pageSize}&pageCurrent=${params.pageCurrent}`,{
-    method:'POST',
-  })
-}
-
-export async function fetchAddArticleComment(params){
-  return request(`/api/article/addMessageForArticle`,{
-    method:'POST',
-    body:params
-  })
+export async function fetchArticleComment(params) {
+  return request(
+    `/publicApi/article/getArticleMessageDetail?articleId=${params.articleId}&pageSize=${
+      params.pageSize
+    }&pageCurrent=${params.pageCurrent}`,
+    {
+      method: 'POST',
+    }
+  );
 }
 
-export async function addRole(params){
-  return request(`/api/role/addRole`,{
-    method:'POST',
-    body:params
-  })
+export async function fetchAddArticleComment(params) {
+  return request(`/api/article/addMessageForArticle`, {
+    method: 'POST',
+    body: params,
+  });
 }
 
-export async function queryRoleList(params){
-  return request(`/api/role/getRoleList?pageCurrent=${params.pageCurrent}&pageSize=${params.pageSize}`,{
-    method:'POST'
-  })
+export async function addRole(params) {
+  return request(`/api/role/addRole`, {
+    method: 'POST',
+    body: params,
+  });
 }
 
-export async function getPermissionByRole(params){
-  return request(`/api/role/getPermissionByRole?roleId=${params}`,{
-    method:'POST'
-  })
+export async function queryRoleList(params) {
+  return request(
+    `/api/role/getRoleList?pageCurrent=${params.pageCurrent}&pageSize=${params.pageSize}`,
+    {
+      method: 'POST',
+    }
+  );
 }
 
-export async function addPermissionForRole(params){
+export async function getPermissionByRole(params) {
+  return request(`/api/role/getPermissionByRole?roleId=${params}`, {
+    method: 'POST',
+  });
+}
+
+export async function addPermissionForRole(params) {
   let formData = new FormData();
   formData.append('addPermissions', params.addPermissions);
   formData.append('deletePermissions', params.deletePermissions);
   formData.append('roleId', params.roleId);
-  return request(`/api/role/addPermissionForRole`,{
-    method:'POST',
-    body:formData
-  })
+  return request(`/api/role/addPermissionForRole`, {
+    method: 'POST',
+    body: formData,
+  });
 }
 
-export async function getUserByRole(params){
-  return request(`/api/role/getUserByRole?roleId=${params}`,{
-    method:'POST'
-  })
+export async function getUserByRole(params) {
+  return request(`/api/role/getUserByRole?roleId=${params}`, {
+    method: 'POST',
+  });
 }
 
-export async function addUserForRole(params){
+export async function addUserForRole(params) {
   let formData = new FormData();
   formData.append('addUsers', params.addUsers);
   formData.append('deleteUsers', params.deleteUsers);
   formData.append('roleId', params.roleId);
-  return request(`/api/role/addUserForRole`,{
-    method:'POST',
-    body:formData
-  })
+  return request(`/api/role/addUserForRole`, {
+    method: 'POST',
+    body: formData,
+  });
 }
 
 export async function getAddressByIp() {
-  return request(`/publicApi/getIpInfo`,{
-    method:'POST',
-  })
+  return request(`/publicApi/getIpInfo`, {
+    method: 'POST',
+  });
 }
 
-
-export async function clearNotices(payload) { 
+export async function clearNotices(payload) {
   let type;
-  if(payload=='message'){
-    type=1;
+  if (payload == 'message') {
+    type = 1;
   }
-  if(payload=='notification'){
-    type=0;
+  if (payload == 'notification') {
+    type = 0;
   }
-  if(payload=='event'){
-    type=2;
+  if (payload == 'event') {
+    type = 2;
   }
-  return request(`/api/notice/clearNotices?type=${type}`,{
-    method:'POST',
-  })
+  return request(`/api/notice/clearNotices?type=${type}`, {
+    method: 'POST',
+  });
 }
 
 export async function fetchLikeArticle(payload) {
-  return request(`/api/article/likeArticle?articleId=${payload.articleId}`,{
-    method:'POST',
-  })
+  return request(`/api/article/likeArticle?articleId=${payload.articleId}`, {
+    method: 'POST',
+  });
 }
 
 export async function fetchStarArticle(payload) {
-  return request(`/api/article/starArticle?articleId=${payload.articleId}`,{
-    method:'POST',
-  })
+  return request(`/api/article/starArticle?articleId=${payload.articleId}`, {
+    method: 'POST',
+  });
 }
 
 export async function getMyStarArticles(payload) {
-  return request(`/api/article/getMyStarArticles?pageCurrent=${payload.pageCurrent}&pageSize=${payload.pageSize}`,{
-    method:'POST',
-  })
+  return request(
+    `/api/article/getMyStarArticles?pageCurrent=${payload.pageCurrent}&pageSize=${
+      payload.pageSize
+    }`,
+    {
+      method: 'POST',
+    }
+  );
 }
 
-
-export async function fetchArticleByTitle(payload) {
-  return request(`/publicApi/article/getArticleByTitle?title=${payload.title}`,{
-    method:'POST',
-  })
+export async function fetchArticleByKey(payload) {
+  return request(`/publicApi/article/getArticleByKey?key=${payload.key}`, {
+    method: 'POST',
+  });
 }

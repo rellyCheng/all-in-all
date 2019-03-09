@@ -1,11 +1,25 @@
 import React from 'react';
 import moment from 'moment';
-import { Avatar } from 'antd';
+import { Avatar, Typography } from 'antd';
 import styles from './index.less';
+import Highlighter from 'react-highlight-words';
+const { Paragraph } = Typography;
 
-const ArticleListContent = ({ data: { content, updateTime, cover, ownerName, href, description,avatar,bgColor } }) => (
+const ArticleListContent = ({
+  searchKey,
+  data: { content, updateTime, cover, ownerName, href, description, avatar, bgColor },
+}) => (
   <div className={styles.listContent}>
-    <div className={styles.description}>{description}</div>
+    <div className={styles.description}>
+      <Paragraph ellipsis={{ rows: 3 }}>
+        <Highlighter
+          highlight="true"
+          searchWords={searchKey || []}
+          autoEscape={true}
+          textToHighlight={description}
+        />
+      </Paragraph>
+    </div>
     <div className={styles.extra}>
       {/* {
           avatar != null ? (
@@ -16,7 +30,7 @@ const ArticleListContent = ({ data: { content, updateTime, cover, ownerName, hre
             </Avatar>
           )
       } */}
-      <a href={href}>{ownerName}</a> 发布在 <a href={href}>{href}</a>
+      <a>{ownerName}</a> 发布在 <a>{href}</a>
       <em>{moment(updateTime).format('YYYY-MM-DD HH:mm:ss')}</em>
     </div>
   </div>
