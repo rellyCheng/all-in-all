@@ -3,6 +3,7 @@ import {
   fetchLikeArticle,
   fetchStarArticle,
   fetchArticleByKey,
+  fetchArticleByTitle,
 } from '@/services/api';
 import { message } from 'antd';
 import router from 'umi/router';
@@ -67,6 +68,15 @@ export default {
         yield put({
           type: 'searchKey',
           payload: payload,
+        });
+      }
+    },
+    *fetchArticleByTitle({ payload, callback }, { call, put }) {
+      const response = yield call(fetchArticleByTitle, payload);
+      if (response.state == 'OK') {
+        yield put({
+          type: 'queryList',
+          payload: Array.isArray(response.data.pageData) ? response.data.pageData : [],
         });
       }
     },

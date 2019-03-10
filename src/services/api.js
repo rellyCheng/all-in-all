@@ -360,3 +360,9 @@ export async function fetchArticleByKey(payload) {
     method: 'POST',
   });
 }
+
+export async function fetchArticleByTitle(payload) {
+  return request(`/publicApi/article/getArticleByTitle?title=${payload.title}`, {
+    method: 'POST',
+  });
+}

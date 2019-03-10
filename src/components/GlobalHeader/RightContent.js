@@ -107,12 +107,21 @@ export default class GlobalHeaderRight extends PureComponent {
               return;
             }
             const { dispatch } = this.props;
-            dispatch({
-              type: 'allArticle/fetchArticleByKey',
-              payload: {
-                key: value,
-              },
-            });
+            if(process.env.API_ENV=='dev'){
+              dispatch({
+                type: 'allArticle/fetchArticleByKey',
+                payload: {
+                  key: value,
+                },
+              });
+            }else{
+              dispatch({
+                type: 'allArticle/fetchArticleByTitle',
+                payload: {
+                  title: value,
+                },
+              });
+            }
           }}
         />
         <Tooltip title={formatMessage({ id: 'component.globalHeader.help' })}>
