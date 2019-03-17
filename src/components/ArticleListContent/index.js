@@ -21,7 +21,7 @@ const ArticleListContent = ({
       </Paragraph>
     </div>
     <div className={styles.extra}>
-      {/* {
+      {
           avatar != null ? (
             <Avatar alt="" src={avatar} />
           ) : (
@@ -29,7 +29,7 @@ const ArticleListContent = ({
               <span style={{ fontSize: '12px' }}>{ownerName.substring(0, 1)}</span>
             </Avatar>
           )
-      } */}
+      } 
       <a>{ownerName}</a> 发布在 <a>{href}</a>
       <em>{moment(updateTime).format('YYYY-MM-DD HH:mm:ss')}</em>
     </div>

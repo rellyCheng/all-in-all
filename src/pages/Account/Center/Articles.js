@@ -30,10 +30,14 @@ class Center extends PureComponent {
           <List.Item
             key={item.id}
             actions={[
-              <IconText type="star-o" text={item.starNum} />,
-              <IconText type="like-o" text={item.likeNum} />,
-              <IconText type="message" text={item.messageNum} />,
+              <p >
+                <IconText type="like-o" text={item.likeNum} />
+              </p>,
+               <p >
+              <IconText type="message" text={item.messageNum} />
+              </p>,
             ]}
+            extra={<img style={{borderRadius:'5px'}} width={272} height={180} alt="logo" src={SERVER_IP.FILE+item.cover} />}
           >
             <List.Item.Meta
               title={
