@@ -26,7 +26,7 @@ const links = [{
   blankTarget: true,
 }];
 
-const copyright = <div>Copyright <Icon type="copyright" /> 2018 1024sir出品</div>;
+const copyright = <div>Copyright <Icon type="copyright" /> <span>皖ICP备19003284号-1</span></div>;
 
 ReactDOM.render(
   <div style={{ background: '#f5f5f5', overflow: 'hidden' }}>

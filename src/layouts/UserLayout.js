@@ -27,7 +27,8 @@ const links = [
 
 const copyright = (
   <Fragment>
-    Copyright <Icon type="copyright" /> 2018 1024sir出品
+    Copyright <Icon type="copyright" />
+    1024sir团队 <span>皖ICP备19003284号-1</span>
   </Fragment>
 );
 

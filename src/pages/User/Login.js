@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { formatMessage, FormattedMessage } from 'umi/locale';
 import Link from 'umi/link';
-import { Checkbox, Alert, Icon,Spin } from 'antd';
+import { Checkbox, Alert, Icon, Spin } from 'antd';
 import Login from '@/components/Login';
 import styles from './Login.less';
 
@@ -63,9 +63,10 @@ class LoginPage extends Component {
     <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />
   );
 
-  handleGitHub=()=>{
-    window.location.href="https://github.com/login/oauth/authorize?client_id=0806acecdaa7e16a61c0&scope=user:email";
-  }
+  handleGitHub = () => {
+    window.location.href =
+      'https://github.com/login/oauth/authorize?client_id=0806acecdaa7e16a61c0&scope=user:email';
+  };
 
   render() {
     const { login, submitting } = this.props;
@@ -115,12 +116,18 @@ class LoginPage extends Component {
           </Submit>
           <div className={styles.other}>
             <FormattedMessage id="app.login.sign-in-with" />
-            <Icon type="github" onClick={this.handleGitHub} spin className={styles.icon} theme="outlined" />
+            <Icon
+              type="github"
+              onClick={this.handleGitHub}
+              spin
+              className={styles.icon}
+              theme="outlined"
+            />
             {/* <Icon type="taobao-circle" className={styles.icon} theme="outlined" />
             <Icon type="weibo-circle" className={styles.icon} theme="outlined" /> */}
-            <Link className={styles.register} to="/user/register">
+            {/* <Link className={styles.register} to="/user/register">
               <FormattedMessage id="app.login.signup" />
-            </Link>
+            </Link> */}
           </div>
         </Login>
       </div>
